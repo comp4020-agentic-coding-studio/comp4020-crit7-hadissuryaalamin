@@ -85,6 +85,79 @@ describe("parseProgram (MMLCV 2026, epic.md 7.4)", () => {
   });
 });
 
+describe("parseProgram (MCOMP 2025, task 003: unit-less/dashed course lines and phrasings the MMLCV fixture doesn't exercise)", () => {
+  const program = parseProgram(fixture("program-mcomp-2025.html"), "MCOMP", 2025);
+
+  it("gathers course lines with no '(N units)' suffix and an optional dash after the code", () => {
+    const compulsory = program.groups.find((g) => g.courses?.includes("COMP6710"));
+    expect(compulsory?.unitsRequired).toBe(24);
+    expect([...(compulsory?.courses ?? [])].sort()).toEqual(
+      ["COMP6250", "COMP6442", "COMP6710", "COMP8260"].sort(),
+    );
+  });
+
+  it("recognises the 'one of the following <adjective> courses:' choice-header phrasing", () => {
+    const foundational = program.groups.find((g) => g.courses?.includes("MATH6005"));
+    expect(foundational?.unitsRequired).toBe(6);
+    expect(foundational?.courses).toEqual(["MATH6005", "COMP6260"]);
+
+    const project = program.groups.find((g) => g.courses?.includes("COMP8830"));
+    expect(project?.unitsRequired).toBe(12);
+    expect(project?.courses).toEqual(["COMP8715", "COMP8830"]);
+  });
+
+  it("recognises the inline 'further ... courses from the subject area X or Y' filter phrasing", () => {
+    const filter = program.groups.find((g) => g.kind === "filter" && g.unitsRequired === 18);
+    expect(filter).toBeDefined();
+    expect([...(filter?.filterSubjects ?? [])].sort()).toEqual(["COMP", "ENGN"]);
+    expect(filter?.filterMinLevel).toBe(6000);
+  });
+
+  it("recognises MCOMP/VCOMP's own 'elective courses offered by ANU' phrasing as a filter group with no invented level floor", () => {
+    const electives = program.groups.find(
+      (g) => g.kind === "filter" && g.unitsRequired === 12 && !g.filterSubjects,
+    );
+    expect(electives).toBeDefined();
+    expect(electives?.filterMinLevel ?? null).toBeNull();
+  });
+
+  it("skips administrative footnotes (double-counting rule) without a parseWarning", () => {
+    expect(
+      program.parseWarnings.some((w) => /double counted/i.test(w)),
+    ).toBe(false);
+  });
+
+  it("still warns (not guesses) about the un-parseable Specialisation choice block", () => {
+    expect(program.parseWarnings.some((w) => /Specialisation/i.test(w))).toBe(true);
+  });
+});
+
+describe("parseProgram (MCOMP 2026, task 003: the multi-paragraph 'following subject areas:' filter phrasing)", () => {
+  const program = parseProgram(fixture("program-mcomp-2026.html"), "MCOMP", 2026);
+
+  it("recognises 'N units from completion of the following compulsory courses:'", () => {
+    const compulsory = program.groups.find((g) => g.courses?.includes("COMP6120"));
+    expect(compulsory?.unitsRequired).toBe(30);
+    expect([...(compulsory?.courses ?? [])].sort()).toEqual(
+      ["COMP6120", "COMP6442", "COMP7710", "COMP8280"].sort(),
+    );
+  });
+
+  it("gathers the subject-area codes from separate 'CODE Name' lines below the header", () => {
+    const filter = program.groups.find((g) => g.kind === "filter" && g.unitsRequired === 18);
+    expect(filter).toBeDefined();
+    expect([...(filter?.filterSubjects ?? [])].sort()).toEqual(["COMP", "ENGN"]);
+    expect(filter?.filterMinLevel).toBe(6000);
+  });
+
+  it("still recognises the generic 'in the following list:' header for the foundational/project groups", () => {
+    const foundational = program.groups.find((g) => g.courses?.includes("MATH6005"));
+    expect(foundational?.unitsRequired).toBe(6);
+    const project = program.groups.find((g) => g.courses?.includes("COMP8830"));
+    expect(project?.unitsRequired).toBe(12);
+  });
+});
+
 describe("parseCourse (COMP8600 2026)", () => {
   const course = parseCourse(fixture("course-comp8600-2026.html"), "COMP8600", 2026);
 

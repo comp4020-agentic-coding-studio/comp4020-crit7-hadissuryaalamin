@@ -24,6 +24,21 @@ export interface RequirementGroupJson {
   filterMinLevel?: number | null;
   /** e.g. "A" / "B" for a project-pathway group; null/undefined otherwise. */
   pathway?: string | null;
+  /**
+   * Marker course codes whose presence in a plan identifies this pathway as
+   * "in use" (epic.md 9.2 pathway auto-detect) — matches
+   * `src/lib/checker-types.ts`'s `RequirementGroup.pathwayMarkers`. Only
+   * meaningful when `pathway` is set; every group of the same pathway
+   * carries the same full marker set (task 003 overrides). Never populated
+   * by the parser itself — only by a hand-written `data/overrides/<CODE>.ts`
+   * (epic.md 7.3), same as `pathway`.
+   *
+   * NOTE for task 005: `src/lib/schema.ts`'s `requirement_groups` table has
+   * no matching column yet — this field needs a migration to reach
+   * `checker-types.RequirementGroup.pathwayMarkers` (logged loudly in
+   * updates/003.md).
+   */
+  pathwayMarkers?: string[];
 }
 
 export interface ProgramJson {
