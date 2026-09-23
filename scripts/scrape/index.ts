@@ -159,7 +159,22 @@ async function main() {
 
   console.log("\nSanity check (requirement groups' units vs program total, epic.md 7.2):");
   for (const p of programs) {
-    const sum = p.groups.reduce((s, g) => s + g.unitsRequired, 0);
+    // Pathway groups (epic.md 7.3/9.2) are alternatives, not additive: a
+    // student completes ONE pathway, not every one a program offers, so a
+    // literal sum across all of them would always overshoot the total by
+    // every pathway but one. Count only the most expensive single pathway's
+    // units once, alongside every non-pathway group, so this check reflects
+    // what one real student's plan adds up to.
+    const nonPathwayUnits = p.groups
+      .filter((g) => !g.pathway)
+      .reduce((s, g) => s + g.unitsRequired, 0);
+    const unitsByPathway = new Map<string, number>();
+    for (const g of p.groups) {
+      if (!g.pathway) continue;
+      unitsByPathway.set(g.pathway, (unitsByPathway.get(g.pathway) ?? 0) + g.unitsRequired);
+    }
+    const pathwayUnits = unitsByPathway.size > 0 ? Math.max(...unitsByPathway.values()) : 0;
+    const sum = nonPathwayUnits + pathwayUnits;
     if (sum !== p.totalUnits) {
       console.warn(
         `  MISMATCH: ${p.code} ${p.year}: groups sum to ${sum}, program total is ${p.totalUnits} (short by ${p.totalUnits - sum})`,
