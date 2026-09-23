@@ -255,6 +255,7 @@ describe("checker: credit allocation (9.1)", () => {
       course("COMP6670"),
       course("COMP8536"),
       course("COMP8539"),
+      course("COMP8600"),
     ]);
     const p = plan({ currentSemester: 1 });
     const courses = [
@@ -275,32 +276,53 @@ describe("checker: credit allocation (9.1)", () => {
     expect(statusOf(result2, "c5").groupName).toBe("MLCV electives");
   });
 
-  it("group full (no spill possible) -> zero-credit, names the full group", () => {
-    const catalogue = mmlcvCatalogue([course("COMP6710")]);
-    // Core only needs 6 units and only ever names COMP6710, so a second
-    // COMP6710 is really the "already counted" rule - to test "group full"
-    // in isolation we instead fill Professional practice (6 units) with one
-    // course, then send a second course also only eligible there.
-    const custom: Catalogue = {
-      ...catalogue,
-      groups: catalogue.groups.map((g) =>
-        g.id === "profprac" ? { ...g, courseCodes: ["COMP6250", "COMP8260"] } : g,
-      ),
-    };
-    const p = plan({ currentSemester: 1 });
-    const courses = [
-      pc("c1", 1, "COMP6250", 1),
-      pc("c2", 1, "COMP8260", 2),
-    ];
-    const catalogue2: Catalogue = {
-      ...custom,
+  it("group full (no spill possible anywhere) -> zero-credit, names the full group", () => {
+    // A minimal catalogue with no generic catch-all elective group (its
+    // "University electives" filter group requires 0 units, i.e. already
+    // full), so a second Professional-practice course truly has nowhere
+    // left to go - this isolates reason 3 from the list-spill behaviour.
+    const catalogue: Catalogue = {
+      program: {
+        code: "MMLCV",
+        year: 2026,
+        name: "Test",
+        totalUnits: 96,
+        semesters: 4,
+      },
+      groups: [
+        {
+          id: "profprac",
+          position: 1,
+          name: "Professional practice",
+          kind: "list",
+          unitsRequired: 6,
+          courseCodes: ["COMP6250", "COMP8260"],
+          filterSubjects: null,
+          filterMinLevel: null,
+          pathway: null,
+          pathwayMarkers: [],
+        },
+        {
+          id: "electives",
+          position: 2,
+          name: "University electives",
+          kind: "filter",
+          unitsRequired: 0,
+          courseCodes: [],
+          filterSubjects: null,
+          filterMinLevel: 6000,
+          pathway: null,
+          pathwayMarkers: [],
+        },
+      ],
       courses: {
-        ...custom.courses,
         COMP6250: [course("COMP6250")],
         COMP8260: [course("COMP8260")],
       },
     };
-    const result = evaluate(p, courses, catalogue2);
+    const p = plan({ currentSemester: 1 });
+    const courses = [pc("c1", 1, "COMP6250", 1), pc("c2", 1, "COMP8260", 2)];
+    const result = evaluate(p, courses, catalogue);
     expect(statusOf(result, "c1").status).toBe("counts");
     const r2 = statusOf(result, "c2");
     expect(r2.status).toBe("zero-credit");
