@@ -1,0 +1,865 @@
+[
+  {
+    "code": "MCOMP",
+    "year": 2025,
+    "name": "Master of Computing",
+    "totalUnits": 96,
+    "semesters": 4,
+    "groups": [
+      {
+        "position": 0,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6250",
+          "COMP6442",
+          "COMP6710",
+          "COMP8260"
+        ]
+      },
+      {
+        "position": 1,
+        "name": "Foundational courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "MATH6005",
+          "COMP6260"
+        ]
+      },
+      {
+        "position": 2,
+        "name": "Project courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 3,
+        "name": "Further COMP/ENGN courses",
+        "kind": "filter",
+        "unitsRequired": 18,
+        "filterSubjects": [
+          "COMP",
+          "ENGN"
+        ],
+        "filterMinLevel": 6000
+      },
+      {
+        "position": 4,
+        "name": "University electives",
+        "kind": "filter",
+        "unitsRequired": 12,
+        "filterSubjects": null,
+        "filterMinLevel": null
+      }
+    ],
+    "parseWarnings": [
+      "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level COMP courses.\"",
+      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\""
+    ]
+  },
+  {
+    "code": "MCOMP",
+    "year": 2026,
+    "name": "Master of Computing",
+    "totalUnits": 96,
+    "semesters": 4,
+    "groups": [
+      {
+        "position": 0,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 30,
+        "courses": [
+          "COMP6120",
+          "COMP6442",
+          "COMP7710",
+          "COMP8280"
+        ]
+      },
+      {
+        "position": 1,
+        "name": "foundational courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "MATH6005",
+          "COMP6260"
+        ]
+      },
+      {
+        "position": 2,
+        "name": "project courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 3,
+        "name": "Further COMP/ENGN courses",
+        "kind": "filter",
+        "unitsRequired": 18,
+        "filterSubjects": [
+          "COMP",
+          "ENGN"
+        ],
+        "filterMinLevel": 6000
+      },
+      {
+        "position": 4,
+        "name": "University electives",
+        "kind": "filter",
+        "unitsRequired": 6,
+        "filterSubjects": null,
+        "filterMinLevel": null
+      }
+    ],
+    "parseWarnings": [
+      "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level COMP courses.\"",
+      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\""
+    ]
+  },
+  {
+    "code": "MCOMP",
+    "year": 2027,
+    "name": "Master of Computing",
+    "totalUnits": 96,
+    "semesters": 4,
+    "groups": [
+      {
+        "position": 0,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 30,
+        "courses": [
+          "COMP6120",
+          "COMP6442",
+          "COMP7710",
+          "COMP8280"
+        ]
+      },
+      {
+        "position": 1,
+        "name": "foundational courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "MATH6005",
+          "COMP6260"
+        ]
+      },
+      {
+        "position": 2,
+        "name": "project courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 3,
+        "name": "Further COMP/ENGN courses",
+        "kind": "filter",
+        "unitsRequired": 18,
+        "filterSubjects": [
+          "COMP",
+          "ENGN"
+        ],
+        "filterMinLevel": 6000
+      },
+      {
+        "position": 4,
+        "name": "University electives",
+        "kind": "filter",
+        "unitsRequired": 6,
+        "filterSubjects": null,
+        "filterMinLevel": null
+      }
+    ],
+    "parseWarnings": [
+      "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level COMP courses.\"",
+      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\""
+    ]
+  },
+  {
+    "code": "MMLCV",
+    "year": 2025,
+    "name": "Master of Machine Learning and Computer Vision",
+    "totalUnits": 96,
+    "semesters": 4,
+    "groups": [
+      {
+        "position": 0,
+        "name": "Structured Programming",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6710"
+        ]
+      },
+      {
+        "position": 1,
+        "name": "a professional practice course",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6250",
+          "COMP8260"
+        ]
+      },
+      {
+        "position": 2,
+        "name": "courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6528",
+          "COMP6670",
+          "COMP8536",
+          "COMP8539",
+          "COMP8600",
+          "COMP8650"
+        ]
+      },
+      {
+        "position": 3,
+        "name": "Computer Vision and Machine Learning courses",
+        "kind": "list",
+        "unitsRequired": 18,
+        "courses": [
+          "COMP6261",
+          "COMP6262",
+          "COMP6320",
+          "COMP6490",
+          "COMP6528",
+          "COMP6670",
+          "COMP8535",
+          "COMP8536",
+          "COMP8539",
+          "COMP8600",
+          "COMP8610",
+          "COMP8620",
+          "COMP8650",
+          "COMP8691",
+          "ENGN6627"
+        ]
+      },
+      {
+        "position": 4,
+        "name": "Project pathway A: software construction",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6442"
+        ],
+        "pathway": "A",
+        "pathwayMarkers": [
+          "COMP6442",
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 5,
+        "name": "Project pathway A: research project or industry internship",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8715",
+          "COMP8830"
+        ],
+        "pathway": "A",
+        "pathwayMarkers": [
+          "COMP6442",
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 6,
+        "name": "Project pathway A: further COMP/ENGN courses",
+        "kind": "filter",
+        "unitsRequired": 12,
+        "filterSubjects": [
+          "COMP",
+          "ENGN"
+        ],
+        "filterMinLevel": 6000,
+        "pathway": "A",
+        "pathwayMarkers": [
+          "COMP6442",
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 7,
+        "name": "Project pathway B: computing research methods",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6445"
+        ],
+        "pathway": "B",
+        "pathwayMarkers": [
+          "COMP6445",
+          "COMP8800"
+        ]
+      },
+      {
+        "position": 8,
+        "name": "Project pathway B: advanced computing research project",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP8800"
+        ],
+        "pathway": "B",
+        "pathwayMarkers": [
+          "COMP6445",
+          "COMP8800"
+        ]
+      },
+      {
+        "position": 9,
+        "name": "University electives",
+        "kind": "filter",
+        "unitsRequired": 12,
+        "filterSubjects": null,
+        "filterMinLevel": 6000
+      }
+    ],
+    "parseWarnings": [
+      "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level courses.\"",
+      "project pathway (Either/Or block) not parsed — needs a hand-written data/overrides/<CODE>.ts (epic.md 7.3)"
+    ]
+  },
+  {
+    "code": "MMLCV",
+    "year": 2026,
+    "name": "Master of Machine Learning and Computer Vision",
+    "totalUnits": 96,
+    "semesters": 4,
+    "groups": [
+      {
+        "position": 0,
+        "name": "Structured Programming",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6710"
+        ]
+      },
+      {
+        "position": 1,
+        "name": "a professional practice course",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6250",
+          "COMP8260"
+        ]
+      },
+      {
+        "position": 2,
+        "name": "courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6528",
+          "COMP6670",
+          "COMP8536",
+          "COMP8539",
+          "COMP8600",
+          "COMP8650"
+        ]
+      },
+      {
+        "position": 3,
+        "name": "Computer Vision and Machine Learning courses",
+        "kind": "list",
+        "unitsRequired": 18,
+        "courses": [
+          "COMP6261",
+          "COMP6262",
+          "COMP6320",
+          "COMP6490",
+          "COMP6528",
+          "COMP6670",
+          "COMP8535",
+          "COMP8536",
+          "COMP8539",
+          "COMP8600",
+          "COMP8610",
+          "COMP8620",
+          "COMP8650",
+          "COMP8691",
+          "ENGN6627"
+        ]
+      },
+      {
+        "position": 4,
+        "name": "Project pathway A: software construction",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6442"
+        ],
+        "pathway": "A",
+        "pathwayMarkers": [
+          "COMP6442",
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 5,
+        "name": "Project pathway A: research project or industry internship",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8715",
+          "COMP8830"
+        ],
+        "pathway": "A",
+        "pathwayMarkers": [
+          "COMP6442",
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 6,
+        "name": "Project pathway A: further COMP/ENGN courses",
+        "kind": "filter",
+        "unitsRequired": 12,
+        "filterSubjects": [
+          "COMP",
+          "ENGN"
+        ],
+        "filterMinLevel": 6000,
+        "pathway": "A",
+        "pathwayMarkers": [
+          "COMP6442",
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 7,
+        "name": "Project pathway B: computing research methods",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6445"
+        ],
+        "pathway": "B",
+        "pathwayMarkers": [
+          "COMP6445",
+          "COMP8800"
+        ]
+      },
+      {
+        "position": 8,
+        "name": "Project pathway B: advanced computing research project",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP8800"
+        ],
+        "pathway": "B",
+        "pathwayMarkers": [
+          "COMP6445",
+          "COMP8800"
+        ]
+      },
+      {
+        "position": 9,
+        "name": "University electives",
+        "kind": "filter",
+        "unitsRequired": 12,
+        "filterSubjects": null,
+        "filterMinLevel": 6000
+      }
+    ],
+    "parseWarnings": [
+      "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level courses.\"",
+      "project pathway (Either/Or block) not parsed — needs a hand-written data/overrides/<CODE>.ts (epic.md 7.3)"
+    ]
+  },
+  {
+    "code": "MMLCV",
+    "year": 2027,
+    "name": "Master of Machine Learning and Computer Vision",
+    "totalUnits": 96,
+    "semesters": 4,
+    "groups": [
+      {
+        "position": 0,
+        "name": "Structured Programming",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6710"
+        ]
+      },
+      {
+        "position": 1,
+        "name": "a professional practice course",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6250",
+          "COMP8260"
+        ]
+      },
+      {
+        "position": 2,
+        "name": "courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6528",
+          "COMP6670",
+          "COMP8536",
+          "COMP8539",
+          "COMP8600",
+          "COMP8650"
+        ]
+      },
+      {
+        "position": 3,
+        "name": "Computer Vision and Machine Learning courses",
+        "kind": "list",
+        "unitsRequired": 18,
+        "courses": [
+          "COMP6261",
+          "COMP6262",
+          "COMP6320",
+          "COMP6490",
+          "COMP6528",
+          "COMP6670",
+          "COMP8535",
+          "COMP8536",
+          "COMP8539",
+          "COMP8600",
+          "COMP8610",
+          "COMP8620",
+          "COMP8650",
+          "COMP8691",
+          "ENGN6627"
+        ]
+      },
+      {
+        "position": 4,
+        "name": "Project pathway A: software construction",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6442"
+        ],
+        "pathway": "A",
+        "pathwayMarkers": [
+          "COMP6442",
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 5,
+        "name": "Project pathway A: research project or industry internship",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8715",
+          "COMP8830"
+        ],
+        "pathway": "A",
+        "pathwayMarkers": [
+          "COMP6442",
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 6,
+        "name": "Project pathway A: further COMP/ENGN courses",
+        "kind": "filter",
+        "unitsRequired": 12,
+        "filterSubjects": [
+          "COMP",
+          "ENGN"
+        ],
+        "filterMinLevel": 6000,
+        "pathway": "A",
+        "pathwayMarkers": [
+          "COMP6442",
+          "COMP8715",
+          "COMP8830"
+        ]
+      },
+      {
+        "position": 7,
+        "name": "Project pathway B: computing research methods",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6445"
+        ],
+        "pathway": "B",
+        "pathwayMarkers": [
+          "COMP6445",
+          "COMP8800"
+        ]
+      },
+      {
+        "position": 8,
+        "name": "Project pathway B: advanced computing research project",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP8800"
+        ],
+        "pathway": "B",
+        "pathwayMarkers": [
+          "COMP6445",
+          "COMP8800"
+        ]
+      },
+      {
+        "position": 9,
+        "name": "University electives",
+        "kind": "filter",
+        "unitsRequired": 12,
+        "filterSubjects": null,
+        "filterMinLevel": 6000
+      }
+    ],
+    "parseWarnings": [
+      "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level courses.\"",
+      "project pathway (Either/Or block) not parsed — needs a hand-written data/overrides/<CODE>.ts (epic.md 7.3)"
+    ]
+  },
+  {
+    "code": "VCOMP",
+    "year": 2025,
+    "name": "Master of Computing (Advanced)",
+    "totalUnits": 96,
+    "semesters": 4,
+    "groups": [
+      {
+        "position": 0,
+        "name": "Choice of course",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6250",
+          "COMP8260"
+        ]
+      },
+      {
+        "position": 1,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6442",
+          "COMP6445"
+        ]
+      },
+      {
+        "position": 2,
+        "name": "Advanced computing research project",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP8800"
+        ]
+      },
+      {
+        "position": 3,
+        "name": "Further COMP/ENGN courses",
+        "kind": "filter",
+        "unitsRequired": 18,
+        "filterSubjects": [
+          "COMP",
+          "ENGN"
+        ],
+        "filterMinLevel": 6000
+      },
+      {
+        "position": 4,
+        "name": "University electives",
+        "kind": "filter",
+        "unitsRequired": 12,
+        "filterSubjects": null,
+        "filterMinLevel": null
+      }
+    ],
+    "parseWarnings": [
+      "out of scope by design (epic.md section 5): \"A minimum of 48 units must come from completion of 8000-level COMP courses\"",
+      "unrecognised requirement line: \"24 units from completion of\"",
+      "unrecognised requirement line: \"COMP8800 Advanced Computing Research Project (must be taken twice, in consecutive semesters (12+12 units))\"",
+      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\"",
+      "unrecognised requirement line: \"Artificial Intelligence\"",
+      "unrecognised requirement line: \"Computer Systems\"",
+      "unrecognised requirement line: \"Computational Foundations\"",
+      "unrecognised requirement line: \"Data Science\"",
+      "unrecognised requirement line: \"Human Centred and Creative Computing\"",
+      "unrecognised requirement line: \"Machine Learning\"",
+      "unrecognised requirement line: \"Professional Computing\""
+    ]
+  },
+  {
+    "code": "VCOMP",
+    "year": 2026,
+    "name": "Master of Computing (Advanced)",
+    "totalUnits": 96,
+    "semesters": 4,
+    "groups": [
+      {
+        "position": 0,
+        "name": "Choice of course",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6250",
+          "COMP8260"
+        ]
+      },
+      {
+        "position": 1,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6442",
+          "COMP6445"
+        ]
+      },
+      {
+        "position": 2,
+        "name": "Advanced computing research project",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP8800"
+        ]
+      },
+      {
+        "position": 3,
+        "name": "Further COMP/ENGN courses",
+        "kind": "filter",
+        "unitsRequired": 18,
+        "filterSubjects": [
+          "COMP",
+          "ENGN"
+        ],
+        "filterMinLevel": 6000
+      },
+      {
+        "position": 4,
+        "name": "University electives",
+        "kind": "filter",
+        "unitsRequired": 12,
+        "filterSubjects": null,
+        "filterMinLevel": null
+      }
+    ],
+    "parseWarnings": [
+      "out of scope by design (epic.md section 5): \"A minimum of 48 units must come from completion of 8000-level COMP courses\"",
+      "unrecognised requirement line: \"24 units from completion of\"",
+      "unrecognised requirement line: \"COMP8800 Advanced Computing Research Project, which must be taken twice, in consecutive semesters (12+12 units)\"",
+      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\"",
+      "unrecognised requirement line: \"Artificial Intelligence\"",
+      "unrecognised requirement line: \"Computer Systems\"",
+      "unrecognised requirement line: \"Cyber Security\"",
+      "unrecognised requirement line: \"Computational Foundations\"",
+      "unrecognised requirement line: \"Data Science\"",
+      "unrecognised requirement line: \"Human Centred and Creative Computing\"",
+      "unrecognised requirement line: \"Machine Learning\"",
+      "unrecognised requirement line: \"Software Development\""
+    ]
+  },
+  {
+    "code": "VCOMP",
+    "year": 2027,
+    "name": "Master of Computing (Advanced)",
+    "totalUnits": 96,
+    "semesters": 4,
+    "groups": [
+      {
+        "position": 0,
+        "name": "Choice of course",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6250",
+          "COMP8260"
+        ]
+      },
+      {
+        "position": 1,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6442",
+          "COMP6445"
+        ]
+      },
+      {
+        "position": 2,
+        "name": "Advanced computing research project",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP8800"
+        ]
+      },
+      {
+        "position": 3,
+        "name": "Further COMP/ENGN courses",
+        "kind": "filter",
+        "unitsRequired": 18,
+        "filterSubjects": [
+          "COMP",
+          "ENGN"
+        ],
+        "filterMinLevel": 6000
+      },
+      {
+        "position": 4,
+        "name": "University electives",
+        "kind": "filter",
+        "unitsRequired": 12,
+        "filterSubjects": null,
+        "filterMinLevel": null
+      }
+    ],
+    "parseWarnings": [
+      "out of scope by design (epic.md section 5): \"A minimum of 48 units must come from completion of 8000-level COMP courses\"",
+      "unrecognised requirement line: \"24 units from completion of\"",
+      "unrecognised requirement line: \"COMP8800 Advanced Computing Research Project, which must be taken twice, in consecutive semesters (12+12 units)\"",
+      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\"",
+      "unrecognised requirement line: \"Artificial Intelligence\"",
+      "unrecognised requirement line: \"Computer Systems\"",
+      "unrecognised requirement line: \"Cyber Security\"",
+      "unrecognised requirement line: \"Computational Foundations\"",
+      "unrecognised requirement line: \"Data Science\"",
+      "unrecognised requirement line: \"Human Centred and Creative Computing\"",
+      "unrecognised requirement line: \"Machine Learning\"",
+      "unrecognised requirement line: \"Software Development\""
+    ]
+  }
+]
