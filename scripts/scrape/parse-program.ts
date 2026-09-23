@@ -78,12 +78,16 @@ const SUBJECT_INLINE_RE = /\b([A-Z]{2,6})\b(?=\s+[A-Z][a-z])/g;
 const ADMIN_NOTE_RE =
   /^the\s+\d+\s+units\s+must\s+consist\s+of:?$|gpa\s+of\s+\d|automatically\s+transferred|approval\s+of\s+an\s+identified\s+supervisor|may\s+not\s+be\s+double\s+counted/i;
 
-// Markers of the project-pathway "Either / Or" block (epic.md 7.3): a
-// hand-written override, not this parser, encodes the pathway. We recognise
-// the block so we can skip it with one clear warning instead of either
-// mis-parsing it as a plain list or spamming a warning per line.
+// Marks the start of the project-pathway "Either / Or" block (epic.md 7.3):
+// a hand-written override, not this parser, encodes the pathway. Every line
+// from here up to (not including) the next university-electives line is
+// pathway prose — some of those lines otherwise resemble unrelated headers
+// (e.g. MMLCV's "12 units from completion of a research project or
+// industry internship in the following list:" would otherwise be
+// mis-parsed as its own generic list group, task 003), so once this marker
+// fires the whole block is skipped as a unit, with one clear warning,
+// rather than testing each line against every other branch below.
 const PATHWAY_START_RE = /^either:?$/i;
-const PATHWAY_OR_RE = /^or$/i;
 
 /**
  * Parse a program page
@@ -165,6 +169,7 @@ function parseRequirementGroups(doc: Document): {
   const groups: RequirementGroupJson[] = [];
   const warnings: string[] = [];
   let pathwayWarned = false;
+  let inPathwayBlock = false;
   let i = 0;
 
   // Gather "CODE Title (N units)." lines directly below a list header,
@@ -235,7 +240,23 @@ function parseRequirementGroups(doc: Document): {
       continue;
     }
 
-    if (PATHWAY_START_RE.test(text) || PATHWAY_OR_RE.test(text)) {
+    // Once inside the pathway block, every line is pathway prose until the
+    // next university-electives line (the block's real, structural end on
+    // every program that has one) — skip the whole thing as a unit rather
+    // than re-testing each line against the branches below, several of
+    // which would otherwise mis-parse a line from inside the block.
+    if (inPathwayBlock) {
+      if (UNI_ELECTIVE_RE.test(text) || ELECTIVE_COURSES_RE.test(text)) {
+        inPathwayBlock = false;
+        // Fall through: let this line be processed normally below.
+      } else {
+        i++;
+        continue;
+      }
+    }
+
+    if (PATHWAY_START_RE.test(text)) {
+      inPathwayBlock = true;
       if (!pathwayWarned) {
         warnings.push(
           "project pathway (Either/Or block) not parsed — needs a hand-written data/overrides/<CODE>.ts (epic.md 7.3)",

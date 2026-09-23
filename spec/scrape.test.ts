@@ -83,6 +83,15 @@ describe("parseProgram (MMLCV 2026, epic.md 7.4)", () => {
       true,
     );
   });
+
+  it("task 003 regression: skips every line inside the Either/Or pathway block, not just the 'Either:'/'OR' marker lines — a sub-header inside the block ('12 units from completion of a research project or industry internship in the following list:') must not leak out as its own group", () => {
+    const leaked = program.groups.find(
+      (g) => g.courses?.length === 2 && g.courses.includes("COMP8715") && g.courses.includes("COMP8830"),
+    );
+    expect(leaked).toBeUndefined();
+    const sum = program.groups.reduce((s, g) => s + g.unitsRequired, 0);
+    expect(sum).toBe(66); // 6 + 6 + 24 + 18 + 12 — everything except the 30-unit pathway, which is out of scope here
+  });
 });
 
 describe("parseProgram (MCOMP 2025, task 003: unit-less/dashed course lines and phrasings the MMLCV fixture doesn't exercise)", () => {
