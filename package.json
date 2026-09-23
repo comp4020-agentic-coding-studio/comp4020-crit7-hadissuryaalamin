@@ -10,6 +10,7 @@
     "typecheck": "astro check",
     "check": "pnpm typecheck && pnpm test",
     "check:evidence": "node scripts/check-evidence.ts",
+    "scrape": "node scripts/scrape/index.ts",
     "test": "astro build && vitest run",
     "db:generate": "drizzle-kit generate"
   },
