@@ -8,6 +8,20 @@
       "when": 1784173013185,
       "tag": "0000_dry_captain_flint",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1790203862937,
+      "tag": "0001_left_blue_blade",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1790203868439,
+      "tag": "0002_jazzy_ken_ellis",
+      "breakpoints": true
     }
   ]
 }
