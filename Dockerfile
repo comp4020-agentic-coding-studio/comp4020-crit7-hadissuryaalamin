@@ -36,6 +36,10 @@ COPY --from=build /app/node_modules /app/node_modules
 COPY --from=build /app/dist /app/dist
 # the committed migrations, applied at boot (see src/lib/db.ts)
 COPY --from=build /app/drizzle /app/drizzle
+# the committed catalogue snapshot, loaded into SQLite at boot (see
+# src/lib/catalogue.ts) — without this the runtime stage has no
+# data/catalogue/*.json and the server would crash on the very first boot.
+COPY --from=build /app/data /app/data
 
 ENV HOST=0.0.0.0
 ENV PORT=4321
