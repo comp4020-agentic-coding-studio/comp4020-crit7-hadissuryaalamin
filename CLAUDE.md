@@ -1,11 +1,36 @@
-# Your harness
+# Harness rules
 
-This file is yours, and it arrives empty on purpose. The rules you hold the
-agent to are part of what gets marked, so they should be rules you decided on.
+The rules I hold the agent to in this repo. I decided each one; the reasons
+sit next to them.
 
-Nothing about the starter is recorded here. What the repo ships is explained
-where it lives --- `fly.toml`, the `Dockerfile`, the CI workflow and
-`spec/README.md` each say what they fix --- and the
-[course website](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/)
-publishes this deliverable's brief and spec. Read them before you plan or build;
-what the agent needs to carry from any of it is your call.
+1. **Never invent catalogue data.** If a page can't be parsed cleanly,
+   record it in `parseWarnings` and move on — don't guess a unit count,
+   a prerequisite, or an offering.
+2. **Every hand-written override in `data/overrides/` cites its source**:
+   the exact program/course/specialisation page URL and the sentence it
+   encodes. An override with no citation doesn't ship.
+3. **The checker (`src/lib/checker.ts`) stays a pure function.** No DB
+   access inside it — it takes plan + catalogue data and returns a
+   result. Keeps it testable and keeps the loader's job (which groups a
+   student's specialisation/pathway sees) separate from the rules.
+4. **Warnings never block.** Adding a course to a plan always succeeds;
+   the checker flags it, it doesn't refuse it. The student decides.
+5. **Mutations are plain-form POST/redirect (PRG).** No JS required to
+   create a plan or add/remove a course. Keeps the app working with JS
+   off and keeps the HTTP tests simple.
+6. **No ambient or floating background animation.**
+7. **Never ship a phone number.** The scraper must not copy contact
+   details into the catalogue; the site must not display any.
+8. **Scraper requests need a real browser User-Agent header.** ANU's
+   course pages hang for a plain `curl`/no-UA request; a browser UA
+   string returns in about a second. Keep the 1-second pause between
+   requests and the on-disk cache — don't hammer the site.
+9. **The live app never fetches ANU at runtime.** Data flow is always
+   scraper → committed JSON snapshot (`data/catalogue/`) → loaded into
+   SQLite at boot. Refresh the snapshot deliberately with `pnpm scrape`
+   and review the diff before committing it.
+10. **Never hand-edit the database.** Schema changes go through
+    `src/lib/schema.ts` + `pnpm db:generate`, and the generated migration
+    gets committed. The DB file itself is never edited directly.
+11. **Never commit `mise.local.toml` or print the Fly deploy token.**
+12. **The repo stays private until ship day.**
