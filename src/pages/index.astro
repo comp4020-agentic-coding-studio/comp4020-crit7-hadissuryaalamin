@@ -7,13 +7,6 @@
 // required for any of this.
 import Layout from "../components/Layout.astro";
 import StatusBadge from "../components/StatusBadge.astro";
-// Side-effect import first: db.ts and catalogue.ts import each other, and
-// whichever loads first determines whether catalogue.ts's module-level
-// specialisationCache is initialized before db.ts's boot-time
-// loadCatalogue() call reads it (a real bug — logged in updates/006.md,
-// not fixed, since src/lib/db.ts and catalogue.ts are out of scope for
-// this task). Importing db.ts first here sidesteps it.
-import "../lib/db";
 import { getProgram, getSpecialisationOptions } from "../lib/catalogue";
 
 const PROGRAM_CODES = ["MCOMP", "VCOMP", "MMLCV"] as const;

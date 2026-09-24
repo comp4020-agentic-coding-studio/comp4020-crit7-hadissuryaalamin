@@ -6,9 +6,6 @@
 import Layout from "../../../components/Layout.astro";
 import GroupProgress from "../../../components/GroupProgress.astro";
 import CourseCard from "../../../components/CourseCard.astro";
-// See index.astro for why this side-effect import comes before catalogue.ts
-// (module-load-order bug in src/lib/db.ts/catalogue.ts, out of scope here).
-import "../../../lib/db";
 import { evaluatePlan, getPlan, type PlanCourseRow } from "../../../lib/plans";
 import { getCatalogueForProgram, getProgram } from "../../../lib/catalogue";
 import { semesterCalendar } from "../../../lib/checker";

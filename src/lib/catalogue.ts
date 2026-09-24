@@ -231,3 +231,7 @@ export function getCatalogueForProgram(
 }
 
 export type { SpecialisationOption };
+
+// Reload at module init, after every declaration above exists; db.ts must not
+// import this file, or the cycle can hit specialisationCache before it's set.
+loadCatalogue();

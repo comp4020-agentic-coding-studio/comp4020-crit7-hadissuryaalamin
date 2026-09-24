@@ -3,7 +3,6 @@ import { dirname } from "node:path";
 import Database from "better-sqlite3";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
-import { loadCatalogue } from "./catalogue";
 
 // One SQLite file is the app's whole persistent state. In production
 // fly.toml points DATABASE_PATH at the machine's volume (/data), which is
@@ -22,8 +21,3 @@ export const db = drizzle(client);
 // run them from. The flow: edit src/lib/schema.ts, `pnpm db:generate`,
 // commit the migration it writes to drizzle/.
 migrate(db, { migrationsFolder: "./drizzle" });
-
-// Catalogue tables are never written to by the app — truncate and reload
-// them from the committed data/catalogue/*.json snapshot every boot (epic.md
-// section 8). Plan tables are untouched by this call.
-loadCatalogue();
