@@ -14,10 +14,13 @@ const LABEL: Record<CourseStatus, string> = {
   counts: "Counts",
   "zero-credit": "Zero credit",
   warn: "Timing warning",
-  unknown: "Unverified",
+  unknown: "Can't check",
 };
+
+// A warned or unchecked course can still be filling a group; say which.
+const showGroup = status !== "zero-credit" && groupName;
 ---
 
 <span class={`badge badge-${status}`}
-  >{LABEL[status]}{status === "counts" && groupName ? ` — ${groupName}` : ""}</span
+  >{LABEL[status]}{showGroup ? ` — ${groupName}` : ""}</span
 >
