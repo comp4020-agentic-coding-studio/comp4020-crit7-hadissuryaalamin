@@ -57,18 +57,18 @@ page looks right.
 
 ## Known limits
 
-- **COMP8600's prerequisite is real but too tangled to parse safely** — a
-  mixed AND/OR expression over ten codes with explicit parentheses. The
-  parser only resolves a requisite that's codes joined by one connective
-  throughout; anything more shows as "Check P&C" rather than being
-  guessed at.
-- **SOFT-SPEC's stated "maximum of 12 units" doesn't add up against its
-  own 24-unit total** once its other blocks are counted, so it's
-  hand-corrected to 6 in `data/overrides/`. That balances the numbers; it
-  is not a fact read off the page, so treat it as a known soft spot, not
-  a verified rule.
-- The MMLCV project pathway is 30 units per option, not 24 as an earlier
-  reading assumed; the scraper and checker use 30.
+- **Some prerequisites are too tangled to parse safely.** COMP8600's 2025
+  and 2026 requisite is a mixed AND/OR expression over ten codes with
+  parentheses (the 2027 page simplifies it to "COMP6670 or COMP3670",
+  which is checked). The parser only resolves a requisite made of codes
+  joined by one connective throughout; anything more shows as "Check
+  P&C" rather than being guessed at.
+- **Software Development specialisation (2026, 2027):** one optional
+  course list says "a maximum of 12 units", but the specialisation's
+  other blocks leave only 6 of its 24 units. It is modelled as 6 in
+  `data/overrides/`, so a second course from that list is counted as a
+  general elective instead. That is a modelling choice, not a fact read
+  off the page.
 - A few specialisation-specific course exclusions are logged as warnings
   rather than enforced, since the data model has no per-course exclusion
   field.
