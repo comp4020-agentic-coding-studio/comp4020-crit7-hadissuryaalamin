@@ -61,11 +61,23 @@
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed:\n\n COMP1100 OR COMP1130 OR COMP1730.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP1100",
-        "COMP1130",
-        "COMP1730"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP1100",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP1130",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP1730",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -86,11 +98,23 @@
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed:\nCOMP1100 OR COMP1130 OR COMP1730.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP1100",
-        "COMP1130",
-        "COMP1730"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP1100",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP1130",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP1730",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -112,11 +136,23 @@
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed:\nCOMP1100 OR COMP1130 OR COMP1730.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP1100",
-        "COMP1130",
-        "COMP1730"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP1100",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP1130",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP1730",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -410,12 +446,64 @@
     "offeredS2": false,
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have successfully completed:\n(COMP3670 or COMP6670 or COMP8410)\nAND\n(COMP1110 or COMP6710 or COMP7710 or COMP1730 or COMP6730).",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "and",
+      "exprs": [
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP3670",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP6670",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP8410",
+              "allowConcurrent": false
+            }
+          ]
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP1110",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP6710",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP7710",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP1730",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP6730",
+              "allowConcurrent": false
+            }
+          ]
+        }
+      ]
+    },
     "incompatible": [],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed:\n(COMP3670 or COMP6670 or COMP8410)\nAND\n(COMP1110 or COMP6710 or COMP7710 or COMP1730 or COMP6730).\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6250",
@@ -695,14 +783,41 @@
     "offeredS2": true,
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed:\nCOMP6300 AND (COMP6710 or COMP7710 or COMP1110)",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "and",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6300",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6710",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP7710",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP1110",
+              "allowConcurrent": false
+            }
+          ]
+        }
+      ]
+    },
     "incompatible": [
       "COMP2310"
     ],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\nCOMP6300 AND (COMP6710 or COMP7710 or COMP1110)\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6310",
@@ -714,14 +829,41 @@
     "offeredS2": true,
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed:\nCOMP6300 AND (COMP6710 or COMP7710 or COMP1110)",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "and",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6300",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6710",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP7710",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP1110",
+              "allowConcurrent": false
+            }
+          ]
+        }
+      ]
+    },
     "incompatible": [
       "COMP2310"
     ],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\nCOMP6300 AND (COMP6710 or COMP7710 or COMP1110)\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6320",
@@ -733,14 +875,51 @@
     "offeredS2": false,
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed COMP6710 OR COMP1110\nAND\nhave completed or be currently enrolled in COMP6262 OR COMP2620 OR PHIL2080.",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "and",
+      "exprs": [
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6710",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP1110",
+              "allowConcurrent": false
+            }
+          ]
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6262",
+              "allowConcurrent": true
+            },
+            {
+              "kind": "course",
+              "code": "COMP2620",
+              "allowConcurrent": true
+            },
+            {
+              "kind": "course",
+              "code": "PHIL2080",
+              "allowConcurrent": true
+            }
+          ]
+        }
+      ]
+    },
     "incompatible": [
       "COMP3620"
     ],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed COMP6710 OR COMP1110\nAND\nhave completed or be currently enrolled in COMP6262 OR COMP2620 OR PHIL2080.\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6320",
@@ -848,15 +1027,43 @@
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed:\n\nCOMP6710 OR COMP1110 OR COMP1140 OR\nCOMP6310 OR COMP2310 OR\nCOMP6442 OR COMP2100.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP6710",
-        "COMP1110",
-        "COMP1140",
-        "COMP6310",
-        "COMP2310",
-        "COMP6442",
-        "COMP2100"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6710",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP1110",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP1140",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP6310",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP2310",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP6442",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP2100",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -877,16 +1084,73 @@
     "offeredS2": false,
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed:\n\n(COMP6710 OR COMP7710 OR COMP1110 OR  COMP1140) OR\n(COMP6310 OR COMP2310) OR\n(COMP6442 OR  COMP2100).",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6710",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP7710",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP1110",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP1140",
+              "allowConcurrent": false
+            }
+          ]
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6310",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP2310",
+              "allowConcurrent": false
+            }
+          ]
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6442",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP2100",
+              "allowConcurrent": false
+            }
+          ]
+        }
+      ]
+    },
     "incompatible": [
       "COMP3310",
       "ENGN3539",
       "ENGN6539"
     ],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\n\n(COMP6710 OR COMP7710 OR COMP1110 OR  COMP1140) OR\n(COMP6310 OR COMP2310) OR\n(COMP6442 OR  COMP2100).\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6331",
@@ -898,16 +1162,73 @@
     "offeredS2": false,
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed:\n\n(COMP6710 OR COMP7710 OR COMP1110 OR  COMP1140) OR\n(COMP6310 OR COMP2310) OR\n(COMP6442 OR  COMP2100).",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6710",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP7710",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP1110",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP1140",
+              "allowConcurrent": false
+            }
+          ]
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6310",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP2310",
+              "allowConcurrent": false
+            }
+          ]
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6442",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP2100",
+              "allowConcurrent": false
+            }
+          ]
+        }
+      ]
+    },
     "incompatible": [
       "COMP3310",
       "ENGN3539",
       "ENGN6539"
     ],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\n\n(COMP6710 OR COMP7710 OR COMP1110 OR  COMP1140) OR\n(COMP6310 OR COMP2310) OR\n(COMP6442 OR  COMP2100).\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6361",
@@ -954,12 +1275,34 @@
     "offeredS2": true,
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have successfully completed COMP6442 and COMP6260; or be enrolled in Master of Computing (Advanced)",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "and",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6442",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP6260",
+              "allowConcurrent": false
+            }
+          ]
+        },
+        {
+          "kind": "program",
+          "programCode": "VCOMP",
+          "negate": false
+        }
+      ]
+    },
     "incompatible": [],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed COMP6442 and COMP6260; or be enrolled in Master of Computing (Advanced)\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6363",
@@ -1460,11 +1803,23 @@
     "offeringKnown": false,
     "prereqText": "To enrol in this course you must have completed COMP6710 or COMP1110 or COMP1140.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP6710",
-        "COMP1110",
-        "COMP1140"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6710",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP1110",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP1140",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [],
@@ -1519,14 +1874,46 @@
     "offeredS2": true,
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have:\n\ncompleted or be currently enrolled in COMP6710 OR COMP6730  OR\nhave completed COMP1110 or COMP1140.",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6710",
+              "allowConcurrent": true
+            },
+            {
+              "kind": "course",
+              "code": "COMP6730",
+              "allowConcurrent": true
+            }
+          ]
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP1110",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP1140",
+              "allowConcurrent": false
+            }
+          ]
+        }
+      ]
+    },
     "incompatible": [
       "COMP3670"
     ],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"To enrol in this course you must have:\n\ncompleted or be currently enrolled in COMP6710 OR COMP6730  OR\nhave completed COMP1110 or COMP1140.\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6670",
@@ -1538,14 +1925,56 @@
     "offeredS2": true,
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must:\nbe enrolled in Master of Computing (Advanced) OR \nhave completed or be currently enrolled in (COMP6710 or COMP7710 or COMP6730)  OR\nhave completed COMP1110 or COMP1140.",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "program",
+          "programCode": "VCOMP",
+          "negate": false
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6710",
+              "allowConcurrent": true
+            },
+            {
+              "kind": "course",
+              "code": "COMP7710",
+              "allowConcurrent": true
+            },
+            {
+              "kind": "course",
+              "code": "COMP6730",
+              "allowConcurrent": true
+            }
+          ]
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP1110",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP1140",
+              "allowConcurrent": false
+            }
+          ]
+        }
+      ]
+    },
     "incompatible": [
       "COMP3670"
     ],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"To enrol in this course you must:\nbe enrolled in Master of Computing (Advanced) OR \nhave completed or be currently enrolled in (COMP6710 or COMP7710 or COMP6730)  OR\nhave completed COMP1110 or COMP1140.\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6670",
@@ -1557,14 +1986,56 @@
     "offeredS2": true,
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must:\nbe enrolled in Master of Computing (Advanced) OR \nhave completed or be currently enrolled in (COMP6710 or COMP7710 or COMP6730)  OR\nhave completed COMP1110 or COMP1140.",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "program",
+          "programCode": "VCOMP",
+          "negate": false
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP6710",
+              "allowConcurrent": true
+            },
+            {
+              "kind": "course",
+              "code": "COMP7710",
+              "allowConcurrent": true
+            },
+            {
+              "kind": "course",
+              "code": "COMP6730",
+              "allowConcurrent": true
+            }
+          ]
+        },
+        {
+          "kind": "or",
+          "exprs": [
+            {
+              "kind": "course",
+              "code": "COMP1110",
+              "allowConcurrent": false
+            },
+            {
+              "kind": "course",
+              "code": "COMP1140",
+              "allowConcurrent": false
+            }
+          ]
+        }
+      ]
+    },
     "incompatible": [
       "COMP3670"
     ],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"To enrol in this course you must:\nbe enrolled in Master of Computing (Advanced) OR \nhave completed or be currently enrolled in (COMP6710 or COMP7710 or COMP6730)  OR\nhave completed COMP1110 or COMP1140.\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6710",
@@ -1594,16 +2065,18 @@
     "offeredS2": true,
     "offeringKnown": true,
     "prereqText": "You are not able to enrol in this course if you are enrolled in the Master of Computing (Advanced).",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "program",
+      "programCode": "VCOMP",
+      "negate": true
+    },
     "incompatible": [
       "COMP1110",
       "COMP1140",
       "COMP7710"
     ],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"You are not able to enrol in this course if you are enrolled in the Master of Computing (Advanced).\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6710",
@@ -1615,16 +2088,18 @@
     "offeredS2": true,
     "offeringKnown": true,
     "prereqText": "You are not able to enrol in this course if you are enrolled in the Master of Computing (Advanced).",
-    "prereqExpr": null,
+    "prereqExpr": {
+      "kind": "program",
+      "programCode": "VCOMP",
+      "negate": true
+    },
     "incompatible": [
       "COMP1110",
       "COMP1140",
       "COMP7710"
     ],
     "repeatableTimes": 1,
-    "parseWarnings": [
-      "prereq_text could not be parsed safely: \"You are not able to enrol in this course if you are enrolled in the Master of Computing (Advanced).\""
-    ]
+    "parseWarnings": []
   },
   {
     "code": "COMP6720",
@@ -2465,11 +2940,23 @@
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed:\n\nCOMP6528 or COMP4528 or ENGN4528.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP6528",
-        "COMP4528",
-        "ENGN4528"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6528",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP4528",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "ENGN4528",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -2489,11 +2976,23 @@
     "offeringKnown": false,
     "prereqText": "To enrol in this course you must have completed:\n\nCOMP6528 or COMP4528 or ENGN4528.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP6528",
-        "COMP4528",
-        "ENGN4528"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6528",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP4528",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "ENGN4528",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -2515,11 +3014,23 @@
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed:\n\nCOMP6528 or COMP4528 or ENGN4528.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP6528",
-        "COMP4528",
-        "ENGN4528"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6528",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP4528",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "ENGN4528",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -2579,10 +3090,18 @@
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed COMP6670 or COMP3670.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP6670",
-        "COMP3670"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6670",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP3670",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -2653,10 +3172,18 @@
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed COMP6320  or COMP3620.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP6320",
-        "COMP3620"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6320",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP3620",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -2765,10 +3292,18 @@
     "offeringKnown": false,
     "prereqText": "To enrol in this course you must have completed COMP6320 or COMP3620.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP6320",
-        "COMP3620"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6320",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP3620",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -2790,10 +3325,18 @@
     "offeringKnown": true,
     "prereqText": "To enrol in this course you must have completed COMP6320 or COMP3620.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP6320",
-        "COMP3620"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6320",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP3620",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -2813,10 +3356,18 @@
     "offeringKnown": false,
     "prereqText": "To enrol in this course you must have completed COMP6320 or COMP3620.",
     "prereqExpr": {
-      "op": "OR",
-      "codes": [
-        "COMP6320",
-        "COMP3620"
+      "kind": "or",
+      "exprs": [
+        {
+          "kind": "course",
+          "code": "COMP6320",
+          "allowConcurrent": false
+        },
+        {
+          "kind": "course",
+          "code": "COMP3620",
+          "allowConcurrent": false
+        }
       ]
     },
     "incompatible": [
@@ -3156,10 +3707,9 @@
     "offeringKnown": false,
     "prereqText": "To enrol in this course you must have completed COMP6670.",
     "prereqExpr": {
-      "op": "AND",
-      "codes": [
-        "COMP6670"
-      ]
+      "kind": "course",
+      "code": "COMP6670",
+      "allowConcurrent": false
     },
     "incompatible": [
       "COMP4880"
