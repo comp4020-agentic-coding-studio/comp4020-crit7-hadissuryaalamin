@@ -611,7 +611,7 @@ describe("checker: timing (9.3)", () => {
     const r = statusOf(result, "c1");
     expect(r.status).toBe("warn");
     expect(r.messages).toContain(
-      "Needs Master of Computing (Advanced) or COMP6710 or COMP7710 first",
+      "Needs COMP6710 or COMP7710 first",
     );
   });
 

@@ -112,7 +112,15 @@ function leafSummary(expr: { kind: "course"; code: string } | { kind: "program";
  * OR lists every option (any one would clear it, but the student picks). */
 function unmetSummary(expr: PrereqExpr, ctx: PrereqCtx): string {
   if (expr.kind === "course" || expr.kind === "program") return leafSummary(expr);
-  const relevant = expr.kind === "and" ? expr.exprs.filter((child) => !isPrereqSatisfied(child, ctx)) : expr.exprs;
+  // An unmet program option in an OR can't be fixed by adding a course, so
+  // it isn't worth listing when course options exist.
+  const courseOptions = expr.exprs.filter((child) => child.kind !== "program");
+  const relevant =
+    expr.kind === "and"
+      ? expr.exprs.filter((child) => !isPrereqSatisfied(child, ctx))
+      : courseOptions.length > 0
+        ? courseOptions
+        : expr.exprs;
   const joiner = expr.kind === "and" ? ", " : " or ";
   return relevant.map((child) => unmetSummary(child, ctx)).join(joiner);
 }
