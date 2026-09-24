@@ -116,9 +116,10 @@ export function loadCatalogue(): void {
           offeredS2: c.offeredS2,
           offeringKnown: c.offeringKnown,
           prereqText: c.prereqText,
-          prereqExpr: c.prereqExpr
-            ? { kind: c.prereqExpr.op.toLowerCase() as "and" | "or", exprs: c.prereqExpr.codes.map((code) => ({ kind: "course" as const, code })) }
-            : null,
+          // scripts/scrape/types.ts's PrereqExpr and checker-types.ts's are
+          // now structurally identical trees (epic.md 18.3) — no reshaping
+          // needed, just pass it through.
+          prereqExpr: c.prereqExpr,
           incompatible: c.incompatible,
           repeatableTimes: c.repeatableTimes,
         })
