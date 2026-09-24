@@ -72,9 +72,18 @@ const showWaiverButton = hasPrereqMessage || prereqWaived;
     {
       result && result.messages.length > 0 && (
         <ul class="course-messages">
-          {result.messages.map((message) => (
-            <li>{message}</li>
-          ))}
+          {result.messages.map((message) =>
+            message.startsWith("Check P&C:") ? (
+              <li>
+                <details>
+                  <summary>Check P&C — requirement too complex to check automatically</summary>
+                  {message}
+                </details>
+              </li>
+            ) : (
+              <li>{message}</li>
+            ),
+          )}
         </ul>
       )
     }
