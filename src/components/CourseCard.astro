@@ -1,0 +1,48 @@
+---
+// One course card (epic.md section 10): code, title, units, status badge
+// (or nothing, on the catch-up screen where nothing is evaluated yet),
+// the reasons behind that status, and a remove form (plain POST/redirect).
+import StatusBadge from "./StatusBadge.astro";
+import type { CourseResult } from "../lib/checker-types";
+
+interface Props {
+  code: string;
+  title: string | null;
+  units: number;
+  unverified: boolean;
+  removeAction: string;
+  planId: string;
+  planCourseId: number;
+  from: "plan" | "catchup";
+  result?: CourseResult;
+}
+
+const { code, title, units, unverified, removeAction, planId, planCourseId, from, result } =
+  Astro.props;
+---
+
+<li class="course-card">
+  <div class="course-card__head">
+    <span class="course-code">{code}</span>
+    {unverified && <span class="tag-unverified">unverified</span>}
+    <span class="course-units">{units} units</span>
+  </div>
+  <p class="course-title">{title ?? "No title on record for this code."}</p>
+  {result && <StatusBadge status={result.status} groupName={result.groupName} />}
+  {
+    result && result.messages.length > 0 && (
+      <ul class="course-messages">
+        {result.messages.map((message) => (
+          <li>{message}</li>
+        ))}
+      </ul>
+    )
+  }
+  <form method="post" action={removeAction} class="course-remove-form">
+    <input type="hidden" name="intent" value="remove" />
+    <input type="hidden" name="planId" value={planId} />
+    <input type="hidden" name="planCourseId" value={planCourseId} />
+    <input type="hidden" name="from" value={from} />
+    <button type="submit" class="btn btn-ghost">Remove {code}</button>
+  </form>
+</li>

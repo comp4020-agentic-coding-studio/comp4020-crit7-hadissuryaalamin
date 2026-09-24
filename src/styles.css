@@ -1,40 +1,504 @@
-body {
-  margin: 0;
-  padding: 2rem;
-  font-family: system-ui, sans-serif;
-  line-height: 1.6;
-  color: #1a1a1a;
+/* Degree Plan Checker — design tokens (epic.md section 10).
+   Direction: an audit ledger, not a marketing page. Paper-and-ink palette,
+   a mono data face for course codes/units, hairline rules for the semester
+   "pages". Status is always a text word — colour is a secondary cue only.
+   No ambient/floating animation anywhere. */
+
+:root {
+  --paper: #eef0e6;
+  --surface: #fbfbf6;
+  --ink: #1e2a28;
+  --ink-soft: #4a5650;
+  --line: #c9cec0;
+  --accent: #2e6f5e;
+  --accent-ink: #ffffff;
+  --zero: #a23b2e;
+  --zero-bg: #f7e6e2;
+  --warn: #8a5a10;
+  --warn-bg: #f6ecd6;
+  --unknown: #52605a;
+  --unknown-bg: #e7ebe4;
+  --counts-bg: #e1ede8;
+
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --radius: 4px;
+  --gap: 1rem;
 }
 
-main {
-  max-width: 40rem;
-  margin: 0 auto;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.55;
+  font-size: 16px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+h1 {
+  font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.2rem);
+  margin: 0 0 0.5rem;
+}
+
+h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.75rem;
 }
 
 a {
-  color: #0b5fff;
+  color: var(--accent);
+}
+
+p {
+  margin: 0 0 0.75rem;
+}
+
+/* --- Layout shell --- */
+
+nav[aria-label="site"] {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 0.9rem 1.25rem;
+  background: var(--ink);
+  flex-wrap: wrap;
+}
+
+nav[aria-label="site"] a {
+  color: var(--surface);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+nav[aria-label="site"] a:hover,
+nav[aria-label="site"] a:focus-visible {
+  text-decoration: underline;
+}
+
+main {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+main.wide {
+  max-width: 62rem;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding: 1.25rem;
+  max-width: 62rem;
+  margin: 0 auto;
+}
+
+footer p {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Keyboard focus is always visible — no outline: none anywhere. */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- Pitch / hero --- */
+
+.pitch {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  max-width: 38rem;
+}
+
+.example-warning {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--zero);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  margin: 0 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+.example-warning code {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+/* --- Cards & forms --- */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 form {
+  display: block;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.field select,
+.field input {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  font: inherit;
+  font-size: 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+}
+
+.hint {
+  margin: 0.3rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 1.25rem;
+}
+
+@media (min-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.btn {
+  display: inline-block;
+  font: inherit;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent);
+  background: var(--surface);
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: var(--counts-bg);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn-primary:hover {
+  background: #245a4c;
+}
+
+.btn-ghost {
+  border-color: var(--line);
+  color: var(--ink-soft);
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.btn-ghost:hover {
+  border-color: var(--zero);
+  color: var(--zero);
+  background: var(--zero-bg);
+}
+
+/* --- Alerts --- */
+
+.alert {
+  border-radius: var(--radius);
+  padding: 0.7rem 1rem;
+  margin: 0 0 1rem;
+  font-size: 0.92rem;
+  border-left: 4px solid transparent;
+}
+
+.alert-error {
+  background: var(--zero-bg);
+  border-left-color: var(--zero);
+  color: #6f2318;
+}
+
+.alert-warn {
+  background: var(--warn-bg);
+  border-left-color: var(--warn);
+  color: #5c3b09;
+}
+
+/* --- Status badges: text label always present, colour is secondary --- */
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  border: 1px solid currentColor;
+}
+
+.badge-counts {
+  background: var(--counts-bg);
+  color: var(--accent);
+}
+
+.badge-zero-credit {
+  background: var(--zero-bg);
+  color: var(--zero);
+}
+
+.badge-warn {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+
+.badge-unknown {
+  background: var(--unknown-bg);
+  color: var(--unknown);
+}
+
+/* --- Group / total progress (signature element: a tick-ruled ledger bar) --- */
+
+.progress-summary {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.group-progress {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.group-progress:last-child {
+  border-bottom: none;
+}
+
+.group-progress__label {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  margin-bottom: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.group-progress__count {
+  font-family: var(--font-mono);
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.group-progress__track {
+  position: relative;
+  height: 0.7rem;
+  border-radius: 2px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  /* tick marks every ~8.33% (like a ruled ledger sheet) */
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--line) 0,
+    var(--line) 1px,
+    transparent 1px,
+    transparent calc(100% / 12)
+  );
+  overflow: hidden;
+}
+
+.group-progress__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--accent);
+}
+
+.group-progress--total .group-progress__fill {
+  background: var(--ink);
+}
+
+/* --- Semesters --- */
+
+.semester {
+  margin-bottom: 2rem;
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--ink);
+}
+
+.semester h2 {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.course-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .course-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.course-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+}
+
+.course-card__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.25rem;
+}
+
+.course-code {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.course-units {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.tag-unverified {
+  font-size: 0.72rem;
+  color: var(--warn);
+  border: 1px solid var(--warn);
+  border-radius: 3px;
+  padding: 0.05rem 0.35rem;
+}
+
+.course-title {
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem;
+}
+
+.course-messages {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.course-messages li {
+  padding: 0.15rem 0;
+}
+
+.course-messages li::before {
+  content: "— ";
+}
+
+.course-remove-form {
+  margin-top: 0.6rem;
+}
+
+.empty {
+  list-style: none;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-style: italic;
+}
+
+.add-course-form {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-  margin-block: 1.5rem;
+  align-items: flex-end;
+  gap: 0.6rem;
+  background: var(--surface);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  padding: 0.75rem;
 }
 
-input {
-  flex: 1;
-  min-width: 12rem;
-  padding: 0.4rem 0.6rem;
+.add-course-form label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  flex-basis: 100%;
+}
+
+.add-course-form input {
+  flex: 1 1 12rem;
+  padding: 0.45rem 0.6rem;
   font: inherit;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
 }
 
-button {
-  padding: 0.4rem 1rem;
-  font: inherit;
+.bookmark-note {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
 }
 
-#messages {
-  padding-inline-start: 1.2rem;
+@media (max-width: 480px) {
+  main {
+    padding: 1.25rem 1rem 2rem;
+  }
+
+  nav[aria-label="site"] {
+    padding: 0.75rem 1rem;
+  }
+
+  .course-units {
+    margin-left: 0;
+  }
 }

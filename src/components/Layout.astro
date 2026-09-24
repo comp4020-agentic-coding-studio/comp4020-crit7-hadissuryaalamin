@@ -1,0 +1,44 @@
+---
+// Shared page shell: nav, main, footer disclaimer (epic.md section 10).
+// No ANU logo or branding imitation — text only.
+import "../styles.css";
+
+interface Props {
+  title: string;
+  wide?: boolean;
+}
+
+const { title, wide = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav aria-label="site">
+      <a href="/">Degree Plan Checker</a>
+      <a href="/readme/">About</a>
+    </nav>
+    <main class={wide ? "wide" : undefined}>
+      <slot />
+    </main>
+    <footer>
+      <p>
+        Not affiliated with ANU. Course and program data is from ANU Programs
+        &amp; Courses, snapshotted 24 September 2026 — always confirm against
+        the <a href="https://programsandcourses.anu.edu.au/">official Programs &amp; Courses site</a>
+        before enrolling.
+      </p>
+    </footer>
+  </body>
+</html>

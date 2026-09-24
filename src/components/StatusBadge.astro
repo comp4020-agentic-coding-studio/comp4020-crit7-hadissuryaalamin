@@ -1,0 +1,23 @@
+---
+// Status is never colour-only (epic.md section 10): every badge carries a
+// text label. Colour is a secondary cue on top of it.
+import type { CourseStatus } from "../lib/checker-types";
+
+interface Props {
+  status: CourseStatus;
+  groupName?: string;
+}
+
+const { status, groupName } = Astro.props;
+
+const LABEL: Record<CourseStatus, string> = {
+  counts: "Counts",
+  "zero-credit": "Zero credit",
+  warn: "Timing warning",
+  unknown: "Unverified",
+};
+---
+
+<span class={`badge badge-${status}`}
+  >{LABEL[status]}{status === "counts" && groupName ? ` — ${groupName}` : ""}</span
+>

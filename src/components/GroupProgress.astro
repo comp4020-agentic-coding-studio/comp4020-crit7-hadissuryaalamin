@@ -1,0 +1,30 @@
+---
+// One row of the progress ledger (epic.md section 10): a group name, the
+// unit count as text (never colour/width alone), and a ticked bar.
+interface Props {
+  name: string;
+  earned: number;
+  required: number;
+  total?: boolean;
+}
+
+const { name, earned, required, total = false } = Astro.props;
+const pct = required > 0 ? Math.min(100, Math.round((earned / required) * 100)) : 100;
+const complete = earned >= required && required > 0;
+---
+
+<div class={`group-progress${total ? " group-progress--total" : ""}`}>
+  <div class="group-progress__label">
+    <span>{name}</span>
+    <span class="group-progress__count"
+      >{earned}/{required} units{complete ? " — complete" : ""}</span
+    >
+  </div>
+  <div
+    class="group-progress__track"
+    role="img"
+    aria-label={`${name}: ${earned} of ${required} units, ${pct}%`}
+  >
+    <div class="group-progress__fill" style={`width:${pct}%`}></div>
+  </div>
+</div>
