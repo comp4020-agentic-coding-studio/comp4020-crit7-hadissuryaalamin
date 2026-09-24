@@ -63,34 +63,59 @@ function semesterStatus(
   return "future";
 }
 
-/** Missing prerequisite codes for `expr` given the set of codes already done
- * in strictly earlier semesters. Empty array = satisfied. For an AND, every
- * unmet child's codes are collected; for an OR, if any child is satisfied
- * the whole thing is satisfied, otherwise every option is "needed" (any one
- * would do, but we don't know which the student will pick). */
-function missingPrereqCodes(expr: PrereqExpr, done: ReadonlySet<string>): string[] {
+/** Program full names for the 3 short codes this app maps a program name to
+ * (mirrors scripts/scrape/parse-prereq.ts's KNOWN_PROGRAMS) — used only to
+ * word the "Not open to <program> students" message. Any other programCode
+ * (an unmapped program's full name, carried verbatim) is displayed as-is. */
+const PROGRAM_DISPLAY_NAMES: Record<string, string> = {
+  MCOMP: "Master of Computing",
+  VCOMP: "Master of Computing (Advanced)",
+  MMLCV: "Master of Machine Learning and Computer Vision",
+};
+
+function programDisplayName(programCode: string): string {
+  return PROGRAM_DISPLAY_NAMES[programCode] ?? programCode;
+}
+
+interface PrereqCtx {
+  /** Codes completed in a strictly earlier semester than the course being checked. */
+  doneBefore: ReadonlySet<string>;
+  /** Codes completed in an earlier semester OR the same semester — only
+   * relevant to a course leaf with `allowConcurrent`. */
+  doneSameOrBefore: ReadonlySet<string>;
+  planProgramCode: string;
+}
+
+/** Is `expr` satisfied given the plan context? A course leaf needs an
+ * earlier semester, or (when `allowConcurrent`) the same semester too. A
+ * program leaf compares to the plan's program, negated for an exclusion. */
+function isPrereqSatisfied(expr: PrereqExpr, ctx: PrereqCtx): boolean {
   if (expr.kind === "course") {
-    return done.has(expr.code) ? [] : [expr.code];
+    return (
+      ctx.doneBefore.has(expr.code) || (expr.allowConcurrent && ctx.doneSameOrBefore.has(expr.code))
+    );
   }
-  if (expr.kind === "and") {
-    const missing: string[] = [];
-    for (const child of expr.exprs) {
-      for (const code of missingPrereqCodes(child, done)) {
-        if (!missing.includes(code)) missing.push(code);
-      }
-    }
-    return missing;
+  if (expr.kind === "program") {
+    const isPlanProgram = ctx.planProgramCode === expr.programCode;
+    return expr.negate ? !isPlanProgram : isPlanProgram;
   }
-  // or
-  const satisfied = expr.exprs.some((child) => missingPrereqCodes(child, done).length === 0);
-  if (satisfied) return [];
-  const all: string[] = [];
-  for (const child of expr.exprs) {
-    for (const code of missingPrereqCodes(child, done)) {
-      if (!all.includes(code)) all.push(code);
-    }
-  }
-  return all;
+  if (expr.kind === "and") return expr.exprs.every((child) => isPrereqSatisfied(child, ctx));
+  return expr.exprs.some((child) => isPrereqSatisfied(child, ctx)); // or
+}
+
+function leafSummary(expr: PrereqExpr): string {
+  if (expr.kind === "course") return expr.code;
+  return programDisplayName(expr.programCode); // program leaf (used only inside a larger OR/AND)
+}
+
+/** Builds the "Needs <this> first" summary for an unsatisfied expr. An AND
+ * only lists its unmet children (the met ones need no further mention); an
+ * OR lists every option (any one would clear it, but the student picks). */
+function unmetSummary(expr: PrereqExpr, ctx: PrereqCtx): string {
+  if (expr.kind === "course" || expr.kind === "program") return leafSummary(expr);
+  const relevant = expr.kind === "and" ? expr.exprs.filter((child) => !isPrereqSatisfied(child, ctx)) : expr.exprs;
+  const joiner = expr.kind === "and" ? ", " : " or ";
+  return relevant.map((child) => unmetSummary(child, ctx)).join(joiner);
 }
 
 function catalogueEntryForYear(
@@ -327,13 +352,20 @@ export function evaluate(
         if (pc.prereqWaived) {
           messages.push(WAIVED_MESSAGE);
         } else if (entry.prereqExpr) {
-          const doneCodes = new Set(
+          const doneBefore = new Set(
             planCourses.filter((p) => p.semesterIndex < pc.semesterIndex).map((p) => p.courseCode),
           );
-          const missing = missingPrereqCodes(entry.prereqExpr, doneCodes);
-          if (missing.length > 0) {
+          const doneSameOrBefore = new Set(
+            planCourses.filter((p) => p.semesterIndex <= pc.semesterIndex).map((p) => p.courseCode),
+          );
+          const prereqCtx: PrereqCtx = { doneBefore, doneSameOrBefore, planProgramCode: plan.programCode };
+          if (!isPrereqSatisfied(entry.prereqExpr, prereqCtx)) {
             status = worse(status, "warn");
-            messages.push(`Needs ${missing.join(", ")} first`);
+            if (entry.prereqExpr.kind === "program" && entry.prereqExpr.negate) {
+              messages.push(`Not open to ${programDisplayName(entry.prereqExpr.programCode)} students`);
+            } else {
+              messages.push(`Needs ${unmetSummary(entry.prereqExpr, prereqCtx)} first`);
+            }
           }
         } else if (entry.prereqText) {
           status = worse(status, "unknown");
