@@ -30,3 +30,4 @@ mise.local.toml
 
 # Impeccable review captures are local evidence, not source
 .impeccable/review/
+.impeccable/questions/
