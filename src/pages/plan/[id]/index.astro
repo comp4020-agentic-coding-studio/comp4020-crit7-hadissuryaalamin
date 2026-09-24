@@ -1,6 +1,7 @@
 ---
-// The plan page (Planting Plan direction): the pinned bed legend, then every
-// semester as a season column, side by side at laptop width — past seasons
+// The plan page (Planting Plan direction): the bed legend — a condensed
+// level key, not a boxed panel — then every semester as a season column,
+// side by side at laptop width — past seasons
 // shown but receded, the current one darker-headed and marked NOW, future
 // ones plain. Only the current semester and later get an add-a-course slot;
 // editing the past stays on the catch-up page.
@@ -125,8 +126,8 @@ const hasPastCourses = courses.some((c) => c.semesterIndex < plan.currentSemeste
 
   {
     evaluation ? (
-      <section class="card legend">
-        <h2>Legend</h2>
+      <section class="legend">
+        <h2 class="sr-only">Legend</h2>
         <div class="legend__rows">
           <GroupProgress name="Total" earned={evaluation.totalEarned} required={evaluation.totalRequired} total />
           {nonPathwayGroups.map((z) => (
@@ -220,6 +221,7 @@ const hasPastCourses = courses.some((c) => c.semesterIndex < plan.currentSemeste
                       result={result}
                       prereqWaived={course.prereqWaived}
                       bedColor={result?.groupName ? bedByGroupName.get(result.groupName)?.hex : undefined}
+                      bedTextColor={result?.groupName ? bedByGroupName.get(result.groupName)?.textColor : undefined}
                     />
                   );
                 })}

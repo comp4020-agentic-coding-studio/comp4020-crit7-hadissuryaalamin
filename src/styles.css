@@ -126,6 +126,21 @@ strong {
   font-weight: 700;
 }
 
+/* Visually hidden but still announced — for a heading that gives a region
+   its accessible name without taking visual space (the legend's h2: the key
+   itself reads fine without a printed title). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Keyboard focus is always visible — no outline: none anywhere. */
 :focus-visible {
   outline: 3px solid var(--action);
@@ -359,10 +374,8 @@ footer p {
   align-items: center;
   gap: 0.3rem;
   font-family: var(--font-display);
-  font-size: 0.76rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
   padding: 0.22rem 0.55rem;
   border-radius: 2px;
   line-height: 1.3;
@@ -384,13 +397,14 @@ footer p {
   animation: stamp-settle 260ms ease-out both;
 }
 
-/* Can't check: a grey stamp — an honest shrug, not a warning. */
+/* Can't check: a grey stamp — an honest shrug, not a warning. Its own
+   keyframe (settles at +1.5deg) — it must not share zero-credit's -2.5deg
+   end angle just because both are stamps. */
 .badge-unknown {
   background: transparent;
   color: var(--mark-unknown);
   border: 2px dashed var(--mark-unknown);
-  transform: rotate(1.5deg);
-  animation: stamp-settle 260ms ease-out both;
+  animation: stamp-settle-unknown 260ms ease-out both;
 }
 
 /* Timing warning: an amber tag, not a stamp — it names a scheduling
@@ -413,53 +427,61 @@ footer p {
   }
 }
 
+@keyframes stamp-settle-unknown {
+  from {
+    opacity: 0;
+    transform: scale(1.3) rotate(8deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(1.5deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .badge-zero-credit,
+  .badge-zero-credit {
+    animation: none;
+    transform: rotate(-2.5deg);
+  }
+
   .badge-unknown {
     animation: none;
+    transform: rotate(1.5deg);
   }
 }
 
-/* --- Pinned legend: the beds, their units filled, and the total. Replaces
-   the old ticked progress bar entirely — a legend, not a gauge. --- */
+/* --- Legend: a level key, not a dashboard panel. Every bed inline in one
+   flowing, wrapping strip — swatch, name, units filled — plus the total.
+   No box, no sticky pin: it reads like a caption, then gets out of the
+   way of the season columns below. --- */
 
 .legend {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.5rem;
-}
-
-@media (min-width: 900px) {
-  .legend {
-    position: sticky;
-    top: 0.75rem;
-    z-index: 5;
-  }
+  margin: 0 0 1.5rem;
 }
 
 .legend__rows {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
+  align-items: baseline;
+  gap: 0.4rem 1.1rem;
 }
 
 .legend-row {
-  display: flex;
+  display: inline-flex;
   align-items: baseline;
-  gap: 0.5rem;
-  font-size: 0.88rem;
-  min-width: 12rem;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  max-width: 100%;
 }
 
 .legend-row__swatch {
   flex: none;
-  width: 0.85rem;
-  height: 0.85rem;
+  width: 0.8rem;
+  height: 0.8rem;
   border-radius: 2px;
   border: 1px solid rgba(30, 42, 34, 0.35);
-  transform: translateY(0.15rem);
+  background: var(--swatch-color, var(--line));
+  transform: translateY(0.1rem);
 }
 
 .legend-row__swatch--total {
@@ -469,63 +491,65 @@ footer p {
 
 .legend-row__name {
   color: var(--ink);
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .legend-row__count {
   color: var(--ink-soft);
   white-space: nowrap;
-  margin-left: auto;
-  padding-left: 0.5rem;
 }
 
 .legend-row--total {
   font-weight: 700;
-  padding-top: 0.5rem;
-  margin-top: 0.35rem;
-  border-top: 1px solid var(--line);
-  flex-basis: 100%;
 }
 
 .legend-row--complete .legend-row__count::after {
   content: " — complete";
 }
 
-/* --- Project pathway sub-group: one heading, options beneath, sharing one
-   hue per option (A one bed, B another) — the unchosen option is quieter,
-   never colour-only; the label text always says "chosen" / "not chosen". --- */
+/* --- Project pathway sub-cluster: one inline group alongside the rest of
+   the key, sharing one hue per option (A one bed, B another). The unchosen
+   option gets a hollow swatch and quieter ink — never colour alone, the
+   words "chosen" / "not chosen" always say which. --- */
 
 .pathway-block {
-  padding: 0.5rem 0 0.25rem;
-  flex-basis: 100%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
 }
 
 .pathway-block__heading {
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
   color: var(--ink-soft);
-  margin: 0.25rem 0 0.6rem;
+  margin: 0;
 }
 
 .pathway-option {
-  margin-bottom: 0.4rem;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.6rem;
 }
 
 .pathway-option__label {
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--ink);
-  margin: 0 0 0.2rem;
+  margin: 0;
 }
 
-.pathway-option--not-chosen {
-  opacity: 0.55;
-}
-
-.pathway-option--not-chosen .pathway-option__label {
+.pathway-option--not-chosen .pathway-option__label,
+.pathway-option--not-chosen .legend-row__name {
   color: var(--ink-soft);
   font-weight: 500;
+}
+
+.pathway-option--not-chosen .legend-row__swatch {
+  background: transparent;
+  border: 1.5px solid var(--swatch-color, var(--line));
 }
 
 /* --- Seasons: semester columns side by side at laptop width, stacking on
@@ -578,15 +602,18 @@ footer p {
   color: var(--surface);
 }
 
+/* Teal is the reserved action colour (buttons only) — the NOW pill reads as
+   a surface-coloured outline on the dark head instead of a teal fill. */
 .season__now {
   flex: none;
   font-family: var(--font-display);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  background: var(--action);
-  color: var(--action-ink);
-  padding: 0.15rem 0.45rem;
+  background: transparent;
+  color: var(--surface);
+  border: 1.5px solid var(--surface);
+  padding: 0.1rem 0.4rem;
   border-radius: 2px;
 }
 
@@ -603,6 +630,16 @@ footer p {
   background: var(--ground);
 }
 
+/* Past seasons recede without touching opacity (which would also dim focus
+   rings and, on the catch-up page, live form controls): the band loses its
+   fill and becomes a hairline in the bed's own colour, and its text goes
+   ink-soft. */
+.season--completed .course-card__band {
+  background: transparent;
+  border-bottom: 3px solid var(--band-color, var(--line));
+  color: var(--ink-soft);
+}
+
 .course-list {
   list-style: none;
   margin: 0 0 1rem;
@@ -612,25 +649,27 @@ footer p {
   gap: 0.75rem;
 }
 
-/* --- Stakes: white labels with a bed-colour band and the bed's name in
-   words. State is a mark (badge above), never colour alone. --- */
+/* --- Stakes: a solid bed-colour band across the top naming the bed in
+   words (sentence case — no shouting), then the label. State is a mark
+   (badge below), never colour alone. --- */
 
 .course-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 0.9rem 1rem 0.9rem 0.95rem;
-  border-left: 6px solid var(--line);
+  overflow: hidden;
 }
 
-.course-card__bed {
-  display: block;
-  font-size: 0.74rem;
+.course-card__band {
+  background: var(--band-color);
+  color: var(--band-text, #ffffff);
+  padding: 0.35rem 0.95rem;
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--ink-soft);
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  margin: 0 0 0.4rem;
+}
+
+.course-card__body {
+  padding: 0.9rem 1rem;
 }
 
 .course-card__head {
@@ -735,11 +774,16 @@ footer p {
 }
 
 .add-course-form input {
-  flex: 1 1 12rem;
+  min-width: 0;
+  flex: 1 1 auto;
   padding: 0.5rem 0.6rem;
   font: inherit;
   border: 1px solid var(--line);
   border-radius: var(--radius);
+}
+
+.add-course-form .btn {
+  flex: none;
 }
 
 @media (max-width: 480px) {
@@ -756,10 +800,6 @@ footer p {
   }
 
   .legend__rows {
-    gap: 0.6rem 1rem;
-  }
-
-  .legend-row {
-    min-width: 100%;
+    gap: 0.5rem 0.85rem;
   }
 }

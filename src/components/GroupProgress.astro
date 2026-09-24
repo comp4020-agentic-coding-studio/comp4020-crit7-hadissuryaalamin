@@ -19,7 +19,7 @@ const complete = earned >= required && required > 0;
 <div class={`legend-row${total ? " legend-row--total" : ""}${complete ? " legend-row--complete" : ""}`}>
   <span
     class={`legend-row__swatch${total ? " legend-row__swatch--total" : ""}`}
-    style={!total && hex ? `background:${hex}` : undefined}
+    style={!total && hex ? `--swatch-color:${hex}` : undefined}
     aria-hidden="true"
   ></span>
   <span class="legend-row__name">{name}</span>

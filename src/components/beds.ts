@@ -14,21 +14,29 @@ export interface Bed {
   /** One of the eight fixed hue names from the direction contract. */
   hueName: string;
   hex: string;
+  /** Text colour to put on a solid fill of `hex` — ink or white, whichever
+   * clears 4.5:1 against it (checked per hue, not assumed). */
+  textColor: string;
 }
 
 // Flat, unmodulated fields — no gradients, no tints — from the contract's
-// fixed set: moss, marigold, brick, iris, plum, sage, ochre, slate. Chosen to
-// sit apart from the reserved action teal (--accent) and from the red/grey/
-// amber marks used for status stamps.
+// fixed set: moss, marigold, brick, iris, plum, sage, slate, ochre. Chosen to
+// sit apart from each other (checked pairwise at swatch size), from the
+// reserved action teal (--action), and from the red/grey/amber marks used
+// for status stamps — brick sits well clear of the zero-credit red, and
+// ochre sits well clear of both marigold and the amber timing tag's hue.
+// Order matters: it's also the fallback assignment order for an 8th+ bed
+// (see buildBedMap's `% 8`), which is why slate — not ochre — is 7th, since
+// MMLCV's largest real case (7 beds) should land on slate.
 const BED_HUES: Bed[] = [
-  { hueName: "moss", hex: "#4F6B3A" },
-  { hueName: "marigold", hex: "#D98A22" },
-  { hueName: "brick", hex: "#A4482F" },
-  { hueName: "iris", hex: "#4C5A9E" },
-  { hueName: "plum", hex: "#7A4569" },
-  { hueName: "sage", hex: "#6E8B6B" },
-  { hueName: "ochre", hex: "#B68B1E" },
-  { hueName: "slate", hex: "#45606B" },
+  { hueName: "moss", hex: "#4F6B3A", textColor: "#ffffff" },
+  { hueName: "marigold", hex: "#D98A22", textColor: "var(--ink)" },
+  { hueName: "brick", hex: "#6E4A36", textColor: "#ffffff" },
+  { hueName: "iris", hex: "#4C5A9E", textColor: "#ffffff" },
+  { hueName: "plum", hex: "#7A4569", textColor: "#ffffff" },
+  { hueName: "sage", hex: "#5C7859", textColor: "#ffffff" },
+  { hueName: "slate", hex: "#45606B", textColor: "#ffffff" },
+  { hueName: "ochre", hex: "#78741A", textColor: "#ffffff" },
 ];
 
 // Groups that should share one hue rather than each taking their own:
