@@ -190,7 +190,7 @@ describe("plan flow: create -> reload -> persists (crit spec line 3)", () => {
 
     const beforeRes = await fetch(`${baseUrl}${planPath}`);
     const beforeHtml = await beforeRes.text();
-    expect(beforeHtml).toContain("Needs COMP6528, COMP4528, ENGN4528 first");
+    expect(beforeHtml).toContain("Needs COMP6528 or COMP4528 or ENGN4528 first");
     expect(beforeHtml).toContain("I have permission to enrol");
     expect(beforeHtml).not.toContain("Prerequisite waived");
 
@@ -206,7 +206,7 @@ describe("plan flow: create -> reload -> persists (crit spec line 3)", () => {
     expect(afterWaiveHtml).toContain(
       "Prerequisite waived - you have permission to enrol",
     );
-    expect(afterWaiveHtml).not.toContain("Needs COMP6528, COMP4528, ENGN4528 first");
+    expect(afterWaiveHtml).not.toContain("Needs COMP6528 or COMP4528 or ENGN4528 first");
     expect(afterWaiveHtml).toContain("Undo permission");
 
     const unwaiveRes = await postWaivePrereq(planId, planCourseId, false);
@@ -215,7 +215,7 @@ describe("plan flow: create -> reload -> persists (crit spec line 3)", () => {
 
     const afterUndoRes = await fetch(`${baseUrl}${planPath}`);
     const afterUndoHtml = await afterUndoRes.text();
-    expect(afterUndoHtml).toContain("Needs COMP6528, COMP4528, ENGN4528 first");
+    expect(afterUndoHtml).toContain("Needs COMP6528 or COMP4528 or ENGN4528 first");
     expect(afterUndoHtml).not.toContain("Prerequisite waived");
     expect(afterUndoHtml).toContain("I have permission to enrol");
   });
