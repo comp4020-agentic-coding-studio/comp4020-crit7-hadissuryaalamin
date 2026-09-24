@@ -38,6 +38,14 @@ export const requirementGroups = sqliteTable("requirement_groups", {
   filterMinLevel: int("filter_min_level"),
   // e.g. "A" / "B" for a project-pathway group; null otherwise.
   pathway: text(),
+  // epic.md 15: specialisation code (e.g. "ARTIF-SPEC") this group belongs
+  // to; groups sharing a code are alternatives, null for a group that isn't
+  // part of a specialisation choice.
+  specialisation: text(),
+  // epic.md 15 / checker-types.RequirementGroup.pathwayMarkers: marker
+  // course codes that identify a pathway as "in use" (9.2 auto-detect).
+  // Only meaningful when `pathway` is set.
+  pathwayMarkers: text("pathway_markers", { mode: "json" }).$type<string[]>(),
 });
 
 export const groupCourses = sqliteTable(
@@ -85,6 +93,9 @@ export const plans = sqliteTable("plans", {
   startYear: int("start_year").notNull(),
   startSemester: int("start_semester").notNull(),
   currentSemester: int("current_semester").notNull(),
+  // epic.md 15 (D14): required for MCOMP/VCOMP (one of that program-year's
+  // specialisations), null/ignored for MMLCV.
+  specialisation: text(),
   createdAt: text("created_at")
     .notNull()
     .default(sql`(datetime('now'))`),
