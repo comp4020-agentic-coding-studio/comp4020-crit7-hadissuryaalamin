@@ -63,7 +63,7 @@ const error = Astro.url.searchParams.get("error");
           );
           const semCourses = coursesBySemester.get(semesterIndex) ?? [];
           return (
-            <section class="season season--completed">
+            <section id={`semester-${semesterIndex}`} class="season season--completed">
               <div class="season__head">
                 <h2>
                   Semester {semesterIndex} — {cal.year} S{cal.semester}

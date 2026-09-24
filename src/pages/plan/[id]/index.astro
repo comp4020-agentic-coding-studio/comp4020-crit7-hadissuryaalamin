@@ -194,7 +194,10 @@ const hasPastCourses = courses.some((c) => c.semesterIndex < plan.currentSemeste
         const isCompleted = semesterIndex < plan.currentSemester;
         const isCurrent = semesterIndex === plan.currentSemester;
         return (
-          <section class={`season${isCompleted ? " season--completed" : ""}${isCurrent ? " season--current" : ""}`}>
+          <section
+            id={`semester-${semesterIndex}`}
+            class={`season${isCompleted ? " season--completed" : ""}${isCurrent ? " season--current" : ""}`}
+          >
             <div class="season__head">
               <h2>
                 Semester {semesterIndex} — {cal.year} S{cal.semester}

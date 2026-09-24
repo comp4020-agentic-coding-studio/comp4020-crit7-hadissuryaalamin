@@ -40,5 +40,34 @@ const { title, wide = false } = Astro.props;
         before enrolling.
       </p>
     </footer>
+    <script is:inline>
+      // 2026-09-25 (epic.md 18.1): scroll stays put after add/remove/waive/
+      // unwaive. Mutations are plain-form POST/redirect (rule 5) so this
+      // can't carry state through the request itself — it saves scrollY to
+      // sessionStorage right before a plan-mutation form submits, and
+      // restores it once the redirected page loads. Progressive enhancement
+      // only: with JS off the browser just lands at the top, same as today.
+      (function () {
+        try {
+          var key = "scrollY:" + location.pathname;
+          document.addEventListener("submit", function (event) {
+            var form = event.target;
+            if (form instanceof HTMLFormElement && form.method === "post") {
+              try {
+                sessionStorage.setItem(key, String(window.scrollY));
+              } catch {}
+            }
+          });
+          var saved = sessionStorage.getItem(key);
+          if (saved !== null) {
+            sessionStorage.removeItem(key);
+            var y = Number(saved);
+            if (Number.isFinite(y)) {
+              window.scrollTo(0, y);
+            }
+          }
+        } catch {}
+      })();
+    </script>
   </body>
 </html>
