@@ -20,13 +20,12 @@ export interface Bed {
 }
 
 // Flat, unmodulated fields — no gradients, no tints — from the contract's
-// fixed set: moss, marigold, brick, iris, plum, sage, slate, ochre. Chosen to
+// fixed set: moss, marigold, brick, iris, plum, rose, slate, sky. Chosen to
 // sit apart from each other (checked pairwise at swatch size), from the
 // reserved action teal (--action), and from the red/grey/amber marks used
-// for status stamps — brick sits well clear of the zero-credit red, and
-// ochre sits well clear of both marigold and the amber timing tag's hue.
+// for status stamps — brick sits well clear of the zero-credit red.
 // Order matters: it's also the fallback assignment order for an 8th+ bed
-// (see buildBedMap's `% 8`), which is why slate — not ochre — is 7th, since
+// (see buildBedMap's `% 8`), which is why slate is 7th, since
 // MMLCV's largest real case (7 beds) should land on slate.
 const BED_HUES: Bed[] = [
   { hueName: "moss", hex: "#4F6B3A", textColor: "#ffffff" },
@@ -34,9 +33,9 @@ const BED_HUES: Bed[] = [
   { hueName: "brick", hex: "#6E4A36", textColor: "#ffffff" },
   { hueName: "iris", hex: "#4C5A9E", textColor: "#ffffff" },
   { hueName: "plum", hex: "#7A4569", textColor: "#ffffff" },
-  { hueName: "sage", hex: "#5C7859", textColor: "#ffffff" },
+  { hueName: "rose", hex: "#B84A73", textColor: "#ffffff" },
   { hueName: "slate", hex: "#45606B", textColor: "#ffffff" },
-  { hueName: "ochre", hex: "#78741A", textColor: "#ffffff" },
+  { hueName: "sky", hex: "#7FB3D9", textColor: "var(--ink)" },
 ];
 
 // Groups that should share one hue rather than each taking their own:

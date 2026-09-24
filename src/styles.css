@@ -734,7 +734,7 @@ footer p {
   flex: none;
   width: 0.9rem;
   height: 0.9rem;
-  color: var(--action);
+  color: var(--ink);
 }
 
 .course-remove-form {
