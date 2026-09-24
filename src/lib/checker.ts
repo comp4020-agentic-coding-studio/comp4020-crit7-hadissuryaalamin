@@ -108,6 +108,8 @@ const PATHWAY_CONFLICT_MESSAGE =
 const UNVERIFIED_MESSAGE = "Unverified course code - not in the ANU catalogue we loaded";
 const UNDERGRAD_MESSAGE = "Undergraduate course - can't count as a university elective";
 const ALREADY_COUNTED_MESSAGE = "Already counted";
+// D15 (epic 16): "I have permission to enrol" waiver note.
+const WAIVED_MESSAGE = "Prerequisite waived - you have permission to enrol";
 
 export function evaluate(
   plan: Plan,
@@ -117,6 +119,10 @@ export function evaluate(
   const groups = catalogue.groups;
   const groupEarned = new Map<string, number>(groups.map((g) => [g.id, 0]));
   const countAlready = new Map<string, number>();
+  // D16 (epic 16): semester indexes seen so far for each code, in walk
+  // order, so a repeatable course's second occurrence can tell whether it
+  // immediately follows the first (continuation) or not (warn).
+  const occurrenceSemestersByCode = new Map<string, number[]>();
   let totalEarned = 0;
   const warnings: string[] = [];
 
@@ -167,6 +173,12 @@ export function evaluate(
     const entries = catalogue.courses[pc.courseCode];
     const isKnown = !!entries && entries.length > 0;
     const effectiveUnverified = pc.unverified || !isKnown;
+
+    // D16: record this occurrence's semester before deciding anything else,
+    // so a later occurrence of the same code can look at every occurrence
+    // that came before it in walk order.
+    const priorSemesters = occurrenceSemestersByCode.get(pc.courseCode) ?? [];
+    occurrenceSemestersByCode.set(pc.courseCode, [...priorSemesters, pc.semesterIndex]);
 
     let level: number;
     let units: number;
@@ -291,18 +303,47 @@ export function evaluate(
         messages.push(`based on ${entry.year} offering`);
       }
 
-      if (entry.prereqExpr) {
-        const doneCodes = new Set(
-          planCourses.filter((p) => p.semesterIndex < pc.semesterIndex).map((p) => p.courseCode),
-        );
-        const missing = missingPrereqCodes(entry.prereqExpr, doneCodes);
-        if (missing.length > 0) {
-          status = worse(status, "warn");
-          messages.push(`Needs ${missing.join(", ")} first`);
+      // D16 (epic 16): a repeatable course's second occurrence. Only the
+      // *second* occurrence (exactly one prior one) is ever a continuation
+      // or a consecutive-semester warning — a third+ occurrence is already
+      // handled by the "Already counted" credit rule above and gets normal
+      // timing checks like any other course.
+      const isSecondOccurrence = !effectiveUnverified && repeatableTimes > 1 && priorSemesters.length === 1;
+      const firstSemesterIndex = priorSemesters[0];
+      const isContinuation = isSecondOccurrence && pc.semesterIndex === firstSemesterIndex! + 1;
+      const isNonConsecutiveRepeat = isSecondOccurrence && !isContinuation;
+
+      if (isContinuation) {
+        // Already in the project — the prerequisite check is skipped
+        // entirely (no "Needs .../Check P&C" message at all), replaced by
+        // this note.
+        messages.push(`Continues from Semester ${firstSemesterIndex}`);
+      } else {
+        // D15: a waiver skips the prerequisite check entirely too, replaced
+        // by its own note — it never touches zero-credit/offering/other
+        // messages, which were already decided above.
+        if (pc.prereqWaived) {
+          messages.push(WAIVED_MESSAGE);
+        } else if (entry.prereqExpr) {
+          const doneCodes = new Set(
+            planCourses.filter((p) => p.semesterIndex < pc.semesterIndex).map((p) => p.courseCode),
+          );
+          const missing = missingPrereqCodes(entry.prereqExpr, doneCodes);
+          if (missing.length > 0) {
+            status = worse(status, "warn");
+            messages.push(`Needs ${missing.join(", ")} first`);
+          }
+        } else if (entry.prereqText) {
+          status = worse(status, "unknown");
+          messages.push(`Check P&C: ${entry.prereqText}`);
         }
-      } else if (entry.prereqText) {
-        status = worse(status, "unknown");
-        messages.push(`Check P&C: ${entry.prereqText}`);
+
+        if (isNonConsecutiveRepeat) {
+          status = worse(status, "warn");
+          messages.push(
+            `Must be taken in consecutive semesters (first part is in Semester ${firstSemesterIndex})`,
+          );
+        }
       }
     }
 

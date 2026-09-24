@@ -565,7 +565,10 @@ describe("checker: repeatable-course continuation (9.16 / D16)", () => {
     const result = evaluate(p, courses, catalogue);
     const r1 = statusOf(result, "c1");
     const r2 = statusOf(result, "c2");
-    expect(r1.status).toBe("counts");
+    // The first occurrence is not a continuation of anything — its own
+    // unparsed requisite text still applies normally.
+    expect(r1.status).toBe("unknown");
+    expect(r1.messages).toContain(`Check P&C: ${"some ANU permission-based text"}`);
     expect(r2.status).toBe("counts");
     expect(r2.messages).toContain("Continues from Semester 3");
     expect(r2.messages.some((m) => m.startsWith("Needs "))).toBe(false);
