@@ -109,6 +109,11 @@ export interface PlanCourse {
    * just within a semester, for pathway auto-detect's "earliest in the
    * plan" rule (9.2) to have a total order. */
   addedOrder: number;
+  /** D15 (epic 16): "I have permission to enrol" — set when the student has
+   * waived this course's prerequisite check. When true the prerequisite
+   * check is skipped entirely (a waiver never hides zero-credit, offering,
+   * unverified or pathway messages, only the prerequisite one). */
+  prereqWaived: boolean;
 }
 
 export type CourseStatus = "counts" | "zero-credit" | "warn" | "unknown";

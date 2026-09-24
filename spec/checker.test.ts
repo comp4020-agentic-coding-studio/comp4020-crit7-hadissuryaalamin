@@ -186,6 +186,7 @@ function pc(
     units: 6,
     level: Number(courseCode.match(/\d/)?.[0] ?? "6") * 1000,
     addedOrder,
+    prereqWaived: false,
     ...overrides,
   };
 }
@@ -504,6 +505,102 @@ describe("checker: timing (9.3)", () => {
     const r = statusOf(result, "c1");
     expect(r.status).toBe("unknown");
     expect(r.messages).toContain("Offering not published yet");
+  });
+});
+
+describe("checker: permission waiver (9.16 / D15)", () => {
+  it("waived prerequisite -> no prereq message, waiver note added, status by credit/offering only", () => {
+    const catalogue = mmlcvCatalogue([
+      course("COMP8600", {
+        prereqText: "To enrol in this course you must have completed COMP6670",
+        prereqExpr: { kind: "course", code: "COMP6670" },
+      }),
+    ]);
+    const p = plan({ currentSemester: 1 });
+    const courses = [pc("c1", 2, "COMP8600", 1, { prereqWaived: true })];
+    const result = evaluate(p, courses, catalogue);
+    const r = statusOf(result, "c1");
+    // COMP8600 has room in MLCV core and is offered — with the prereq
+    // waived, nothing else is wrong, so it counts.
+    expect(r.status).toBe("counts");
+    expect(r.messages.some((m) => m.startsWith("Needs "))).toBe(false);
+    expect(r.messages.some((m) => m.startsWith("Check P&C:"))).toBe(false);
+    expect(r.messages).toContain("Prerequisite waived - you have permission to enrol");
+  });
+
+  it("a waiver never hides zero-credit or offering messages", () => {
+    const catalogue = mmlcvCatalogue([
+      course("COMP1100", {
+        level: 1000,
+        offeredS1: false,
+        prereqText: "some prereq text",
+        prereqExpr: { kind: "course", code: "COMP6670" },
+      }),
+    ]);
+    const p = plan({ startYear: 2026, startSemester: 1, currentSemester: 1 });
+    const courses = [
+      pc("c1", 1, "COMP1100", 1, { level: 1000, prereqWaived: true }),
+    ];
+    const result = evaluate(p, courses, catalogue);
+    const r = statusOf(result, "c1");
+    expect(r.status).toBe("zero-credit");
+    expect(r.messages).toContain(
+      "Undergraduate course - can't count as a university elective",
+    );
+    expect(r.messages).toContain("Not offered in Semester 1 2026");
+    expect(r.messages).toContain("Prerequisite waived - you have permission to enrol");
+  });
+});
+
+describe("checker: repeatable-course continuation (9.16 / D16)", () => {
+  it("second occurrence in the immediately-next semester continues, no prereq message", () => {
+    const catalogue = mmlcvCatalogue([
+      course("COMP8715", {
+        repeatableTimes: 2,
+        prereqText: "some ANU permission-based text",
+      }),
+    ]);
+    const p = plan({ currentSemester: 1 });
+    const courses = [pc("c1", 3, "COMP8715", 1), pc("c2", 4, "COMP8715", 2)];
+    const result = evaluate(p, courses, catalogue);
+    const r1 = statusOf(result, "c1");
+    const r2 = statusOf(result, "c2");
+    expect(r1.status).toBe("counts");
+    expect(r2.status).toBe("counts");
+    expect(r2.messages).toContain("Continues from Semester 3");
+    expect(r2.messages.some((m) => m.startsWith("Needs "))).toBe(false);
+    expect(r2.messages.some((m) => m.startsWith("Check P&C:"))).toBe(false);
+  });
+
+  it("COMP8800 (12 units per semester) follows the same continuation rule", () => {
+    const catalogue = mmlcvCatalogue([
+      course("COMP8800", { units: 12, repeatableTimes: 2 }),
+    ]);
+    const p = plan({ currentSemester: 1 });
+    const courses = [
+      pc("c1", 1, "COMP8800", 1, { units: 12 }),
+      pc("c2", 2, "COMP8800", 2, { units: 12 }),
+    ];
+    const result = evaluate(p, courses, catalogue);
+    expect(statusOf(result, "c2").messages).toContain("Continues from Semester 1");
+    expect(result.groups.find((g) => g.name === "Project pathway B")?.earned).toBe(24);
+    expect(result.totalEarned).toBe(24);
+  });
+
+  it("non-consecutive semesters -> warn, credit totals unchanged", () => {
+    const catalogue = mmlcvCatalogue([
+      course("COMP8715", { repeatableTimes: 2 }),
+    ]);
+    const p = plan({ currentSemester: 1 });
+    const courses = [pc("c1", 1, "COMP8715", 1), pc("c2", 3, "COMP8715", 2)];
+    const result = evaluate(p, courses, catalogue);
+    const r2 = statusOf(result, "c2");
+    expect(r2.status).toBe("warn");
+    expect(r2.messages).toContain(
+      "Must be taken in consecutive semesters (first part is in Semester 1)",
+    );
+    expect(result.groups.find((g) => g.name === "Project pathway A")?.earned).toBe(12);
+    expect(result.totalEarned).toBe(12);
   });
 });
 
