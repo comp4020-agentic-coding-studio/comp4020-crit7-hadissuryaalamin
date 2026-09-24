@@ -1,28 +1,204 @@
 ---
-import "../styles.css";
+// Home page (epic.md section 10): pitch + start-a-plan form. Plain HTML
+// form, POST /api/plans, redirect (303) to /plan/<id> or
+// /plan/<id>/catch-up. On a validation error, /api/plans redirects back
+// here with the message and the submitted values as query params, so the
+// form re-renders with the error shown and the choices kept — no JS
+// required for any of this.
+import Layout from "../components/Layout.astro";
+import StatusBadge from "../components/StatusBadge.astro";
+import { getProgram, getSpecialisationOptions } from "../lib/catalogue";
 
-// Placeholder home page. The guestbook starter has been removed (task 001);
-// the real onboarding form (program, start year, start semester, current
-// semester — epic.md section 10) is built in task 006. This keeps the
-// invariants (one h1, nav landmark, lang, title, viewport) passing in the
-// meantime.
+const PROGRAM_CODES = ["MCOMP", "VCOMP", "MMLCV"] as const;
+const SPECIALISATION_PROGRAM_CODES = ["MCOMP", "VCOMP"] as const;
+const YEARS = [2025, 2026, 2027] as const;
+
+function programName(code: string): string {
+  for (const year of YEARS) {
+    const program = getProgram(code, year);
+    if (program) return program.name;
+  }
+  return code;
+}
+
+const programOptions = PROGRAM_CODES.map((code) => ({ code, name: programName(code) }));
+
+// Data-driven specialisation options (epic.md 15): a JSON map keyed
+// "<programCode>:<year>" for the progressive-enhancement script to narrow
+// the select to, plus a deduplicated union used as the no-JS baseline list
+// (any option a student picks is validated server-side against their exact
+// program-year regardless).
+const specialisationMap: Record<string, { code: string; name: string }[]> = {};
+const unionByCode = new Map<string, string>();
+for (const code of SPECIALISATION_PROGRAM_CODES) {
+  for (const year of YEARS) {
+    const options = getSpecialisationOptions(code, year);
+    specialisationMap[`${code}:${year}`] = options;
+    for (const option of options) {
+      if (!unionByCode.has(option.code)) unionByCode.set(option.code, option.name);
+    }
+  }
+}
+const specialisationOptions = [...unionByCode.entries()]
+  .map(([code, name]) => ({ code, name }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const params = Astro.url.searchParams;
+const error = params.get("error");
+const values = {
+  programCode: params.get("programCode") ?? "",
+  startYear: params.get("startYear") ?? "",
+  startSemester: params.get("startSemester") ?? "2".slice(0, 0) || "1",
+  currentSemester: params.get("currentSemester") ?? "",
+  specialisation: params.get("specialisation") ?? "",
+};
+if (params.get("startSemester")) values.startSemester = params.get("startSemester")!;
+
+// Guard against "</script>" inside embedded JSON breaking out of the tag.
+const specialisationDataJson = JSON.stringify(specialisationMap).replace(/</g, "\\u003c");
 ---
 
-<!doctype html>
-<html lang="en-AU">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Degree Plan Checker</title>
-  </head>
-  <body>
-    <nav aria-label="site">
-      <a href="/">Home</a>
-      <a href="/readme/">About</a>
-    </nav>
-    <main>
-      <h1>Degree Plan Checker</h1>
-      <p>Coming soon: build your ANU master's degree plan here.</p>
-    </main>
-  </body>
-</html>
+<Layout title="Degree Plan Checker">
+  <h1>Degree Plan Checker</h1>
+  <p class="pitch">
+    Build your ANU master's degree plan semester by semester, and see —
+    before you enrol — whether a course actually counts toward your degree.
+  </p>
+
+  <div class="example-warning">
+    <StatusBadge status="zero-credit" />
+    <span
+      ><code>COMP1100</code> as a university elective — "Undergraduate course
+      - can't count as a university elective"</span
+    >
+  </div>
+
+  {error && <p class="alert alert-error" role="alert">{error}</p>}
+
+  <form method="post" action="/api/plans" class="card start-form">
+    <h2>Start a plan</h2>
+    <div class="form-grid">
+      <div class="field">
+        <label for="programCode">Program</label>
+        <select id="programCode" name="programCode" required>
+          <option value="" disabled selected={!values.programCode}>Select a program</option>
+          {
+            programOptions.map((program) => (
+              <option value={program.code} selected={values.programCode === program.code}>
+                {program.name} ({program.code})
+              </option>
+            ))
+          }
+        </select>
+      </div>
+      <div class="field">
+        <label for="startYear">Year you started (or will start)</label>
+        <select id="startYear" name="startYear" required>
+          <option value="" disabled selected={!values.startYear}>Select a year</option>
+          {
+            YEARS.map((year) => (
+              <option value={year} selected={values.startYear === String(year)}>
+                {year}
+              </option>
+            ))
+          }
+        </select>
+      </div>
+      <div class="field">
+        <label for="startSemester">Started in</label>
+        <select id="startSemester" name="startSemester" required>
+          <option value="1" selected={values.startSemester !== "2"}>First Semester (S1)</option>
+          <option value="2" selected={values.startSemester === "2"}>Second Semester (S2)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="currentSemester">Semester you're enrolling in now</label>
+        <input
+          id="currentSemester"
+          name="currentSemester"
+          type="number"
+          min="1"
+          max="12"
+          inputmode="numeric"
+          aria-describedby="currentSemester-hint"
+          value={values.currentSemester || "1"}
+          required
+        />
+        <p id="currentSemester-hint" class="hint">
+          1st semester of your program = 1, 2nd = 2, and so on.
+        </p>
+      </div>
+      <div class="field" id="specialisation-field">
+        <label for="specialisation">Specialisation (Master of Computing only)</label>
+        <select id="specialisation" name="specialisation">
+          <option value="">Select a specialisation</option>
+          {
+            specialisationOptions.map((option) => (
+              <option value={option.code} selected={values.specialisation === option.code}>
+                {option.name}
+              </option>
+            ))
+          }
+        </select>
+        <p class="hint">
+          MCOMP and VCOMP students pick one specialisation (24 units). Not
+          needed for MMLCV.
+        </p>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Start planning</button>
+  </form>
+
+  <script type="application/json" id="specialisation-data" set:html={specialisationDataJson} />
+  <script>
+    // Progressive enhancement only — the form above already works without
+    // this (epic.md section 15). Narrows the specialisation list to the
+    // chosen program+year, and hides/disables it entirely for MMLCV, which
+    // has no specialisation slot.
+    const dataEl = document.getElementById("specialisation-data");
+    const data: Record<string, { code: string; name: string }[]> = dataEl
+      ? JSON.parse(dataEl.textContent || "{}")
+      : {};
+    const programSel = document.getElementById("programCode");
+    const yearSel = document.getElementById("startYear");
+    const specField = document.getElementById("specialisation-field");
+    const specSel = document.getElementById("specialisation");
+
+    function update() {
+      if (
+        !(programSel instanceof HTMLSelectElement) ||
+        !(yearSel instanceof HTMLSelectElement) ||
+        !(specField instanceof HTMLElement) ||
+        !(specSel instanceof HTMLSelectElement)
+      ) {
+        return;
+      }
+      const options = data[`${programSel.value}:${yearSel.value}`] ?? [];
+      if (programSel.value === "MMLCV" || options.length === 0) {
+        specField.hidden = true;
+        specSel.disabled = true;
+        specSel.required = false;
+        return;
+      }
+      specField.hidden = false;
+      specSel.disabled = false;
+      specSel.required = true;
+      const current = specSel.value;
+      specSel.innerHTML = "";
+      const blank = document.createElement("option");
+      blank.value = "";
+      blank.textContent = "Select a specialisation";
+      specSel.appendChild(blank);
+      for (const option of options) {
+        const opt = document.createElement("option");
+        opt.value = option.code;
+        opt.textContent = option.name;
+        if (option.code === current) opt.selected = true;
+        specSel.appendChild(opt);
+      }
+    }
+    programSel?.addEventListener("change", update);
+    yearSel?.addEventListener("change", update);
+    update();
+  </script>
+</Layout>
