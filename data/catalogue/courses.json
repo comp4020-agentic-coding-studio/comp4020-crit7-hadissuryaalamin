@@ -249,6 +249,63 @@
     ]
   },
   {
+    "code": "COMP6034",
+    "year": 2026,
+    "title": "Network Security",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course, you must be enrolled in the Master of Computing (Advanced) and have completed COMP6800 or COMP2700",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3704"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course, you must be enrolled in the Master of Computing (Advanced) and have completed COMP6800 or COMP2700\""
+    ]
+  },
+  {
+    "code": "COMP6034",
+    "year": 2027,
+    "title": "Network Security",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course, you must be enrolled in the Master of Computing (Advanced) and have completed COMP6800 or COMP2700",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3704"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course, you must be enrolled in the Master of Computing (Advanced) and have completed COMP6800 or COMP2700\""
+    ]
+  },
+  {
+    "code": "COMP6120",
+    "year": 2025,
+    "title": "Software Engineering",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have successfully completed or be currently studying COMP6442 or COMP2100.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP2120"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed or be currently studying COMP6442 or COMP2100.\""
+    ]
+  },
+  {
     "code": "COMP6120",
     "year": 2026,
     "title": "Software Engineering",
@@ -284,6 +341,80 @@
     "repeatableTimes": 1,
     "parseWarnings": [
       "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed or be currently studying COMP6442 or COMP2100.\""
+    ]
+  },
+  {
+    "code": "COMP6240",
+    "year": 2025,
+    "title": "Relational Databases",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "You are not able to enrol in this course if you have successfully completed COMP2400.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP7240"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"You are not able to enrol in this course if you have successfully completed COMP2400.\""
+    ]
+  },
+  {
+    "code": "COMP6240",
+    "year": 2026,
+    "title": "Relational Databases",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "You are not able to enrol in this course if you have successfully completed COMP2400.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP7240"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"You are not able to enrol in this course if you have successfully completed COMP2400.\""
+    ]
+  },
+  {
+    "code": "COMP6240",
+    "year": 2027,
+    "title": "Relational Databases",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "You are not able to enrol in this course if you have successfully completed COMP2400.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP7240"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"You are not able to enrol in this course if you have successfully completed COMP2400.\""
+    ]
+  },
+  {
+    "code": "COMP6242",
+    "year": 2027,
+    "title": "Deep Learning",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have successfully completed:\n(COMP3670 or COMP6670 or COMP8410)\nAND\n(COMP1110 or COMP6710 or COMP7710 or COMP1730 or COMP6730).",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed:\n(COMP3670 or COMP6670 or COMP8410)\nAND\n(COMP1110 or COMP6710 or COMP7710 or COMP1730 or COMP6730).\""
     ]
   },
   {
@@ -494,6 +625,103 @@
     ],
     "repeatableTimes": 1,
     "parseWarnings": []
+  },
+  {
+    "code": "COMP6300",
+    "year": 2026,
+    "title": "Computer Architecture",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be:\n\nstudying a Master of Computing OR Master of Computing (Advanced)\n\nOR \n\nhave completed\n\nCOMP6710 OR COMP7710 OR COMP1110.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP2300",
+      "ENGN2219",
+      "COMP6719"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be:\n\nstudying a Master of Computing OR Master of Computing (Advanced)\n\nOR \n\nhave completed\n\nCOMP6710 OR COMP7710 OR COMP1110.\""
+    ]
+  },
+  {
+    "code": "COMP6300",
+    "year": 2027,
+    "title": "Computer Architecture",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be:\n\nstudying a Master of Computing OR Master of Computing (Advanced)\n\nOR \n\nhave completed\n\nCOMP6710 OR COMP7710 OR COMP1110.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP2300",
+      "ENGN2219",
+      "COMP6719"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be:\n\nstudying a Master of Computing OR Master of Computing (Advanced)\n\nOR \n\nhave completed\n\nCOMP6710 OR COMP7710 OR COMP1110.\""
+    ]
+  },
+  {
+    "code": "COMP6310",
+    "year": 2025,
+    "title": "Systems, Networks and Concurrency",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed (or have an exemption for):\n\nCOMP6300 AND \nCOMP6710 or COMP1110.\n\nYou will not be able to enrol in the course if you have completed COMP2310.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed (or have an exemption for):\n\nCOMP6300 AND \nCOMP6710 or COMP1110.\n\nYou will not be able to enrol in the course if you have completed COMP2310.\""
+    ]
+  },
+  {
+    "code": "COMP6310",
+    "year": 2026,
+    "title": "Systems, Networks and Concurrency",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed:\nCOMP6300 AND (COMP6710 or COMP7710 or COMP1110)",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP2310"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\nCOMP6300 AND (COMP6710 or COMP7710 or COMP1110)\""
+    ]
+  },
+  {
+    "code": "COMP6310",
+    "year": 2027,
+    "title": "Systems, Networks and Concurrency",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed:\nCOMP6300 AND (COMP6710 or COMP7710 or COMP1110)",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP2310"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\nCOMP6300 AND (COMP6710 or COMP7710 or COMP1110)\""
+    ]
   },
   {
     "code": "COMP6320",
@@ -550,6 +778,321 @@
     "repeatableTimes": 1,
     "parseWarnings": [
       "prereq_text could not be parsed safely: \"To enrol in this course you must have completed\n\n(COMP6710 OR COMP7710 OR COMP1110 OR be enrolled in Master of Computing (Advanced))\nAND\nhave completed or be currently enrolled in COMP6262 OR COMP2620\""
+    ]
+  },
+  {
+    "code": "COMP6330",
+    "year": 2025,
+    "title": "Operating Systems Implementation",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be:\n\nstudying a Master of Computing (Advanced)  \n\nOR \n\nbe enrolled in or have completed COMP6300 or\n\nhave completed COMP2300 or  ENGN2219.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3300"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be:\n\nstudying a Master of Computing (Advanced)  \n\nOR \n\nbe enrolled in or have completed COMP6300 or\n\nhave completed COMP2300 or  ENGN2219.\""
+    ]
+  },
+  {
+    "code": "COMP6330",
+    "year": 2026,
+    "title": "Operating Systems Implementation",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be:\n\nstudying a Master of Computing (Advanced)  \n\nOR \n\nbe enrolled in or have completed COMP6300 or\n\nhave completed COMP2300 or  ENGN2219.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3300"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be:\n\nstudying a Master of Computing (Advanced)  \n\nOR \n\nbe enrolled in or have completed COMP6300 or\n\nhave completed COMP2300 or  ENGN2219.\""
+    ]
+  },
+  {
+    "code": "COMP6330",
+    "year": 2027,
+    "title": "Operating Systems Implementation",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be:\n\nstudying a Master of Computing (Advanced)  \n\nOR \n\nbe enrolled in or have completed COMP6300 or\n\nhave completed COMP2300 or  ENGN2219.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3300"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be:\n\nstudying a Master of Computing (Advanced)  \n\nOR \n\nbe enrolled in or have completed COMP6300 or\n\nhave completed COMP2300 or  ENGN2219.\""
+    ]
+  },
+  {
+    "code": "COMP6331",
+    "year": 2025,
+    "title": "Computer Networks",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed:\n\nCOMP6710 OR COMP1110 OR COMP1140 OR\nCOMP6310 OR COMP2310 OR\nCOMP6442 OR COMP2100.",
+    "prereqExpr": {
+      "op": "OR",
+      "codes": [
+        "COMP6710",
+        "COMP1110",
+        "COMP1140",
+        "COMP6310",
+        "COMP2310",
+        "COMP6442",
+        "COMP2100"
+      ]
+    },
+    "incompatible": [
+      "COMP3310",
+      "ENGN3539",
+      "ENGN6539"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": []
+  },
+  {
+    "code": "COMP6331",
+    "year": 2026,
+    "title": "Computer Networks",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed:\n\n(COMP6710 OR COMP7710 OR COMP1110 OR  COMP1140) OR\n(COMP6310 OR COMP2310) OR\n(COMP6442 OR  COMP2100).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3310",
+      "ENGN3539",
+      "ENGN6539"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\n\n(COMP6710 OR COMP7710 OR COMP1110 OR  COMP1140) OR\n(COMP6310 OR COMP2310) OR\n(COMP6442 OR  COMP2100).\""
+    ]
+  },
+  {
+    "code": "COMP6331",
+    "year": 2027,
+    "title": "Computer Networks",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed:\n\n(COMP6710 OR COMP7710 OR COMP1110 OR  COMP1140) OR\n(COMP6310 OR COMP2310) OR\n(COMP6442 OR  COMP2100).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3310",
+      "ENGN3539",
+      "ENGN6539"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\n\n(COMP6710 OR COMP7710 OR COMP1110 OR  COMP1140) OR\n(COMP6310 OR COMP2310) OR\n(COMP6442 OR  COMP2100).\""
+    ]
+  },
+  {
+    "code": "COMP6361",
+    "year": 2025,
+    "title": "Principles of Programming Languages",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": ".To enrol in this course you must have successfully completed COMP6710 and COMP6260; or be enrolled in Master of Computing (Advanced)",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \".To enrol in this course you must have successfully completed COMP6710 and COMP6260; or be enrolled in Master of Computing (Advanced)\""
+    ]
+  },
+  {
+    "code": "COMP6361",
+    "year": 2026,
+    "title": "Principles of Programming Languages",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": ".To enrol in this course you must have successfully completed COMP6710 and COMP6260; or be enrolled in Master of Computing (Advanced)",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \".To enrol in this course you must have successfully completed COMP6710 and COMP6260; or be enrolled in Master of Computing (Advanced)\""
+    ]
+  },
+  {
+    "code": "COMP6361",
+    "year": 2027,
+    "title": "Principles of Programming Languages",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have successfully completed COMP6442 and COMP6260; or be enrolled in Master of Computing (Advanced)",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed COMP6442 and COMP6260; or be enrolled in Master of Computing (Advanced)\""
+    ]
+  },
+  {
+    "code": "COMP6363",
+    "year": 2025,
+    "title": "Theory of Computation",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying Master of Computing OR Master of Computing (Advanced).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3630"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying Master of Computing OR Master of Computing (Advanced).\""
+    ]
+  },
+  {
+    "code": "COMP6363",
+    "year": 2026,
+    "title": "Theory of Computation",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying Master of Computing OR Master of Computing (Advanced).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3630"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying Master of Computing OR Master of Computing (Advanced).\""
+    ]
+  },
+  {
+    "code": "COMP6363",
+    "year": 2027,
+    "title": "Theory of Computation",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying Master of Computing OR Master of Computing (Advanced).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3630"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying Master of Computing OR Master of Computing (Advanced).\""
+    ]
+  },
+  {
+    "code": "COMP6390",
+    "year": 2025,
+    "title": "Human-Computer Interaction",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must:\n\nbe studying Master of Computing  OR Master of Computing Advanced \n\nOR\n\nhave completed 6 units of (COMP6442 OR COMP6710 OR COMP6720).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3900"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must:\n\nbe studying Master of Computing  OR Master of Computing Advanced \n\nOR\n\nhave completed 6 units of (COMP6442 OR COMP6710 OR COMP6720).\""
+    ]
+  },
+  {
+    "code": "COMP6390",
+    "year": 2026,
+    "title": "Human-Computer Interaction",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must:\n\nbe studying Master of Computing  OR Master of Computing Advanced \n\nOR\n\nhave completed 6 units of (COMP6442 OR COMP6710 OR COMP6720).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3900"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must:\n\nbe studying Master of Computing  OR Master of Computing Advanced \n\nOR\n\nhave completed 6 units of (COMP6442 OR COMP6710 OR COMP6720).\""
+    ]
+  },
+  {
+    "code": "COMP6390",
+    "year": 2027,
+    "title": "Human-Computer Interaction",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must:\n\nbe studying Master of Computing  OR Master of Computing Advanced \n\nOR\n\nhave completed 6 units of (COMP6442 OR COMP6710 OR COMP6720 OR COMP6730 OR COMP7710).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3900"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must:\n\nbe studying Master of Computing  OR Master of Computing Advanced \n\nOR\n\nhave completed 6 units of (COMP6442 OR COMP6710 OR COMP6720 OR COMP6730 OR COMP7710).\""
+    ]
+  },
+  {
+    "code": "COMP6434",
+    "year": 2027,
+    "title": "Data Wrangling",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed:\n6 units of (COMP1110 or COMP1140 or COMP6730 or COMP6710) AND\n6 units of (COMP2400 or COMP6240).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3430",
+      "COMP8930"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\n6 units of (COMP1110 or COMP1140 or COMP6730 or COMP6710) AND\n6 units of (COMP2400 or COMP6240).\""
     ]
   },
   {
@@ -670,6 +1213,119 @@
     ]
   },
   {
+    "code": "COMP6464",
+    "year": 2025,
+    "title": "High Performance Scientific Computing",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course you must:\n\nbe studying Master of Computing or \nMaster of Computing (Advanced)  or \nhave successfully completed COMP6710  or  COMP1110.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3320"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course you must:\n\nbe studying Master of Computing or \nMaster of Computing (Advanced)  or \nhave successfully completed COMP6710  or  COMP1110.\""
+    ]
+  },
+  {
+    "code": "COMP6464",
+    "year": 2026,
+    "title": "High Performance Scientific Computing",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must:\n\nbe studying Master of Computing or Master of Computing (Advanced)  OR\nhave successfully completed (COMP6710  or COMP7710 or COMP1110 or COMP1140).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3320"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must:\n\nbe studying Master of Computing or Master of Computing (Advanced)  OR\nhave successfully completed (COMP6710  or COMP7710 or COMP1110 or COMP1140).\""
+    ]
+  },
+  {
+    "code": "COMP6464",
+    "year": 2027,
+    "title": "High Performance Scientific Computing",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must:\n\nbe studying Master of Computing or Master of Computing (Advanced)  OR\nhave successfully completed (COMP6710  or COMP7710 or COMP1110 or COMP1140).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3320"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must:\n\nbe studying Master of Computing or Master of Computing (Advanced)  OR\nhave successfully completed (COMP6710  or COMP7710 or COMP1110 or COMP1140).\""
+    ]
+  },
+  {
+    "code": "COMP6466",
+    "year": 2025,
+    "title": "Algorithms",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must:\n\nbe studying Master of Computing or  Master of Computing Advanced\nor have successfully completed COMP6710  or COMP1110 or COMP1140.\n\nYou are not able to enrol in this course if you have successfully completed COMP3600.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must:\n\nbe studying Master of Computing or  Master of Computing Advanced\nor have successfully completed COMP6710  or COMP1110 or COMP1140.\n\nYou are not able to enrol in this course if you have successfully completed COMP3600.\""
+    ]
+  },
+  {
+    "code": "COMP6466",
+    "year": 2026,
+    "title": "Algorithms",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must:\n\nbe studying Master of Computing or  Master of Computing Advanced\nor have successfully completed (COMP6710  or COMP7710 or COMP1110 or COMP1140).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3600"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must:\n\nbe studying Master of Computing or  Master of Computing Advanced\nor have successfully completed (COMP6710  or COMP7710 or COMP1110 or COMP1140).\""
+    ]
+  },
+  {
+    "code": "COMP6466",
+    "year": 2027,
+    "title": "Algorithms",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must:\n\nbe studying Master of Computing or  Master of Computing Advanced\nor have successfully completed (COMP6710  or COMP7710 or COMP1110 or COMP1140).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3600"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must:\n\nbe studying Master of Computing or  Master of Computing Advanced\nor have successfully completed (COMP6710  or COMP7710 or COMP1110 or COMP1140).\""
+    ]
+  },
+  {
     "code": "COMP6490",
     "year": 2025,
     "title": "Document Analysis",
@@ -791,6 +1447,66 @@
     "repeatableTimes": 1,
     "parseWarnings": [
       "prereq_text could not be parsed safely: \"To enrol in this course you must be studying one of:\n\nGraduate Diploma of Computing\nMaster of Computing\nMaster of Computing (Advanced).\nMaster of Machine Learning and Computer Vision\""
+    ]
+  },
+  {
+    "code": "COMP6540",
+    "year": 2025,
+    "title": "Game Development",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course you must have completed COMP6710 or COMP1110 or COMP1140.",
+    "prereqExpr": {
+      "op": "OR",
+      "codes": [
+        "COMP6710",
+        "COMP1110",
+        "COMP1140"
+      ]
+    },
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet"
+    ]
+  },
+  {
+    "code": "COMP6540",
+    "year": 2026,
+    "title": "Game Development",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course you must be enrolled in Master of Computing Advanced OR have completed (COMP6710 or COMP1110 or COMP1140).",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be enrolled in Master of Computing Advanced OR have completed (COMP6710 or COMP1110 or COMP1140).\""
+    ]
+  },
+  {
+    "code": "COMP6540",
+    "year": 2027,
+    "title": "Game Development",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course you must:\n\nbe enrolled in Master of Computing Advanced OR\n\nhave completed (COMP6710 or  COMP7710 or COMP1110  or  COMP1140).",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course you must:\n\nbe enrolled in Master of Computing Advanced OR\n\nhave completed (COMP6710 or  COMP7710 or COMP1110  or  COMP1140).\""
     ]
   },
   {
@@ -911,6 +1627,137 @@
     ]
   },
   {
+    "code": "COMP6720",
+    "year": 2025,
+    "title": "Art and Interaction Computing",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP1720"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": []
+  },
+  {
+    "code": "COMP6720",
+    "year": 2026,
+    "title": "Art and Interaction Computing",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP1720"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet"
+    ]
+  },
+  {
+    "code": "COMP6720",
+    "year": 2027,
+    "title": "Art and Interaction Computing",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP1720"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet"
+    ]
+  },
+  {
+    "code": "COMP6780",
+    "year": 2025,
+    "title": "Web Development and Design",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP1710"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet"
+    ]
+  },
+  {
+    "code": "COMP6780",
+    "year": 2026,
+    "title": "Web Development and Design",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP1710"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet"
+    ]
+  },
+  {
+    "code": "COMP6800",
+    "year": 2026,
+    "title": "Cyber Security Foundations",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be enrolled in Masters of Computing (Advanced).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP2700"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be enrolled in Masters of Computing (Advanced).\""
+    ]
+  },
+  {
+    "code": "COMP6800",
+    "year": 2027,
+    "title": "Cyber Security Foundations",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be enrolled in Masters of Computing (Advanced).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP2700"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be enrolled in Masters of Computing (Advanced).\""
+    ]
+  },
+  {
     "code": "COMP7710",
     "year": 2026,
     "title": "Programming Fundamentals",
@@ -947,6 +1794,165 @@
     ],
     "repeatableTimes": 1,
     "parseWarnings": []
+  },
+  {
+    "code": "COMP8011",
+    "year": 2025,
+    "title": "Advanced Topics in Formal Methods and Programming Languages",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have successfully completed 12 units of 6000-level COMP courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions Enrolling in CECC courses.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed 12 units of 6000-level COMP courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions Enrolling in CECC courses.\""
+    ]
+  },
+  {
+    "code": "COMP8011",
+    "year": 2026,
+    "title": "Advanced Topics in Formal Methods and Programming Languages",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have successfully completed 12 units of 6000-level COMP courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions Enrolling in CECC courses.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed 12 units of 6000-level COMP courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions Enrolling in CECC courses.\""
+    ]
+  },
+  {
+    "code": "COMP8011",
+    "year": 2027,
+    "title": "Advanced Topics in Formal Methods and Programming Languages",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have successfully completed 12 units of 6000-level COMP courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions Enrolling in CECC courses.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed 12 units of 6000-level COMP courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions Enrolling in CECC courses.\""
+    ]
+  },
+  {
+    "code": "COMP8020",
+    "year": 2027,
+    "title": "Advanced Topics in Human-Centred and Creative Computing",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course, you must have completed COMP6390.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the prerequisites can request a permission code from the College.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course, you must have completed COMP6390.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the prerequisites can request a permission code from the College.\""
+    ]
+  },
+  {
+    "code": "COMP8045",
+    "year": 2025,
+    "title": "Advanced Topics in Computer Systems & Architecture",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course you must have successfully completed 12 units of 6000-level COMP coded courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions on Enrolling in CSS courses.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed 12 units of 6000-level COMP coded courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions on Enrolling in CSS courses.\""
+    ]
+  },
+  {
+    "code": "COMP8045",
+    "year": 2026,
+    "title": "Advanced Topics in Computer Systems & Architecture",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have successfully completed 12 units of 6000-level COMP coded courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions on Enrolling in CSS courses.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed 12 units of 6000-level COMP coded courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions on Enrolling in CSS courses.\""
+    ]
+  },
+  {
+    "code": "COMP8045",
+    "year": 2027,
+    "title": "Advanced Topics in Computer Systems & Architecture",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have successfully completed 12 units of 6000-level COMP coded courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions on Enrolling in CSS courses.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have successfully completed 12 units of 6000-level COMP coded courses.\n\nAdditional Prerequisite courses for the Advanced Topic will be listed on the SoCo website when the course topic is announced. Students who meet the pre-requisites can request a permission code following the instructions on Enrolling in CSS courses.\""
+    ]
+  },
+  {
+    "code": "COMP8131",
+    "year": 2026,
+    "title": "Managing Software Quality and Process",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course you must be enrolled in the Masters of Computing Advanced (VCOMP) and have successfully completed COMP6800 Cyber Security Foundations.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4130"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be enrolled in the Masters of Computing Advanced (VCOMP) and have successfully completed COMP6800 Cyber Security Foundations.\""
+    ]
+  },
+  {
+    "code": "COMP8131",
+    "year": 2027,
+    "title": "Managing Software Quality and Process",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be enrolled in the Masters of Computing Advanced (VCOMP) and have successfully completed COMP6800 Cyber Security Foundations.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4130"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be enrolled in the Masters of Computing Advanced (VCOMP) and have successfully completed COMP6800 Cyber Security Foundations.\""
+    ]
   },
   {
     "code": "COMP8260",
@@ -1041,6 +2047,306 @@
     "repeatableTimes": 1,
     "parseWarnings": [
       "prereq_text could not be parsed safely: \"To enrol in this course you must be enrolled in the Graduate Diploma of Computing or Master of Computing or Master of Computing (Advanced) or Master of Machine Learning and Computer Vision.\""
+    ]
+  },
+  {
+    "code": "COMP8300",
+    "year": 2025,
+    "title": "Parallel Systems",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed:\n\nCOMP6310/2310 OR COMP6330/3300 OR COMP6331/3310 OR COMP6464  OR ENGN6539",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4300"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\n\nCOMP6310/2310 OR COMP6330/3300 OR COMP6331/3310 OR COMP6464  OR ENGN6539\""
+    ]
+  },
+  {
+    "code": "COMP8300",
+    "year": 2026,
+    "title": "Parallel Systems",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course you must have completed:\n\nCOMP6310/2310 OR COMP6330/3300 OR COMP6331/3310 OR COMP6464  OR ENGN6539",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4300"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\n\nCOMP6310/2310 OR COMP6330/3300 OR COMP6331/3310 OR COMP6464  OR ENGN6539\""
+    ]
+  },
+  {
+    "code": "COMP8300",
+    "year": 2027,
+    "title": "Parallel Systems",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed:\n\nCOMP6310/2310 OR COMP6330/3300 OR COMP6331/3310 OR COMP6464  OR ENGN6539",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4300"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed:\n\nCOMP6310/2310 OR COMP6330/3300 OR COMP6331/3310 OR COMP6464  OR ENGN6539\""
+    ]
+  },
+  {
+    "code": "COMP8350",
+    "year": 2025,
+    "title": "Sound and Music Computing",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed either COMP6390 or COMP6720.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4350"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed either COMP6390 or COMP6720.\""
+    ]
+  },
+  {
+    "code": "COMP8350",
+    "year": 2026,
+    "title": "Sound and Music Computing",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course you must have completed either COMP6390 or COMP6720.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4350"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed either COMP6390 or COMP6720.\""
+    ]
+  },
+  {
+    "code": "COMP8350",
+    "year": 2027,
+    "title": "Sound and Music Computing",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed either COMP6390 or COMP6720.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4350"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed either COMP6390 or COMP6720.\""
+    ]
+  },
+  {
+    "code": "COMP8410",
+    "year": 2025,
+    "title": "Data Mining",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed\n   COMP7240 or COMP6240 or COMP2400; and\n   COMP6730 or COMP7230 or COMP6710.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3420",
+      "COMP3425",
+      "COMP8400",
+      "COMP8910"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed\n   COMP7240 or COMP6240 or COMP2400; and\n   COMP6730 or COMP7230 or COMP6710.\""
+    ]
+  },
+  {
+    "code": "COMP8410",
+    "year": 2026,
+    "title": "Data Mining",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed\n   COMP7240 or COMP6240 or COMP2400; and\n   COMP6730 or COMP7230 or COMP6710.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3420",
+      "COMP3425",
+      "COMP8400",
+      "COMP8910"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed\n   COMP7240 or COMP6240 or COMP2400; and\n   COMP6730 or COMP7230 or COMP6710.\""
+    ]
+  },
+  {
+    "code": "COMP8410",
+    "year": 2027,
+    "title": "Data Mining",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed\n   COMP7240 or COMP6240 or COMP2400; and\n   COMP6730 or COMP7230 or COMP6710.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3420",
+      "COMP3425",
+      "COMP8400",
+      "COMP8910"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed\n   COMP7240 or COMP6240 or COMP2400; and\n   COMP6730 or COMP7230 or COMP6710.\""
+    ]
+  },
+  {
+    "code": "COMP8430",
+    "year": 2025,
+    "title": "Data Wrangling",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed either COMP7230, COMP6730 or COMP6710; AND COMP7240 or COMP6240.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3430"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed either COMP7230, COMP6730 or COMP6710; AND COMP7240 or COMP6240.\""
+    ]
+  },
+  {
+    "code": "COMP8430",
+    "year": 2026,
+    "title": "Data Wrangling",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed either COMP7230, COMP6730 or COMP6710; AND COMP7240 or COMP6240.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3430"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed either COMP7230, COMP6730 or COMP6710; AND COMP7240 or COMP6240.\""
+    ]
+  },
+  {
+    "code": "COMP8460",
+    "year": 2025,
+    "title": "Advanced Algorithms",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course, you must have completed COMP6466 or COMP3600.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4600"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course, you must have completed COMP6466 or COMP3600.\""
+    ]
+  },
+  {
+    "code": "COMP8460",
+    "year": 2026,
+    "title": "Advanced Algorithms",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course, you must have completed COMP6466 or COMP3600.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4600"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course, you must have completed COMP6466 or COMP3600.\""
+    ]
+  },
+  {
+    "code": "COMP8460",
+    "year": 2027,
+    "title": "Advanced Algorithms",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course, you must have completed COMP6466 or COMP3600.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4600"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course, you must have completed COMP6466 or COMP3600.\""
+    ]
+  },
+  {
+    "code": "COMP8490",
+    "year": 2027,
+    "title": "Document Analysis",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be enrolled in\n\nMaster of Computing (Advanced)\nOR \n\nhave completed 6 units of: (COMP6240/2400 OR COMP6260/1600 OR COMP6442/2100)\nAND\nhave completed 6 units of: (COMP6730/1730 OR COMP6710/1110).",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4650",
+      "COMP6490",
+      "COMP6990"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be enrolled in\n\nMaster of Computing (Advanced)\nOR \n\nhave completed 6 units of: (COMP6240/2400 OR COMP6260/1600 OR COMP6442/2100)\nAND\nhave completed 6 units of: (COMP6730/1730 OR COMP6710/1110).\""
     ]
   },
   {
@@ -1522,6 +2828,99 @@
     ]
   },
   {
+    "code": "COMP8703",
+    "year": 2026,
+    "title": "Vulnerability Research and Exploit Mitigation",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course, you must be enrolled in the Master of Computing (Advanced) and have completed COMP6034 or COMP3704.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3703",
+      "COMP4703"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course, you must be enrolled in the Master of Computing (Advanced) and have completed COMP6034 or COMP3704.\""
+    ]
+  },
+  {
+    "code": "COMP8703",
+    "year": 2027,
+    "title": "Vulnerability Research and Exploit Mitigation",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course, you must be enrolled in the Master of Computing (Advanced) and have completed COMP6034 or COMP3704.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP3703",
+      "COMP4703"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course, you must be enrolled in the Master of Computing (Advanced) and have completed COMP6034 or COMP3704.\""
+    ]
+  },
+  {
+    "code": "COMP8712",
+    "year": 2025,
+    "title": "Compiler Construction",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have complete COMP6710 AND COMP6442 AND  COMP6310.\n\nStudents who have previously completed COMP3710 or COMP6470 - please contact CECC Student Services for a Permission Code.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have complete COMP6710 AND COMP6442 AND  COMP6310.\n\nStudents who have previously completed COMP3710 or COMP6470 - please contact CECC Student Services for a Permission Code.\""
+    ]
+  },
+  {
+    "code": "COMP8712",
+    "year": 2026,
+    "title": "Compiler Construction",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed COMP6442 AND COMP6310.\nStudents who have previously completed COMP3710 or COMP6470 - please contact CSS Student Services for a Permission Code.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed COMP6442 AND COMP6310.\nStudents who have previously completed COMP3710 or COMP6470 - please contact CSS Student Services for a Permission Code.\""
+    ]
+  },
+  {
+    "code": "COMP8712",
+    "year": 2027,
+    "title": "Compiler Construction",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course you must have completed COMP6442 AND COMP6310.\nStudents who have previously completed COMP3710 or COMP6470 - please contact CSS Student Services for a Permission Code.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed COMP6442 AND COMP6310.\nStudents who have previously completed COMP3710 or COMP6470 - please contact CSS Student Services for a Permission Code.\""
+    ]
+  },
+  {
     "code": "COMP8715",
     "year": 2025,
     "title": "Advanced Computing Team Project",
@@ -1706,6 +3105,128 @@
     ]
   },
   {
+    "code": "COMP8880",
+    "year": 2025,
+    "title": "Computational Methods for Network Science",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must have completed\n   COMP6670; OR\n   (6 units of either COMP6710 or COMP6730 or COMP7230) and (either COMP8410 or COMP8910) and STAT6039.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4880",
+      "COMP8980"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed\n   COMP6670; OR\n   (6 units of either COMP6710 or COMP6730 or COMP7230) and (either COMP8410 or COMP8910) and STAT6039.\""
+    ]
+  },
+  {
+    "code": "COMP8880",
+    "year": 2026,
+    "title": "Computational Methods for Network Science",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course you must have completed\n   COMP6670; OR\n   (6 units of either COMP6710 or COMP6730 or COMP7230) and (either COMP8410 or COMP8910) and STAT6039.",
+    "prereqExpr": null,
+    "incompatible": [
+      "COMP4880",
+      "COMP8980"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "prereq_text could not be parsed safely: \"To enrol in this course you must have completed\n   COMP6670; OR\n   (6 units of either COMP6710 or COMP6730 or COMP7230) and (either COMP8410 or COMP8910) and STAT6039.\""
+    ]
+  },
+  {
+    "code": "COMP8880",
+    "year": 2027,
+    "title": "Computational Methods for Network Science",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": "To enrol in this course you must have completed COMP6670.",
+    "prereqExpr": {
+      "op": "AND",
+      "codes": [
+        "COMP6670"
+      ]
+    },
+    "incompatible": [
+      "COMP4880"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet"
+    ]
+  },
+  {
+    "code": "ENGN6213",
+    "year": 2025,
+    "title": "Digital Systems and Microprocessors",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying Master of Engineering or Master of Computing or Master of Computing (Advanced).",
+    "prereqExpr": null,
+    "incompatible": [
+      "ENGN4213"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying Master of Engineering or Master of Computing or Master of Computing (Advanced).\""
+    ]
+  },
+  {
+    "code": "ENGN6213",
+    "year": 2026,
+    "title": "Digital Systems and Microprocessors",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying Master of Engineering or Master of Computing or Master of Computing (Advanced).",
+    "prereqExpr": null,
+    "incompatible": [
+      "ENGN4213"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying Master of Engineering or Master of Computing or Master of Computing (Advanced).\""
+    ]
+  },
+  {
+    "code": "ENGN6213",
+    "year": 2027,
+    "title": "Digital Systems and Microprocessors",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying Master of Engineering or Master of Computing or Master of Computing (Advanced).",
+    "prereqExpr": null,
+    "incompatible": [
+      "ENGN4213"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying Master of Engineering or Master of Computing or Master of Computing (Advanced).\""
+    ]
+  },
+  {
     "code": "ENGN6627",
     "year": 2025,
     "title": "Robotics",
@@ -1763,6 +3284,216 @@
     ]
   },
   {
+    "code": "ENGN8100",
+    "year": 2025,
+    "title": "Introduction to Systems Engineering",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying Master of Engineering, Master of Project Management, Master of Business Information Systems or Graduate Certificate in Nuclear Technology and Regulation.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying Master of Engineering, Master of Project Management, Master of Business Information Systems or Graduate Certificate in Nuclear Technology and Regulation.\""
+    ]
+  },
+  {
+    "code": "ENGN8100",
+    "year": 2026,
+    "title": "Introduction to Systems Engineering",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying Master of Engineering, Master of Computing, Master of Computing (Advanced), Master of Project Management, Master of Business Information Systems or Graduate Certificate in Nuclear Technology and Regulation.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying Master of Engineering, Master of Computing, Master of Computing (Advanced), Master of Project Management, Master of Business Information Systems or Graduate Certificate in Nuclear Technology and Regulation.\""
+    ]
+  },
+  {
+    "code": "ENGN8100",
+    "year": 2027,
+    "title": "Introduction to Systems Engineering",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying Master of Engineering, Master of Computing, Master of Computing (Advanced), Master of Project Management, Master of Business Information Systems or Graduate Certificate in Nuclear Technology and Regulation.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying Master of Engineering, Master of Computing, Master of Computing (Advanced), Master of Project Management, Master of Business Information Systems or Graduate Certificate in Nuclear Technology and Regulation.\""
+    ]
+  },
+  {
+    "code": "INFS8004",
+    "year": 2025,
+    "title": "Enterprise Systems and Strategy",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [
+      "INFS4004"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": []
+  },
+  {
+    "code": "INFS8004",
+    "year": 2026,
+    "title": "Enterprise Systems and Strategy",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [
+      "INFS4004"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": []
+  },
+  {
+    "code": "INFS8004",
+    "year": 2027,
+    "title": "Enterprise Systems and Strategy",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course, you must: be enrolled in the MMGNT - Master of Management or have completed INFS7004 - Accounting Information Systems .",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course, you must: be enrolled in the MMGNT - Master of Management or have completed INFS7004 - Accounting Information Systems .\""
+    ]
+  },
+  {
+    "code": "INFS8205",
+    "year": 2025,
+    "title": "Digital Strategy, Executive and Operations",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "You are not able to enrol in this course if you previously completed INFS3024 or INFS4205.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"You are not able to enrol in this course if you previously completed INFS3024 or INFS4205.\""
+    ]
+  },
+  {
+    "code": "INFS8205",
+    "year": 2026,
+    "title": "Digital Strategy, Executive and Operations",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "You are not able to enrol in this course if you previously completed INFS3024 or INFS4205.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"You are not able to enrol in this course if you previously completed INFS3024 or INFS4205.\""
+    ]
+  },
+  {
+    "code": "INFS8205",
+    "year": 2027,
+    "title": "Digital Strategy, Executive and Operations",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course, you must have:be enrolled in one of the following programs: MMGNT - Master of Management ,or have completed at least one of the following courses: INFS8004 - Enterprise Systems  INFS8008 - Intelligent Business Analysis  INFS8210 - Business Analytics .",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course, you must have:be enrolled in one of the following programs: MMGNT - Master of Management ,or have completed at least one of the following courses: INFS8004 - Enterprise Systems  INFS8008 - Intelligent Business Analysis  INFS8210 - Business Analytics .\""
+    ]
+  },
+  {
+    "code": "LAWS8445",
+    "year": 2025,
+    "title": "Information Technology Law",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying a;\n\nMaster of Laws (MLLM) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of Law (CLAW) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of New Technologies Law; or\nJuris Doctor (MJD) and have completed or be completing five 6100 level LAWS courses; or\nMaster of Financial Management and Law (MFIML) and have completed or be completing LAWS8586 Law and Legal Institutions.",
+    "prereqExpr": null,
+    "incompatible": [
+      "LAWS4245"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying a;\n\nMaster of Laws (MLLM) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of Law (CLAW) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of New Technologies Law; or\nJuris Doctor (MJD) and have completed or be completing five 6100 level LAWS courses; or\nMaster of Financial Management and Law (MFIML) and have completed or be completing LAWS8586 Law and Legal Institutions.\""
+    ]
+  },
+  {
+    "code": "LAWS8445",
+    "year": 2026,
+    "title": "Information Technology Law",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying a;\n\nMaster of Laws (MLLM) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of Law (CLAW) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of New Technologies Law; or\nJuris Doctor (MJD) and have completed or be completing five 6100 level LAWS courses; or\nMaster of Financial Management and Law (MFIML) and have completed or be completing LAWS8586 Law and Legal Institutions.",
+    "prereqExpr": null,
+    "incompatible": [
+      "LAWS4245"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying a;\n\nMaster of Laws (MLLM) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of Law (CLAW) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of New Technologies Law; or\nJuris Doctor (MJD) and have completed or be completing five 6100 level LAWS courses; or\nMaster of Financial Management and Law (MFIML) and have completed or be completing LAWS8586 Law and Legal Institutions.\""
+    ]
+  },
+  {
+    "code": "LAWS8445",
+    "year": 2027,
+    "title": "Information Technology Law",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you must be studying a;\n\nMaster of Laws (MLLM) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of Law (CLAW) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of New Technologies Law; or\nJuris Doctor (MJD) and have completed or be completing five 6100 level LAWS courses; or\nMaster of Financial Management and Law (MFIML) and have completed or be completing LAWS8586 Law and Legal Institutions.",
+    "prereqExpr": null,
+    "incompatible": [
+      "LAWS4245"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you must be studying a;\n\nMaster of Laws (MLLM) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of Law (CLAW) and have completed or be completing LAWS8586 Law and Legal Institutions; or\nGraduate Certificate of New Technologies Law; or\nJuris Doctor (MJD) and have completed or be completing five 6100 level LAWS courses; or\nMaster of Financial Management and Law (MFIML) and have completed or be completing LAWS8586 Law and Legal Institutions.\""
+    ]
+  },
+  {
     "code": "MATH1013",
     "year": 2025,
     "title": "Mathematics and Applications 1",
@@ -1865,6 +3596,243 @@
     "repeatableTimes": 1,
     "parseWarnings": [
       "prereq_text could not be parsed safely: \"CECS students must be enrolled in a Graduate Diploma of Computing or a Master of Computing to enrol in this course.\n\nIncompatible: MATH1005\""
+    ]
+  },
+  {
+    "code": "MATH6114",
+    "year": 2025,
+    "title": "Number Theory and Cryptography",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "Incompatible: MATH3301.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"Incompatible: MATH3301.\""
+    ]
+  },
+  {
+    "code": "MATH6114",
+    "year": 2026,
+    "title": "Number Theory and Cryptography",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "Incompatible: MATH3301.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"Incompatible: MATH3301.\""
+    ]
+  },
+  {
+    "code": "MATH6114",
+    "year": 2027,
+    "title": "Number Theory and Cryptography",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": "Incompatible: MATH3301.",
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"Incompatible: MATH3301.\""
+    ]
+  },
+  {
+    "code": "MATH8343",
+    "year": 2025,
+    "title": "Foundations of Mathematics",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you need to be active in the Master of Mathematical Sciences (Advanced) or Master of Science in Mathematical Sciences.",
+    "prereqExpr": null,
+    "incompatible": [
+      "MATH3343",
+      "MATH4343",
+      "MATH6203"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you need to be active in the Master of Mathematical Sciences (Advanced) or Master of Science in Mathematical Sciences.\""
+    ]
+  },
+  {
+    "code": "MATH8343",
+    "year": 2026,
+    "title": "Foundations of Mathematics",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you need to be active in the Master of Mathematical Sciences (Advanced) or Master of Science in Mathematical Sciences.",
+    "prereqExpr": null,
+    "incompatible": [
+      "MATH3343",
+      "MATH4343",
+      "MATH6203"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you need to be active in the Master of Mathematical Sciences (Advanced) or Master of Science in Mathematical Sciences.\""
+    ]
+  },
+  {
+    "code": "MATH8343",
+    "year": 2027,
+    "title": "Foundations of Mathematics",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": "To enrol in this course you need to be active in the Master of Mathematical Sciences (Advanced) or Master of Science in Mathematical Sciences.",
+    "prereqExpr": null,
+    "incompatible": [
+      "MATH3343",
+      "MATH4343",
+      "MATH6203"
+    ],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "prereq_text could not be parsed safely: \"To enrol in this course you need to be active in the Master of Mathematical Sciences (Advanced) or Master of Science in Mathematical Sciences.\""
+    ]
+  },
+  {
+    "code": "MGMT7020",
+    "year": 2025,
+    "title": "Technology and Project Management",
+    "units": 6,
+    "level": 7000,
+    "offeredS1": true,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Requisite and Incompatibility section not found"
+    ]
+  },
+  {
+    "code": "MGMT7020",
+    "year": 2026,
+    "title": "Technology and Project Management",
+    "units": 6,
+    "level": 7000,
+    "offeredS1": true,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Requisite and Incompatibility section not found"
+    ]
+  },
+  {
+    "code": "MGMT7020",
+    "year": 2027,
+    "title": "Technology and Project Management",
+    "units": 6,
+    "level": 7000,
+    "offeredS1": true,
+    "offeredS2": true,
+    "offeringKnown": true,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Requisite and Incompatibility section not found"
+    ]
+  },
+  {
+    "code": "REGN8014",
+    "year": 2025,
+    "title": "Contemporary Issues in Technology Governance",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Requisite and Incompatibility section not found"
+    ]
+  },
+  {
+    "code": "REGN8014",
+    "year": 2026,
+    "title": "Contemporary Issues in Technology Governance",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Offering not published yet",
+      "Requisite and Incompatibility section not found"
+    ]
+  },
+  {
+    "code": "REGN8014",
+    "year": 2027,
+    "title": "Contemporary Issues in Technology Governance",
+    "units": 6,
+    "level": 8000,
+    "offeredS1": true,
+    "offeredS2": false,
+    "offeringKnown": true,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "Requisite and Incompatibility section not found"
+    ]
+  },
+  {
+    "code": "STAT6039",
+    "year": 2025,
+    "title": "STAT6039",
+    "units": 6,
+    "level": 6000,
+    "offeredS1": false,
+    "offeredS2": false,
+    "offeringKnown": false,
+    "prereqText": null,
+    "prereqExpr": null,
+    "incompatible": [],
+    "repeatableTimes": 1,
+    "parseWarnings": [
+      "title not found",
+      "Unit Value not found",
+      "Offering not published yet",
+      "Requisite and Incompatibility section not found"
     ]
   }
 ]

@@ -40,6 +40,191 @@
       },
       {
         "position": 3,
+        "name": "Specialisation courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6262",
+          "COMP6320",
+          "COMP8620",
+          "COMP8691"
+        ],
+        "specialisation": "ARTIF-SPEC"
+      },
+      {
+        "position": 4,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6361",
+          "COMP6363",
+          "COMP8011",
+          "COMP8460",
+          "MATH6114",
+          "MATH8343"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 5,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6261",
+          "COMP6262",
+          "COMP6466",
+          "COMP8712"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 6,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8300",
+          "COMP8045",
+          "COMP8712"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 7,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6310",
+          "COMP6330",
+          "COMP6331",
+          "COMP6361",
+          "COMP6464",
+          "ENGN6213"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 8,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 18,
+        "courses": [
+          "COMP6240",
+          "COMP8410",
+          "COMP8430"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 9,
+        "name": "Elective courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6490",
+          "COMP6670",
+          "COMP8600",
+          "COMP8650",
+          "COMP8880",
+          "STAT6039"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 10,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6390"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 11,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8350",
+          "COMP8539",
+          "COMP8610"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 12,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6528",
+          "COMP6540",
+          "COMP6720",
+          "COMP6780"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 13,
+        "name": "Specialisation courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6261",
+          "COMP6490",
+          "COMP6528",
+          "COMP6670",
+          "COMP8600",
+          "COMP8650",
+          "COMP8880"
+        ],
+        "specialisation": "MCHL-SPEC"
+      },
+      {
+        "position": 14,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6120",
+          "ENGN8100"
+        ],
+        "specialisation": "PCOM-SPEC"
+      },
+      {
+        "position": 15,
+        "name": "Elective courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6240",
+          "COMP6331",
+          "COMP6390",
+          "INFS8004",
+          "INFS8205",
+          "LAWS8445",
+          "MGMT7020",
+          "REGN8014"
+        ],
+        "specialisation": "PCOM-SPEC"
+      },
+      {
+        "position": 16,
+        "name": "Further 8000-level COMP courses",
+        "kind": "filter",
+        "unitsRequired": 6,
+        "filterSubjects": [
+          "COMP"
+        ],
+        "filterMinLevel": 8000,
+        "specialisation": "PCOM-SPEC"
+      },
+      {
+        "position": 17,
         "name": "Further COMP/ENGN courses",
         "kind": "filter",
         "unitsRequired": 18,
@@ -50,7 +235,7 @@
         "filterMinLevel": 6000
       },
       {
-        "position": 4,
+        "position": 18,
         "name": "University electives",
         "kind": "filter",
         "unitsRequired": 12,
@@ -58,9 +243,45 @@
         "filterMinLevel": null
       }
     ],
+    "specialisations": [
+      {
+        "code": "ARTIF-SPEC",
+        "name": "Artificial Intelligence"
+      },
+      {
+        "code": "COMP-SPEC",
+        "name": "Computational Foundations"
+      },
+      {
+        "code": "CMSY-SPEC",
+        "name": "Computer Systems"
+      },
+      {
+        "code": "DTSC-SPEC",
+        "name": "Data Science"
+      },
+      {
+        "code": "HCCM-SPEC",
+        "name": "Human-Centred and Creative Computing"
+      },
+      {
+        "code": "MCHL-SPEC",
+        "name": "Machine Learning"
+      },
+      {
+        "code": "PCOM-SPEC",
+        "name": "Professional Computing"
+      }
+    ],
     "parseWarnings": [
       "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level COMP courses.\"",
-      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\""
+      "out of scope by design (epic.md section 5): \"This Specialization requires the completion of 24 units, which must consist of a minimum of 12 units of 8000 level courses.\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units of 8000 level courses\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of 12 units of 8000-level courses\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must include a minimum of 12 units of 8000-level courses:\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of a minimum of 12 units of 8000 level courses.\"",
+      "PCOM-SPEC 2025: filter excludes specific courses (COMP8715, COMP8800, COMP8830) not enforced by a \"filter\" group's subject/level fields: \"6 units from completion of any 8000 level COMP coded course excluding project courses (COMP8715, COMP8800, COMP8830).\""
     ]
   },
   {
@@ -84,7 +305,7 @@
       },
       {
         "position": 1,
-        "name": "foundational courses",
+        "name": "Foundational courses",
         "kind": "list",
         "unitsRequired": 6,
         "courses": [
@@ -94,7 +315,7 @@
       },
       {
         "position": 2,
-        "name": "project courses",
+        "name": "Project courses",
         "kind": "list",
         "unitsRequired": 12,
         "courses": [
@@ -104,6 +325,191 @@
       },
       {
         "position": 3,
+        "name": "Specialisation courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6262",
+          "COMP6320",
+          "COMP8620",
+          "COMP8691"
+        ],
+        "specialisation": "ARTIF-SPEC"
+      },
+      {
+        "position": 4,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6361",
+          "COMP6363",
+          "COMP8011",
+          "COMP8460",
+          "MATH6114",
+          "MATH8343"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 5,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6261",
+          "COMP6262",
+          "COMP6466",
+          "COMP8712"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 6,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8300",
+          "COMP8045",
+          "COMP8712"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 7,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6300",
+          "COMP6310",
+          "COMP6330",
+          "COMP6331",
+          "COMP6361",
+          "COMP6464",
+          "ENGN6213"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 8,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 18,
+        "courses": [
+          "COMP6240",
+          "COMP8410",
+          "COMP8430"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 9,
+        "name": "Elective courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6490",
+          "COMP6670",
+          "COMP8600",
+          "COMP8650",
+          "COMP8880"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 10,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6390"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 11,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8350",
+          "COMP8539",
+          "COMP8610"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 12,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6528",
+          "COMP6540",
+          "COMP6720",
+          "COMP6780"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 13,
+        "name": "Specialisation courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6261",
+          "COMP6490",
+          "COMP6528",
+          "COMP6670",
+          "COMP8600",
+          "COMP8650",
+          "COMP8880"
+        ],
+        "specialisation": "MCHL-SPEC"
+      },
+      {
+        "position": 14,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6120",
+          "ENGN8100"
+        ],
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 15,
+        "name": "Further 8000-level COMP courses",
+        "kind": "filter",
+        "unitsRequired": 6,
+        "filterSubjects": [
+          "COMP"
+        ],
+        "filterMinLevel": 8000,
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 16,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6240",
+          "COMP6331",
+          "COMP6390",
+          "INFS8004",
+          "INFS8205",
+          "LAWS8445",
+          "MGMT7020",
+          "REGN8014"
+        ],
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 17,
         "name": "Further COMP/ENGN courses",
         "kind": "filter",
         "unitsRequired": 18,
@@ -114,7 +520,7 @@
         "filterMinLevel": 6000
       },
       {
-        "position": 4,
+        "position": 18,
         "name": "University electives",
         "kind": "filter",
         "unitsRequired": 6,
@@ -122,9 +528,47 @@
         "filterMinLevel": null
       }
     ],
+    "specialisations": [
+      {
+        "code": "ARTIF-SPEC",
+        "name": "Artificial Intelligence"
+      },
+      {
+        "code": "COMP-SPEC",
+        "name": "Computational Foundations"
+      },
+      {
+        "code": "CMSY-SPEC",
+        "name": "Computer Systems"
+      },
+      {
+        "code": "DTSC-SPEC",
+        "name": "Data Science"
+      },
+      {
+        "code": "HCCM-SPEC",
+        "name": "Human-Centred and Creative Computing"
+      },
+      {
+        "code": "MCHL-SPEC",
+        "name": "Machine Learning"
+      },
+      {
+        "code": "SOFT-SPEC",
+        "name": "Software Development"
+      }
+    ],
     "parseWarnings": [
       "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level COMP courses.\"",
-      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\""
+      "out of scope by design (epic.md section 5): \"This Specialization requires the completion of 24 units, which must consist of a minimum of 12 units of 8000 level courses.\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units must come from the completion of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of a minimum of 12 units of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of 12 units of 8000-level courses\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must include a minimum of 12 units of 8000-level courses:\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of a minimum of 12 units of 8000-level courses.\"",
+      "SOFT-SPEC 2026: filter excludes specific courses (COMP8715, COMP8800, COMP8830) not enforced by a \"filter\" group's subject/level fields: \"6 units from completion of an 8000-level course from the subject area COMP Computing, excluding the project courses (COMP8715, COMP8800, COMP8830).\"",
+      "SOFT-SPEC 2026: unrecognised requirement line: \"Note: MCOMP students who complete COMP6120 as part of their program rules need to replace it with 6 units of 6000/8000 COMP.\""
     ]
   },
   {
@@ -148,7 +592,7 @@
       },
       {
         "position": 1,
-        "name": "foundational courses",
+        "name": "Foundational courses",
         "kind": "list",
         "unitsRequired": 6,
         "courses": [
@@ -158,7 +602,7 @@
       },
       {
         "position": 2,
-        "name": "project courses",
+        "name": "Project courses",
         "kind": "list",
         "unitsRequired": 12,
         "courses": [
@@ -168,6 +612,156 @@
       },
       {
         "position": 3,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6262",
+          "COMP6320",
+          "COMP6242",
+          "COMP6670",
+          "COMP6528"
+        ],
+        "specialisation": "ARTIF-SPEC"
+      },
+      {
+        "position": 4,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8490",
+          "COMP8539",
+          "COMP8600",
+          "COMP8620",
+          "COMP8650",
+          "COMP8691"
+        ],
+        "specialisation": "ARTIF-SPEC"
+      },
+      {
+        "position": 5,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6361",
+          "COMP6363",
+          "COMP8011",
+          "COMP8460",
+          "MATH6114",
+          "MATH8343"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 6,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6261",
+          "COMP6262",
+          "COMP6466",
+          "COMP8712"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 7,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8300",
+          "COMP8045",
+          "COMP8712"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 8,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6300",
+          "COMP6310",
+          "COMP6330",
+          "COMP6331",
+          "COMP6361",
+          "COMP6464",
+          "ENGN6213"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 9,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 18,
+        "courses": [
+          "COMP6240",
+          "COMP8410",
+          "COMP8490"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 10,
+        "name": "Elective courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6434",
+          "COMP6670",
+          "COMP8600",
+          "COMP8650",
+          "COMP8880"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 11,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6120",
+          "ENGN8100"
+        ],
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 12,
+        "name": "Further 8000-level COMP courses",
+        "kind": "filter",
+        "unitsRequired": 6,
+        "filterSubjects": [
+          "COMP"
+        ],
+        "filterMinLevel": 8000,
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 13,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6240",
+          "COMP6331",
+          "COMP6390",
+          "INFS8004",
+          "INFS8205",
+          "LAWS8445",
+          "MGMT7020",
+          "REGN8014"
+        ],
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 14,
         "name": "Further COMP/ENGN courses",
         "kind": "filter",
         "unitsRequired": 18,
@@ -178,7 +772,7 @@
         "filterMinLevel": 6000
       },
       {
-        "position": 4,
+        "position": 15,
         "name": "University electives",
         "kind": "filter",
         "unitsRequired": 6,
@@ -186,9 +780,37 @@
         "filterMinLevel": null
       }
     ],
+    "specialisations": [
+      {
+        "code": "ARTIF-SPEC",
+        "name": "Artificial Intelligence"
+      },
+      {
+        "code": "COMP-SPEC",
+        "name": "Computational Foundations"
+      },
+      {
+        "code": "CMSY-SPEC",
+        "name": "Computer Systems"
+      },
+      {
+        "code": "DTSC-SPEC",
+        "name": "Data Science"
+      },
+      {
+        "code": "SOFT-SPEC",
+        "name": "Software Development"
+      }
+    ],
     "parseWarnings": [
       "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level COMP courses.\"",
-      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\""
+      "out of scope by design (epic.md section 5): \"This Specialisation requires the completion of 24 units, which must include a minimum of 12 units of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units must come from the completion of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of a minimum of 12 units of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of 12 units of 8000-level courses\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of a minimum of 12 units of 8000-level courses.\"",
+      "SOFT-SPEC 2027: filter excludes specific courses (COMP8715, COMP8800, COMP8830) not enforced by a \"filter\" group's subject/level fields: \"6 units from completion of an 8000-level course from the subject area COMP Computing, excluding the project courses (COMP8715, COMP8800, COMP8830).\"",
+      "SOFT-SPEC 2027: unrecognised requirement line: \"Note: MCOMP students who complete COMP6120 as part of their program rules need to replace it with 6 units of 6000/8000 COMP.\""
     ]
   },
   {
@@ -209,7 +831,7 @@
       },
       {
         "position": 1,
-        "name": "a professional practice course",
+        "name": "A professional practice course",
         "kind": "list",
         "unitsRequired": 6,
         "courses": [
@@ -219,7 +841,7 @@
       },
       {
         "position": 2,
-        "name": "courses",
+        "name": "MLCV core courses",
         "kind": "list",
         "unitsRequired": 24,
         "courses": [
@@ -339,6 +961,7 @@
         "filterMinLevel": 6000
       }
     ],
+    "specialisations": [],
     "parseWarnings": [
       "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level courses.\"",
       "project pathway (Either/Or block) not parsed — needs a hand-written data/overrides/<CODE>.ts (epic.md 7.3)"
@@ -362,7 +985,7 @@
       },
       {
         "position": 1,
-        "name": "a professional practice course",
+        "name": "A professional practice course",
         "kind": "list",
         "unitsRequired": 6,
         "courses": [
@@ -372,7 +995,7 @@
       },
       {
         "position": 2,
-        "name": "courses",
+        "name": "MLCV core courses",
         "kind": "list",
         "unitsRequired": 24,
         "courses": [
@@ -492,6 +1115,7 @@
         "filterMinLevel": 6000
       }
     ],
+    "specialisations": [],
     "parseWarnings": [
       "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level courses.\"",
       "project pathway (Either/Or block) not parsed — needs a hand-written data/overrides/<CODE>.ts (epic.md 7.3)"
@@ -515,7 +1139,7 @@
       },
       {
         "position": 1,
-        "name": "a professional practice course",
+        "name": "A professional practice course",
         "kind": "list",
         "unitsRequired": 6,
         "courses": [
@@ -525,7 +1149,7 @@
       },
       {
         "position": 2,
-        "name": "courses",
+        "name": "MLCV core courses",
         "kind": "list",
         "unitsRequired": 24,
         "courses": [
@@ -645,6 +1269,7 @@
         "filterMinLevel": 6000
       }
     ],
+    "specialisations": [],
     "parseWarnings": [
       "out of scope by design (epic.md section 5): \"A minimum of 24 units must come from completion of 8000-level courses.\"",
       "project pathway (Either/Or block) not parsed — needs a hand-written data/overrides/<CODE>.ts (epic.md 7.3)"
@@ -688,6 +1313,191 @@
       },
       {
         "position": 3,
+        "name": "Specialisation courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6262",
+          "COMP6320",
+          "COMP8620",
+          "COMP8691"
+        ],
+        "specialisation": "ARTIF-SPEC"
+      },
+      {
+        "position": 4,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6361",
+          "COMP6363",
+          "COMP8011",
+          "COMP8460",
+          "MATH6114",
+          "MATH8343"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 5,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6261",
+          "COMP6262",
+          "COMP6466",
+          "COMP8712"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 6,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8300",
+          "COMP8045",
+          "COMP8712"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 7,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6310",
+          "COMP6330",
+          "COMP6331",
+          "COMP6361",
+          "COMP6464",
+          "ENGN6213"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 8,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 18,
+        "courses": [
+          "COMP6240",
+          "COMP8410",
+          "COMP8430"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 9,
+        "name": "Elective courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6490",
+          "COMP6670",
+          "COMP8600",
+          "COMP8650",
+          "COMP8880",
+          "STAT6039"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 10,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6390"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 11,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8350",
+          "COMP8539",
+          "COMP8610"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 12,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6528",
+          "COMP6540",
+          "COMP6720",
+          "COMP6780"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 13,
+        "name": "Specialisation courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6261",
+          "COMP6490",
+          "COMP6528",
+          "COMP6670",
+          "COMP8600",
+          "COMP8650",
+          "COMP8880"
+        ],
+        "specialisation": "MCHL-SPEC"
+      },
+      {
+        "position": 14,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6120",
+          "ENGN8100"
+        ],
+        "specialisation": "PCOM-SPEC"
+      },
+      {
+        "position": 15,
+        "name": "Elective courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6240",
+          "COMP6331",
+          "COMP6390",
+          "INFS8004",
+          "INFS8205",
+          "LAWS8445",
+          "MGMT7020",
+          "REGN8014"
+        ],
+        "specialisation": "PCOM-SPEC"
+      },
+      {
+        "position": 16,
+        "name": "Further 8000-level COMP courses",
+        "kind": "filter",
+        "unitsRequired": 6,
+        "filterSubjects": [
+          "COMP"
+        ],
+        "filterMinLevel": 8000,
+        "specialisation": "PCOM-SPEC"
+      },
+      {
+        "position": 17,
         "name": "Further COMP/ENGN courses",
         "kind": "filter",
         "unitsRequired": 18,
@@ -698,26 +1508,55 @@
         "filterMinLevel": 6000
       },
       {
-        "position": 4,
+        "position": 18,
         "name": "University electives",
         "kind": "filter",
         "unitsRequired": 12,
         "filterSubjects": null,
         "filterMinLevel": null
+      }
+    ],
+    "specialisations": [
+      {
+        "code": "ARTIF-SPEC",
+        "name": "Artificial Intelligence"
+      },
+      {
+        "code": "COMP-SPEC",
+        "name": "Computational Foundations"
+      },
+      {
+        "code": "CMSY-SPEC",
+        "name": "Computer Systems"
+      },
+      {
+        "code": "DTSC-SPEC",
+        "name": "Data Science"
+      },
+      {
+        "code": "HCCM-SPEC",
+        "name": "Human-Centred and Creative Computing"
+      },
+      {
+        "code": "MCHL-SPEC",
+        "name": "Machine Learning"
+      },
+      {
+        "code": "PCOM-SPEC",
+        "name": "Professional Computing"
       }
     ],
     "parseWarnings": [
       "out of scope by design (epic.md section 5): \"A minimum of 48 units must come from completion of 8000-level COMP courses\"",
       "unrecognised requirement line: \"24 units from completion of\"",
       "unrecognised requirement line: \"COMP8800 Advanced Computing Research Project (must be taken twice, in consecutive semesters (12+12 units))\"",
-      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\"",
-      "unrecognised requirement line: \"Artificial Intelligence\"",
-      "unrecognised requirement line: \"Computer Systems\"",
-      "unrecognised requirement line: \"Computational Foundations\"",
-      "unrecognised requirement line: \"Data Science\"",
-      "unrecognised requirement line: \"Human Centred and Creative Computing\"",
-      "unrecognised requirement line: \"Machine Learning\"",
-      "unrecognised requirement line: \"Professional Computing\""
+      "out of scope by design (epic.md section 5): \"This Specialization requires the completion of 24 units, which must consist of a minimum of 12 units of 8000 level courses.\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units of 8000 level courses\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of 12 units of 8000-level courses\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must include a minimum of 12 units of 8000-level courses:\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of a minimum of 12 units of 8000 level courses.\"",
+      "PCOM-SPEC 2025: filter excludes specific courses (COMP8715, COMP8800, COMP8830) not enforced by a \"filter\" group's subject/level fields: \"6 units from completion of any 8000 level COMP coded course excluding project courses (COMP8715, COMP8800, COMP8830).\""
     ]
   },
   {
@@ -758,6 +1597,225 @@
       },
       {
         "position": 3,
+        "name": "Specialisation courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6262",
+          "COMP6320",
+          "COMP8620",
+          "COMP8691"
+        ],
+        "specialisation": "ARTIF-SPEC"
+      },
+      {
+        "position": 4,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6361",
+          "COMP6363",
+          "COMP8011",
+          "COMP8460",
+          "MATH6114",
+          "MATH8343"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 5,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6261",
+          "COMP6262",
+          "COMP6466",
+          "COMP8712"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 6,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8300",
+          "COMP8045",
+          "COMP8712"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 7,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6300",
+          "COMP6310",
+          "COMP6330",
+          "COMP6331",
+          "COMP6361",
+          "COMP6464",
+          "ENGN6213"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 8,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6034",
+          "COMP6800"
+        ],
+        "specialisation": "CSEC-SPEC"
+      },
+      {
+        "position": 9,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP8131",
+          "COMP8703"
+        ],
+        "specialisation": "CSEC-SPEC"
+      },
+      {
+        "position": 10,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP8011",
+          "COMP8045",
+          "COMP8712"
+        ],
+        "specialisation": "CSEC-SPEC"
+      },
+      {
+        "position": 11,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 18,
+        "courses": [
+          "COMP6240",
+          "COMP8410",
+          "COMP8430"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 12,
+        "name": "Elective courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6490",
+          "COMP6670",
+          "COMP8600",
+          "COMP8650",
+          "COMP8880"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 13,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6390"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 14,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8350",
+          "COMP8539",
+          "COMP8610"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 15,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6528",
+          "COMP6540",
+          "COMP6720",
+          "COMP6780"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 16,
+        "name": "Specialisation courses",
+        "kind": "list",
+        "unitsRequired": 24,
+        "courses": [
+          "COMP6261",
+          "COMP6490",
+          "COMP6528",
+          "COMP6670",
+          "COMP8600",
+          "COMP8650",
+          "COMP8880"
+        ],
+        "specialisation": "MCHL-SPEC"
+      },
+      {
+        "position": 17,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6120",
+          "ENGN8100"
+        ],
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 18,
+        "name": "Further 8000-level COMP courses",
+        "kind": "filter",
+        "unitsRequired": 6,
+        "filterSubjects": [
+          "COMP"
+        ],
+        "filterMinLevel": 8000,
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 19,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6240",
+          "COMP6331",
+          "COMP6390",
+          "INFS8004",
+          "INFS8205",
+          "LAWS8445",
+          "MGMT7020",
+          "REGN8014"
+        ],
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 20,
         "name": "Further COMP/ENGN courses",
         "kind": "filter",
         "unitsRequired": 18,
@@ -768,7 +1826,7 @@
         "filterMinLevel": 6000
       },
       {
-        "position": 4,
+        "position": 21,
         "name": "University electives",
         "kind": "filter",
         "unitsRequired": 12,
@@ -776,19 +1834,54 @@
         "filterMinLevel": null
       }
     ],
+    "specialisations": [
+      {
+        "code": "ARTIF-SPEC",
+        "name": "Artificial Intelligence"
+      },
+      {
+        "code": "COMP-SPEC",
+        "name": "Computational Foundations"
+      },
+      {
+        "code": "CMSY-SPEC",
+        "name": "Computer Systems"
+      },
+      {
+        "code": "CSEC-SPEC",
+        "name": "Cyber Security"
+      },
+      {
+        "code": "DTSC-SPEC",
+        "name": "Data Science"
+      },
+      {
+        "code": "HCCM-SPEC",
+        "name": "Human-Centred and Creative Computing"
+      },
+      {
+        "code": "MCHL-SPEC",
+        "name": "Machine Learning"
+      },
+      {
+        "code": "SOFT-SPEC",
+        "name": "Software Development"
+      }
+    ],
     "parseWarnings": [
       "out of scope by design (epic.md section 5): \"A minimum of 48 units must come from completion of 8000-level COMP courses\"",
       "unrecognised requirement line: \"24 units from completion of\"",
       "unrecognised requirement line: \"COMP8800 Advanced Computing Research Project, which must be taken twice, in consecutive semesters (12+12 units)\"",
-      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\"",
-      "unrecognised requirement line: \"Artificial Intelligence\"",
-      "unrecognised requirement line: \"Computer Systems\"",
-      "unrecognised requirement line: \"Cyber Security\"",
-      "unrecognised requirement line: \"Computational Foundations\"",
-      "unrecognised requirement line: \"Data Science\"",
-      "unrecognised requirement line: \"Human Centred and Creative Computing\"",
-      "unrecognised requirement line: \"Machine Learning\"",
-      "unrecognised requirement line: \"Software Development\""
+      "out of scope by design (epic.md section 5): \"This Specialization requires the completion of 24 units, which must consist of a minimum of 12 units of 8000 level courses.\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units must come from the completion of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of a minimum of 12 units of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units must come from completion of 8000-level courses\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of 12 units of 8000-level courses\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must include a minimum of 12 units of 8000-level courses:\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of a minimum of 12 units of 8000-level courses.\"",
+      "SOFT-SPEC 2026: filter excludes specific courses (COMP8715, COMP8800, COMP8830) not enforced by a \"filter\" group's subject/level fields: \"6 units from completion of an 8000-level course from the subject area COMP Computing, excluding the project courses (COMP8715, COMP8800, COMP8830).\"",
+      "SOFT-SPEC 2026: unrecognised requirement line: \"Note: MCOMP students who complete COMP6120 as part of their program rules need to replace it with 6 units of 6000/8000 COMP.\""
     ]
   },
   {
@@ -829,6 +1922,225 @@
       },
       {
         "position": 3,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6262",
+          "COMP6320",
+          "COMP6242",
+          "COMP6670",
+          "COMP6528"
+        ],
+        "specialisation": "ARTIF-SPEC"
+      },
+      {
+        "position": 4,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8490",
+          "COMP8539",
+          "COMP8600",
+          "COMP8620",
+          "COMP8650",
+          "COMP8691"
+        ],
+        "specialisation": "ARTIF-SPEC"
+      },
+      {
+        "position": 5,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6361",
+          "COMP6363",
+          "COMP8011",
+          "COMP8460",
+          "MATH6114",
+          "MATH8343"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 6,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6261",
+          "COMP6262",
+          "COMP6466",
+          "COMP8712"
+        ],
+        "specialisation": "COMP-SPEC"
+      },
+      {
+        "position": 7,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8300",
+          "COMP8045",
+          "COMP8712"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 8,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6300",
+          "COMP6310",
+          "COMP6330",
+          "COMP6331",
+          "COMP6361",
+          "COMP6464",
+          "ENGN6213"
+        ],
+        "specialisation": "CMSY-SPEC"
+      },
+      {
+        "position": 9,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6034",
+          "COMP6800"
+        ],
+        "specialisation": "CSEC-SPEC"
+      },
+      {
+        "position": 10,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP8131",
+          "COMP8703"
+        ],
+        "specialisation": "CSEC-SPEC"
+      },
+      {
+        "position": 11,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP8011",
+          "COMP8045",
+          "COMP8712"
+        ],
+        "specialisation": "CSEC-SPEC"
+      },
+      {
+        "position": 12,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 18,
+        "courses": [
+          "COMP6240",
+          "COMP8410",
+          "COMP8490"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 13,
+        "name": "Elective courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6434",
+          "COMP6670",
+          "COMP8600",
+          "COMP8650",
+          "COMP8880"
+        ],
+        "specialisation": "DTSC-SPEC"
+      },
+      {
+        "position": 14,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6390"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 15,
+        "name": "Required list courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP8020",
+          "COMP8350",
+          "COMP8539",
+          "COMP8610"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 16,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6528",
+          "COMP6540",
+          "COMP6720"
+        ],
+        "specialisation": "HCCM-SPEC"
+      },
+      {
+        "position": 17,
+        "name": "Compulsory courses",
+        "kind": "list",
+        "unitsRequired": 12,
+        "courses": [
+          "COMP6120",
+          "ENGN8100"
+        ],
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 18,
+        "name": "Further 8000-level COMP courses",
+        "kind": "filter",
+        "unitsRequired": 6,
+        "filterSubjects": [
+          "COMP"
+        ],
+        "filterMinLevel": 8000,
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 19,
+        "name": "Optional list courses",
+        "kind": "list",
+        "unitsRequired": 6,
+        "courses": [
+          "COMP6240",
+          "COMP6331",
+          "COMP6390",
+          "INFS8004",
+          "INFS8205",
+          "LAWS8445",
+          "MGMT7020",
+          "REGN8014"
+        ],
+        "specialisation": "SOFT-SPEC"
+      },
+      {
+        "position": 20,
         "name": "Further COMP/ENGN courses",
         "kind": "filter",
         "unitsRequired": 18,
@@ -839,7 +2151,7 @@
         "filterMinLevel": 6000
       },
       {
-        "position": 4,
+        "position": 21,
         "name": "University electives",
         "kind": "filter",
         "unitsRequired": 12,
@@ -847,19 +2159,49 @@
         "filterMinLevel": null
       }
     ],
+    "specialisations": [
+      {
+        "code": "ARTIF-SPEC",
+        "name": "Artificial Intelligence"
+      },
+      {
+        "code": "COMP-SPEC",
+        "name": "Computational Foundations"
+      },
+      {
+        "code": "CMSY-SPEC",
+        "name": "Computer Systems"
+      },
+      {
+        "code": "CSEC-SPEC",
+        "name": "Cyber Security"
+      },
+      {
+        "code": "DTSC-SPEC",
+        "name": "Data Science"
+      },
+      {
+        "code": "HCCM-SPEC",
+        "name": "Human-Centred and Creative Computing"
+      },
+      {
+        "code": "SOFT-SPEC",
+        "name": "Software Development"
+      }
+    ],
     "parseWarnings": [
       "out of scope by design (epic.md section 5): \"A minimum of 48 units must come from completion of 8000-level COMP courses\"",
       "unrecognised requirement line: \"24 units from completion of\"",
       "unrecognised requirement line: \"COMP8800 Advanced Computing Research Project, which must be taken twice, in consecutive semesters (12+12 units)\"",
-      "unrecognised requirement line: \"24 units from the completion of one of the following Specialisations:\"",
-      "unrecognised requirement line: \"Artificial Intelligence\"",
-      "unrecognised requirement line: \"Computer Systems\"",
-      "unrecognised requirement line: \"Cyber Security\"",
-      "unrecognised requirement line: \"Computational Foundations\"",
-      "unrecognised requirement line: \"Data Science\"",
-      "unrecognised requirement line: \"Human Centred and Creative Computing\"",
-      "unrecognised requirement line: \"Machine Learning\"",
-      "unrecognised requirement line: \"Software Development\""
+      "out of scope by design (epic.md section 5): \"This Specialisation requires the completion of 24 units, which must include a minimum of 12 units of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units must come from the completion of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of a minimum of 12 units of 8000-level courses.\"",
+      "out of scope by design (epic.md section 5): \"A minimum of 12 units must come from completion of 8000-level courses\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of 12 units of 8000-level courses\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must include a minimum of 12 units of 8000-level courses:\"",
+      "out of scope by design (epic.md section 5): \"This specialisation requires the completion of 24 units, which must consist of a minimum of 12 units of 8000-level courses.\"",
+      "SOFT-SPEC 2027: filter excludes specific courses (COMP8715, COMP8800, COMP8830) not enforced by a \"filter\" group's subject/level fields: \"6 units from completion of an 8000-level course from the subject area COMP Computing, excluding the project courses (COMP8715, COMP8800, COMP8830).\"",
+      "SOFT-SPEC 2027: unrecognised requirement line: \"Note: MCOMP students who complete COMP6120 as part of their program rules need to replace it with 6 units of 6000/8000 COMP.\""
     ]
   }
 ]
