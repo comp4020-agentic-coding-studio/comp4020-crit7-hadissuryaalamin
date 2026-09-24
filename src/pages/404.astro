@@ -1,0 +1,16 @@
+---
+// Also served for /plan/<unknown id> via Astro.rewrite("/404") from the
+// plan pages, which keeps the original URL in the address bar but renders
+// this content with a real 404 status.
+import Layout from "../components/Layout.astro";
+Astro.response.status = 404;
+---
+
+<Layout title="Not found">
+  <h1>Page not found</h1>
+  <p>
+    That plan link doesn't match anything on record — it may have been
+    mistyped, or the server's data has since been reset.
+  </p>
+  <p><a href="/" class="btn btn-primary">Start a new plan</a></p>
+</Layout>
