@@ -1,0 +1,118 @@
+---
+// Catch-up page (epic.md section 10): record what you already did in
+// semesters before "now", so the plan page's totals are complete. No
+// checker status is shown here — those courses already happened, there's
+// nothing left to warn about — just add/remove.
+import Layout from "../../../components/Layout.astro";
+import CourseCard from "../../../components/CourseCard.astro";
+import { getPlan, type PlanCourseRow } from "../../../lib/plans";
+import { getCatalogueForProgram, getProgram } from "../../../lib/catalogue";
+import { semesterCalendar } from "../../../lib/checker";
+
+const { id } = Astro.params;
+const found = id ? getPlan(id) : null;
+if (!found) {
+  return Astro.rewrite("/404");
+}
+const { plan, courses } = found;
+
+const program = getProgram(plan.programCode, plan.startYear);
+const catalogue = getCatalogueForProgram(plan.programCode, plan.startYear, plan.specialisation);
+const allCourseCodes = catalogue ? Object.keys(catalogue.courses).sort() : [];
+
+function titleFor(code: string, calendarYear: number): string | null {
+  const entries = catalogue?.courses[code] ?? [];
+  if (entries.length === 0) return null;
+  const exact = entries.find((e) => e.year === calendarYear);
+  return (exact ?? [...entries].sort((a, b) => b.year - a.year)[0])!.title;
+}
+
+const coursesBySemester = new Map<number, PlanCourseRow[]>();
+for (const course of courses) {
+  if (course.semesterIndex >= plan.currentSemester) continue; // shown on the plan page instead
+  const list = coursesBySemester.get(course.semesterIndex) ?? [];
+  list.push(course);
+  coursesBySemester.set(course.semesterIndex, list);
+}
+
+const pastSemesterIndexes: number[] = [];
+for (let s = 1; s < plan.currentSemester; s++) pastSemesterIndexes.push(s);
+
+const error = Astro.url.searchParams.get("error");
+---
+
+<Layout title={`Catch up — ${plan.programCode} ${plan.startYear}`} wide>
+  <h1>Catch up on past semesters</h1>
+  <p class="pitch">
+    {program?.name ?? plan.programCode}, started {plan.startYear} S{plan.startSemester}. Add
+    whatever you've already completed so your totals are right — nothing here
+    is checked, it's just a record.
+  </p>
+
+  {error && <p class="alert alert-error" role="alert">{error}</p>}
+
+  {
+    pastSemesterIndexes.length === 0 ? (
+      <p class="empty">You're on semester 1 — there's nothing to catch up on yet.</p>
+    ) : (
+      pastSemesterIndexes.map((semesterIndex) => {
+        const cal = semesterCalendar(
+          { startYear: plan.startYear, startSemester: plan.startSemester as 1 | 2 },
+          semesterIndex,
+        );
+        const semCourses = coursesBySemester.get(semesterIndex) ?? [];
+        return (
+          <section class="semester">
+            <h2>
+              Semester {semesterIndex} — {cal.year} S{cal.semester}
+            </h2>
+            {semCourses.length === 0 ? (
+              <p class="empty">Nothing added yet.</p>
+            ) : (
+              <ul class="course-list">
+                {semCourses.map((course) => (
+                  <CourseCard
+                    code={course.courseCode}
+                    title={titleFor(course.courseCode, cal.year)}
+                    units={course.units}
+                    unverified={course.unverified}
+                    removeAction="/api/plan-courses"
+                    planId={plan.id}
+                    planCourseId={course.id}
+                    from="catchup"
+                  />
+                ))}
+              </ul>
+            )}
+            <form method="post" action="/api/plan-courses" class="add-course-form">
+              <input type="hidden" name="intent" value="add" />
+              <input type="hidden" name="planId" value={plan.id} />
+              <input type="hidden" name="from" value="catchup" />
+              <input type="hidden" name="semesterIndex" value={semesterIndex} />
+              <label for={`course-${semesterIndex}`}>Add a course</label>
+              <div class="add-course-form__row">
+                <input
+                  id={`course-${semesterIndex}`}
+                  name="courseCode"
+                  list="course-codes"
+                  placeholder="e.g. COMP6262"
+                  autocomplete="off"
+                  required
+                />
+                <button type="submit" class="btn">Add</button>
+              </div>
+            </form>
+          </section>
+        );
+      })
+    )
+  }
+
+  <datalist id="course-codes">
+    {allCourseCodes.map((code) => <option value={code} />)}
+  </datalist>
+
+  <p class="card">
+    <a href={`/plan/${plan.id}`} class="btn btn-primary">Done — show my plan</a>
+  </p>
+</Layout>
