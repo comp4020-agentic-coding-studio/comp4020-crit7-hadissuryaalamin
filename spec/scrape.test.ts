@@ -290,44 +290,178 @@ describe("parseCourse (COMP8539 2026 — the 'should parse' fixture)", () => {
 
   it("parses the plain all-OR requisite", () => {
     expect(course.prereqExpr).toEqual({
-      op: "OR",
-      codes: ["COMP6528", "COMP4528", "ENGN4528"],
+      kind: "or",
+      exprs: [
+        { kind: "course", code: "COMP6528", allowConcurrent: false },
+        { kind: "course", code: "COMP4528", allowConcurrent: false },
+        { kind: "course", code: "ENGN4528", allowConcurrent: false },
+      ],
     });
   });
 });
 
 describe("parsePrereq", () => {
-  it("parses a single code with no connective as a trivial AND", () => {
+  it("parses a single code with no connective as a bare leaf", () => {
     expect(parsePrereq("To enrol in this course you must have completed COMP1100.")).toEqual({
-      op: "AND",
-      codes: ["COMP1100"],
+      kind: "course",
+      code: "COMP1100",
+      allowConcurrent: false,
     });
   });
 
   it("parses an all-AND sentence", () => {
     expect(parsePrereq("You must have completed COMP1100 and COMP1130.")).toEqual({
-      op: "AND",
-      codes: ["COMP1100", "COMP1130"],
+      kind: "and",
+      exprs: [
+        { kind: "course", code: "COMP1100", allowConcurrent: false },
+        { kind: "course", code: "COMP1130", allowConcurrent: false },
+      ],
     });
   });
 
   it("parses an all-OR sentence", () => {
     expect(parsePrereq("You must have completed COMP1100 or COMP1130 or COMP1140.")).toEqual({
-      op: "OR",
-      codes: ["COMP1100", "COMP1130", "COMP1140"],
+      kind: "or",
+      exprs: [
+        { kind: "course", code: "COMP1100", allowConcurrent: false },
+        { kind: "course", code: "COMP1130", allowConcurrent: false },
+        { kind: "course", code: "COMP1140", allowConcurrent: false },
+      ],
     });
   });
 
-  it("returns null for a mixed and/or expression, even with explicit grouping", () => {
+  // Previously null (epic.md 9.3 rejected any explicit grouping outright).
+  // The richer grammar (epic.md 18.3) now parses parentheses, so this
+  // becomes COMP1100 OR (COMP1130 AND COMP1140) — no guessing involved,
+  // the parentheses fully disambiguate the mixed connective.
+  it("parses a mixed and/or expression when explicit grouping disambiguates it", () => {
+    expect(parsePrereq("You must have completed COMP1100 or (COMP1130 and COMP1140).")).toEqual({
+      kind: "or",
+      exprs: [
+        { kind: "course", code: "COMP1100", allowConcurrent: false },
+        {
+          kind: "and",
+          exprs: [
+            { kind: "course", code: "COMP1130", allowConcurrent: false },
+            { kind: "course", code: "COMP1140", allowConcurrent: false },
+          ],
+        },
+      ],
+    });
+  });
+
+  it("returns null for a genuinely mixed and/or expression with no grouping to disambiguate it", () => {
+    expect(parsePrereq("You must have completed COMP1100 and COMP1130 or COMP1140.")).toBeNull();
+  });
+
+  // Previously null (epic.md 9.3 treated any program mention as
+  // disqualifying). The richer grammar (epic.md 18.3) now parses program
+  // membership as its own leaf kind, so this becomes
+  // (enrolled in VCOMP) OR COMP6710.
+  it("parses a sentence naming a program as a program leaf alongside a course leaf", () => {
     expect(
-      parsePrereq("You must have completed COMP1100 or (COMP1130 and COMP1140)."),
+      parsePrereq("You must be enrolled in Master of Computing (Advanced) or have completed COMP6710."),
+    ).toEqual({
+      kind: "or",
+      exprs: [
+        { kind: "program", programCode: "VCOMP", negate: false },
+        { kind: "course", code: "COMP6710", allowConcurrent: false },
+      ],
+    });
+  });
+
+  it("maps 'Master of Computing' (not Advanced) to MCOMP", () => {
+    expect(parsePrereq("You must be enrolled in Master of Computing.")).toEqual({
+      kind: "program",
+      programCode: "MCOMP",
+      negate: false,
+    });
+  });
+
+  it("maps 'Master of Machine Learning and Computer Vision' to MMLCV despite its own internal 'and'", () => {
+    expect(
+      parsePrereq("You must be enrolled in Master of Machine Learning and Computer Vision."),
+    ).toEqual({
+      kind: "program",
+      programCode: "MMLCV",
+      negate: false,
+    });
+  });
+
+  it("parses an unmapped program name as its own leaf, carrying the full name verbatim", () => {
+    expect(parsePrereq("You must be enrolled in Master of Data Science.")).toEqual({
+      kind: "program",
+      programCode: "Master of Data Science",
+      negate: false,
+    });
+  });
+
+  it("parses the program-exclusion sentence ('not able to enrol ... if you are enrolled in') as a negated program leaf, even as the sole requisite text", () => {
+    expect(
+      parsePrereq(
+        "You are not able to enrol in this course if you are enrolled in the Master of Computing (Advanced).",
+      ),
+    ).toEqual({ kind: "program", programCode: "VCOMP", negate: true });
+  });
+
+  it("marks a course leaf allowConcurrent when the sentence says 'completed or be currently enrolled in'", () => {
+    expect(
+      parsePrereq("To enrol in this course you must have: completed or be currently enrolled in COMP6710."),
+    ).toEqual({ kind: "course", code: "COMP6710", allowConcurrent: true });
+  });
+
+  // Real ANU text (COMP6670, 2026/2027 catalogue years): a "must:" OR-list
+  // mixing a program clause, a parenthesised concurrent-eligible course
+  // group, and a plain completed-course group.
+  it("parses the real COMP6670 requisite sentence", () => {
+    const text =
+      "To enrol in this course you must:\n" +
+      "be enrolled in Master of Computing (Advanced) OR \n" +
+      "have completed or be currently enrolled in (COMP6710 or COMP7710 or COMP6730)  OR\n" +
+      "have completed COMP1110 or COMP1140.";
+    expect(parsePrereq(text)).toEqual({
+      kind: "or",
+      exprs: [
+        { kind: "program", programCode: "VCOMP", negate: false },
+        {
+          kind: "or",
+          exprs: [
+            { kind: "course", code: "COMP6710", allowConcurrent: true },
+            { kind: "course", code: "COMP7710", allowConcurrent: true },
+            { kind: "course", code: "COMP6730", allowConcurrent: true },
+          ],
+        },
+        {
+          kind: "or",
+          exprs: [
+            { kind: "course", code: "COMP1110", allowConcurrent: false },
+            { kind: "course", code: "COMP1140", allowConcurrent: false },
+          ],
+        },
+      ],
+    });
+  });
+
+  it("returns null for a unit-count requisite ('36 units of COMP courses')", () => {
+    expect(parsePrereq("You must have completed 36 units of COMP courses.")).toBeNull();
+  });
+
+  it("returns null for a GPA requisite", () => {
+    expect(parsePrereq("You must have a GPA of at least 5.0.")).toBeNull();
+  });
+
+  it("returns null for a permission-code requisite", () => {
+    expect(
+      parsePrereq("Enrolment in this course requires permission from the Head of School."),
     ).toBeNull();
   });
 
-  it("returns null when the sentence names a program rather than only courses", () => {
-    expect(
-      parsePrereq("You must be enrolled in Master of Computing (Advanced) or have completed COMP6710."),
-    ).toBeNull();
+  it("returns null for a major-eligibility requisite", () => {
+    expect(parsePrereq("You must be enrolled in the Computer Science major.")).toBeNull();
+  });
+
+  it("returns null for a project-group eligibility requisite", () => {
+    expect(parsePrereq("You must be a member of an eligible project group.")).toBeNull();
   });
 
   it("returns null when there are no course codes at all", () => {

@@ -4,12 +4,15 @@
 // schema.ts. A later task maps Drizzle rows into these shapes.
 
 /** A prerequisite requirement, parsed from a course's requisite sentence
- * (epic 9.3 / scraper). Only pure AND-of-codes or pure OR-of-codes trees are
- * ever produced by the scraper; this type is a little more general (nested
- * and/or) so the checker doesn't have to assume the scraper's limits, but
- * callers should not rely on nesting beyond one level. */
+ * (epic 18.3 / scraper). Mirrors scripts/scrape/types.ts's `PrereqExpr`
+ * structurally (no cross-import between the scraper and the app, per the
+ * existing architecture) — course leaves carry `allowConcurrent` (satisfied
+ * by the same semester, not just an earlier one) and program leaves carry
+ * `negate` (a program *exclusion* rather than a membership requirement).
+ * `and`/`or` nodes may nest (explicit parentheses in the source). */
 export type PrereqExpr =
-  | { kind: "course"; code: string }
+  | { kind: "course"; code: string; allowConcurrent: boolean }
+  | { kind: "program"; programCode: string; negate: boolean }
   | { kind: "and"; exprs: PrereqExpr[] }
   | { kind: "or"; exprs: PrereqExpr[] };
 

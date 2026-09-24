@@ -85,16 +85,33 @@ export interface ProgramJson {
 }
 
 /**
- * A parsed AND/OR requisite expression over course codes. Deliberately flat:
- * epic.md 9.3 "Prereq parsing" only parses a sentence that is codes joined by
- * a *single* kind of connective (all "and" or all "or"). Anything mixed,
- * parenthesised/nested, or mentioning units, programs, permission or majors
- * is left unparsed (`null`) rather than guessed at — see parse-prereq.ts.
+ * A parsed requisite expression tree (epic.md 18.3, replacing the old flat
+ * "single connective" grammar). Two leaf kinds:
+ *  - `course`: satisfied by completing the code in an earlier semester, or
+ *    the same semester when `allowConcurrent` (the requisite sentence said
+ *    "completed or be currently enrolled in").
+ *  - `program`: a plan-program-membership condition (e.g. "must be enrolled
+ *    in the Master of Computing (Advanced)"), or its negation (a program
+ *    *exclusion*, e.g. "not able to enrol in this course if you are
+ *    enrolled in ..."). `programCode` is one of the mapped short codes
+ *    (VCOMP/MCOMP/MMLCV) when the sentence names a program with a known
+ *    mapping, otherwise the program's full name text verbatim (guaranteed
+ *    never to equal a real plan's programCode, so it's vacuously satisfied
+ *    unless negated — see checker.ts).
+ * `and`/`or` nodes combine children, and may nest (explicit parentheses in
+ * the source sentence). Anything not confidently parseable this way — unit
+ * counts, GPA, permission codes, project-group eligibility, majors, or a
+ * genuinely unclear/mixed connective with no grouping to disambiguate it —
+ * is left `null` rather than guessed at (see parse-prereq.ts).
  */
-export interface PrereqExpr {
-  op: "AND" | "OR";
-  codes: string[];
-}
+export type PrereqLeaf =
+  | { kind: "course"; code: string; allowConcurrent: boolean }
+  | { kind: "program"; programCode: string; negate: boolean };
+
+export type PrereqExpr =
+  | PrereqLeaf
+  | { kind: "and"; exprs: PrereqExpr[] }
+  | { kind: "or"; exprs: PrereqExpr[] };
 
 export interface CourseJson {
   code: string;

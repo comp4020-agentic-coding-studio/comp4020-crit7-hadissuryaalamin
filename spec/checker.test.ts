@@ -441,7 +441,7 @@ describe("checker: timing (9.3)", () => {
     const catalogue = mmlcvCatalogue([
       course("COMP8600", {
         prereqText: "To enrol in this course you must have completed COMP6670",
-        prereqExpr: { kind: "course", code: "COMP6670" },
+        prereqExpr: { kind: "course", code: "COMP6670", allowConcurrent: false },
       }),
       course("COMP6670"),
     ]);
@@ -457,7 +457,7 @@ describe("checker: timing (9.3)", () => {
     const catalogue = mmlcvCatalogue([
       course("COMP8600", {
         prereqText: "To enrol in this course you must have completed COMP6670",
-        prereqExpr: { kind: "course", code: "COMP6670" },
+        prereqExpr: { kind: "course", code: "COMP6670", allowConcurrent: false },
       }),
       course("COMP6670"),
     ]);
@@ -476,7 +476,7 @@ describe("checker: timing (9.3)", () => {
     const catalogue = mmlcvCatalogue([
       course("COMP8600", {
         prereqText: "To enrol in this course you must have completed COMP6670",
-        prereqExpr: { kind: "course", code: "COMP6670" },
+        prereqExpr: { kind: "course", code: "COMP6670", allowConcurrent: false },
       }),
       course("COMP6670"),
     ]);
@@ -506,6 +506,133 @@ describe("checker: timing (9.3)", () => {
     expect(r.messages).toContain(
       "Check P&C: To enrol in this course you must have completed COMP6670 or have permission of the course convener",
     );
+  });
+
+  it("a course leaf with allowConcurrent is satisfied by the same semester", () => {
+    const catalogue = mmlcvCatalogue([
+      course("COMP8600", {
+        prereqText: "you must have completed or be currently enrolled in COMP6670",
+        prereqExpr: { kind: "course", code: "COMP6670", allowConcurrent: true },
+      }),
+      course("COMP6670"),
+    ]);
+    const p = plan({ currentSemester: 1 });
+    const courses = [pc("c1", 2, "COMP8600", 1), pc("c2", 2, "COMP6670", 2)];
+    const result = evaluate(p, courses, catalogue);
+    const r = statusOf(result, "c1");
+    expect(r.messages.some((m) => m.startsWith("Needs "))).toBe(false);
+  });
+
+  // Client example 1 (epic.md 18.3): COMP6710's real requisite is a program
+  // exclusion, not a course requirement — on an MMLCV plan (the default
+  // test plan()) it's simply not open to Master of Computing (Advanced)
+  // students, so an MMLCV student sees no prerequisite message at all.
+  it("a negated program leaf is satisfied when the plan's program differs (client example: COMP6710 on an MMLCV plan)", () => {
+    const catalogue = mmlcvCatalogue([
+      course("COMP6710", {
+        prereqText:
+          "You are not able to enrol in this course if you are enrolled in the Master of Computing (Advanced).",
+        prereqExpr: { kind: "program", programCode: "VCOMP", negate: true },
+      }),
+    ]);
+    const p = plan({ currentSemester: 1 }); // programCode: "MMLCV"
+    const courses = [pc("c1", 2, "COMP6710", 1)];
+    const result = evaluate(p, courses, catalogue);
+    const r = statusOf(result, "c1");
+    expect(r.messages.some((m) => m.startsWith("Needs "))).toBe(false);
+    expect(r.messages.some((m) => m.startsWith("Not open to "))).toBe(false);
+  });
+
+  it("a negated program leaf warns 'Not open to ... students' when the plan is that program", () => {
+    const catalogue = mmlcvCatalogue([
+      course("COMP6710", {
+        prereqText:
+          "You are not able to enrol in this course if you are enrolled in the Master of Computing (Advanced).",
+        prereqExpr: { kind: "program", programCode: "VCOMP", negate: true },
+      }),
+    ]);
+    const p = plan({ currentSemester: 1, programCode: "VCOMP" });
+    const courses = [pc("c1", 2, "COMP6710", 1)];
+    const result = evaluate(p, courses, catalogue);
+    const r = statusOf(result, "c1");
+    expect(r.status).toBe("warn");
+    expect(r.messages).toContain("Not open to Master of Computing (Advanced) students");
+  });
+
+  // Client example 2 (epic.md 18.3): COMP6670's real requisite tree — a
+  // program leaf, an allowConcurrent OR-group and a plain OR-group.
+  it("client example: COMP6670's real requisite tree is satisfied by COMP6710 in a strictly earlier semester", () => {
+    const catalogue = mmlcvCatalogue([
+      course("COMP6670", {
+        prereqExpr: {
+          kind: "or",
+          exprs: [
+            { kind: "program", programCode: "VCOMP", negate: false },
+            {
+              kind: "or",
+              exprs: [
+                { kind: "course", code: "COMP6710", allowConcurrent: true },
+                { kind: "course", code: "COMP7710", allowConcurrent: true },
+              ],
+            },
+          ],
+        },
+      }),
+      course("COMP6710"),
+    ]);
+    const p = plan({ currentSemester: 1 });
+    const courses = [pc("c1", 1, "COMP6710", 1), pc("c2", 2, "COMP6670", 2)];
+    const result = evaluate(p, courses, catalogue);
+    const r = statusOf(result, "c2");
+    expect(r.messages.some((m) => m.startsWith("Needs "))).toBe(false);
+  });
+
+  it("client example: COMP6670 alone (no COMP6710/program) warns, listing every option OR'd together", () => {
+    const catalogue = mmlcvCatalogue([
+      course("COMP6670", {
+        prereqExpr: {
+          kind: "or",
+          exprs: [
+            { kind: "program", programCode: "VCOMP", negate: false },
+            {
+              kind: "or",
+              exprs: [
+                { kind: "course", code: "COMP6710", allowConcurrent: true },
+                { kind: "course", code: "COMP7710", allowConcurrent: true },
+              ],
+            },
+          ],
+        },
+      }),
+    ]);
+    const p = plan({ currentSemester: 1 }); // programCode: "MMLCV" - not VCOMP
+    const courses = [pc("c1", 2, "COMP6670", 1)];
+    const result = evaluate(p, courses, catalogue);
+    const r = statusOf(result, "c1");
+    expect(r.status).toBe("warn");
+    expect(r.messages).toContain(
+      "Needs Master of Computing (Advanced) or COMP6710 or COMP7710 first",
+    );
+  });
+
+  it("'Needs <summary> first' wording for a simple two-option OR (client's illustrative example)", () => {
+    const catalogue = mmlcvCatalogue([
+      course("COMP6670", {
+        prereqExpr: {
+          kind: "or",
+          exprs: [
+            { kind: "course", code: "COMP6710", allowConcurrent: true },
+            { kind: "course", code: "COMP7710", allowConcurrent: true },
+          ],
+        },
+      }),
+    ]);
+    const p = plan({ currentSemester: 1 });
+    const courses = [pc("c1", 2, "COMP6670", 1)];
+    const result = evaluate(p, courses, catalogue);
+    const r = statusOf(result, "c1");
+    expect(r.status).toBe("warn");
+    expect(r.messages).toContain("Needs COMP6710 or COMP7710 first");
   });
 
   it("completed semester skips timing checks", () => {
@@ -539,7 +666,7 @@ describe("checker: permission waiver (9.16 / D15)", () => {
     const catalogue = mmlcvCatalogue([
       course("COMP8600", {
         prereqText: "To enrol in this course you must have completed COMP6670",
-        prereqExpr: { kind: "course", code: "COMP6670" },
+        prereqExpr: { kind: "course", code: "COMP6670", allowConcurrent: false },
       }),
     ]);
     const p = plan({ currentSemester: 1 });
@@ -560,7 +687,7 @@ describe("checker: permission waiver (9.16 / D15)", () => {
         level: 1000,
         offeredS1: false,
         prereqText: "some prereq text",
-        prereqExpr: { kind: "course", code: "COMP6670" },
+        prereqExpr: { kind: "course", code: "COMP6670", allowConcurrent: false },
       }),
     ]);
     const p = plan({ startYear: 2026, startSemester: 1, currentSemester: 1 });
