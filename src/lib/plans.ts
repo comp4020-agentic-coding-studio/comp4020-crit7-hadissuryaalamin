@@ -174,6 +174,17 @@ export function removeCourse(planId: string, planCourseId: number): void {
     .run();
 }
 
+/** D15 (epic.md 16): "I have permission to enrol" / "Undo permission" —
+ * sets or clears the waiver on one plan course. Scoped to `planId` so one
+ * plan can't waive another's row. A no-op (no throw) if the row doesn't
+ * belong to this plan, matching removeCourse's existing behaviour. */
+export function setPrereqWaived(planId: string, planCourseId: number, waived: boolean): void {
+  db.update(planCourses)
+    .set({ prereqWaived: waived })
+    .where(and(eq(planCourses.id, planCourseId), eq(planCourses.planId, planId)))
+    .run();
+}
+
 /** Loads the plan, builds the checker's Catalogue input restricted to this
  * plan's program-year and chosen specialisation (epic.md 15 — the loader's
  * job; the checker itself never sees specialisation-filtering logic), and
@@ -205,6 +216,7 @@ export function evaluatePlan(planId: string): EvaluateResult | null {
     units: c.units,
     level: c.level,
     addedOrder: c.id,
+    prereqWaived: c.prereqWaived,
   }));
 
   return evaluate(checkerPlan, checkerCourses, catalogue);

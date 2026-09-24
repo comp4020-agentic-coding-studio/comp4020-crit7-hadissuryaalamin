@@ -1,0 +1,1 @@
+ALTER TABLE `plan_courses` ADD `prereq_waived` integer DEFAULT false NOT NULL;

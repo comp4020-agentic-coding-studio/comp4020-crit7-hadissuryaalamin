@@ -151,6 +151,33 @@ describe("addCourse / removeCourse", () => {
     plansMod.removeCourse(plan.id, course.id);
     expect(plansMod.getPlan(plan.id)?.courses).toHaveLength(0);
   });
+
+  it("new courses start with prereqWaived false, and setPrereqWaived toggles it, scoped to the plan", () => {
+    const plan = plansMod.createPlan({
+      programCode: "MMLCV",
+      startYear: 2026,
+      startSemester: 1,
+      currentSemester: 1,
+    });
+    const otherPlan = plansMod.createPlan({
+      programCode: "MMLCV",
+      startYear: 2026,
+      startSemester: 1,
+      currentSemester: 1,
+    });
+    const course = plansMod.addCourse(plan.id, 1, "COMP8539");
+    expect(course.prereqWaived).toBe(false);
+
+    plansMod.setPrereqWaived(plan.id, course.id, true);
+    expect(plansMod.getPlan(plan.id)?.courses[0]?.prereqWaived).toBe(true);
+
+    // Scoped to planId — another plan can't waive this row.
+    plansMod.setPrereqWaived(otherPlan.id, course.id, false);
+    expect(plansMod.getPlan(plan.id)?.courses[0]?.prereqWaived).toBe(true);
+
+    plansMod.setPrereqWaived(plan.id, course.id, false);
+    expect(plansMod.getPlan(plan.id)?.courses[0]?.prereqWaived).toBe(false);
+  });
 });
 
 describe("evaluatePlan", () => {

@@ -111,6 +111,10 @@ export const planCourses = sqliteTable("plan_courses", {
   unverified: int({ mode: "boolean" }).notNull().default(false),
   units: int().notNull(),
   level: int().notNull(),
+  // epic.md 16 (D15): "I have permission to enrol" — waives this course's
+  // prerequisite check. Set/unset via /api/plan-courses' waive-prereq /
+  // unwaive-prereq intents; never touched by the catalogue reload.
+  prereqWaived: int("prereq_waived", { mode: "boolean" }).notNull().default(false),
   addedAt: text("added_at")
     .notNull()
     .default(sql`(datetime('now'))`),
