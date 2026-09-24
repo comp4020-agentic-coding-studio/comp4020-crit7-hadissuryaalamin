@@ -2,17 +2,17 @@
 name: Degree Plan Checker
 description: A degree laid out as a planting plan — season columns, colour-coded beds, labelled stakes, stamped marks.
 colors:
-  ground: "#eef1ea"
-  grid-line: "rgba(30, 42, 34, 0.07)"
-  surface: "#fafaf4"
-  surface-sunk: "#e6e9e0"
+  ground: "#f5edde"
+  grid-line: "rgba(26, 26, 26, 0.07)"
+  surface: "#fbf7ee"
+  surface-sunk: "#eadfc1"
   field: "#ffffff"
-  ink: "#1e2a22"
-  ink-soft: "#4b5a4c"
-  line: "#c7cdbd"
-  action: "#0f5e63"
+  ink: "#1a1a1a"
+  ink-soft: "#3f5c64"
+  line: "#d9cba6"
+  action: "#1b6478"
   action-ink: "#ffffff"
-  action-hover: "#0c4a4e"
+  action-hover: "#103f4c"
   mark-zero: "#a3271c"
   mark-unknown: "#52605a"
   mark-warn-ink: "#7a4c0a"
@@ -20,14 +20,14 @@ colors:
   mark-counts: "#2f6a4a"
   alert-error-bg: "#f5e2dd"
   alert-error-ink: "#6c2015"
-  bed-moss: "#4F6B3A"
-  bed-marigold: "#D98A22"
+  bed-moss: "#3F5B2E"
+  bed-marigold: "#BE830E"
   bed-brick: "#6E4A36"
-  bed-iris: "#4C5A9E"
-  bed-plum: "#7A4569"
-  bed-rose: "#B84A73"
-  bed-slate: "#45606B"
-  bed-sky: "#7FB3D9"
+  bed-iris: "#2C3A55"
+  bed-plum: "#5A3568"
+  bed-rose: "#9E3F5C"
+  bed-slate: "#5E6670"
+  bed-sky: "#D9C08A"
 typography:
   display:
     fontFamily: "Atkinson Hyperlegible Next, Atkinson Hyperlegible, system-ui, sans-serif"
@@ -153,9 +153,9 @@ components:
 
 **Creative North Star: "The Planting Plan"**
 
-The degree is a garden drawn on a drafting sheet. Semesters are season columns, requirement groups are colour-coded beds, and every course is a labelled stake planted in one of them. A student reads the plan the way a gardener reads a bed layout: which beds are full, which stakes sit in the wrong place, what still needs planting. The system refuses the analytics dashboard: no stat tiles, no progress rings, no bars. Progress is always a count in words ("6/12 units").
+The degree is a garden drawn on a drafting sheet. Semesters are season columns, requirement groups are colour-coded beds, and every course is a labelled stake planted in one of them. A student reads the plan the way a gardener reads a bed layout: which beds are full, which stakes sit in the wrong place, what still needs planting. The system refuses the analytics dashboard: no stat tiles, no progress rings, no big-number summaries. Progress is a count in words ("6/12 units") plus, since 2026-09-25 (the client asked for the bars back), a thin flat fill bar in the bed's own colour beside that text — the words are still the primary cue, the bar is a second one, never the only one.
 
-The ground is a pale sage drafting sheet with a faint 8px grid; everything sits flat on it, separated by hairline borders and tonal steps, never shadows. Colour carries two jobs and keeps them apart: eight flat bed hues say *which group*, and a small set of marks (red stamp, grey stamp, amber tag, green outline, pin) say *what happened*. Every mark carries its own words; colour is always the second cue. One deep teal is reserved for primary actions and belongs to no bed.
+The ground is a pale drafting sheet — since 2026-09-25 in ANU Programs & Courses' own parchment-cream family, unofficially — with a faint 8px grid; everything sits flat on it, separated by hairline borders and tonal steps, never shadows. Colour carries two jobs and keeps them apart: eight flat bed hues say *which group*, and a small set of marks (red stamp, grey stamp, amber tag, green outline, pin) say *what happened*. Every mark carries its own words; colour is always the second cue. One deep teal, adapted from ANU's own link teal, is reserved for primary actions and belongs to no bed.
 
 One workhorse sans, Atkinson Hyperlegible Next, does everything, chosen because many readers use English as a second language. Density is moderate: readable line lengths, generous card padding, columns side by side at laptop width and stacked on a phone with no horizontal scroll.
 
@@ -168,7 +168,9 @@ One workhorse sans, Atkinson Hyperlegible Next, does everything, chosen because 
 
 ## Colors
 
-A muted sage-and-ink paper world carrying eight saturated but earthy bed hues and a separate, text-bound mark vocabulary.
+A parchment-and-ink paper world carrying eight saturated but earthy bed hues and a separate, text-bound mark vocabulary.
+
+**Source (2026-09-25, epic.md 18.4):** the client chose ANU's own colour palette, unofficially — ground, surface, ink-soft and action are remapped from hues extracted from `https://programsandcourses.anu.edu.au/` and its stylesheet (parchment cream, near-black ink, slate-teal, link teal), each darkened where the raw extract fell short of 4.5:1 as body/label text on the new ground. The eight bed hues were re-picked to harmonise with ANU's gold/black without copying either literally, kept pairwise distinct and clear of the mark vocabulary and the reserved action teal. No ANU logo, font or layout was adopted — see Do's and Don'ts and the footer disclaimer.
 
 ### Primary
 - **Reserved Deep Teal** (action): primary buttons only (Start planning, Add, Done), links, text selection and every focus ring. Never used as a bed, a mark or a decorative fill. **Deeper Teal** (action-hover) is its hover state.
@@ -273,6 +275,8 @@ A full-width Garden Ink bar, 0.9rem 1.25rem padding, holding text-only links in 
 ### Stake (signature)
 A course card. It has a solid band in its bed's hue across the top naming the bed in words (label type, sentence case), then the body (0.9rem 1rem): course code (title type) with units pushed right in tabular numerals, the course title, one status mark, dash-led reason lines in 0.82rem soft ink, then ghost actions. A stake with no group gets no band. A granted permission shows a small inline-SVG pin (0.9rem, ink) beside "Undo permission".
 
+**Check P&C shortening (since 2026-09-25, epic.md 18.3):** a reason line that starts "Check P&C:" is too long and too rule-heavy to read inline, so the stake shows one short line instead — "Check P&C — requirement too complex to check automatically" — as a native `<summary>`, with the full original checker text sitting inside the `<details>` it opens. The full text is always present in the HTML; the disclosure only changes whether it's shown open. Every other reason line renders as before, unchanged.
+
 ### Marks (signature)
 Inline labels in 0.8rem 700 with the exact checker text. Colour is secondary.
 - **Counts:** a transparent box with a 1.5px Counts Green outline, "Counts — {group}".
@@ -286,7 +290,7 @@ Inline labels in 0.8rem 700 with the exact checker text. Colour is secondary.
 The head is a Sunk Sage strip, 3px top corners, with a 2px ink bottom rule and an uppercase soft-ink name. **Current:** full ink head with paper text and a NOW pill outlined in paper. **Completed:** transparent head with a hairline rule, stakes on the ground tone, bands collapsed to hairlines. Each open column ends with the dashed add-a-course slot holding a teal Add button.
 
 ### Legend (level key)
-One wrapping inline strip: a 0.8rem square swatch with a 35% ink border, the bed name, and "earned/required units" in soft ink, with " — complete" appended when full. The total leads with an ink dot in bold. Pathway options cluster inline. The unchosen option gets hollow 1.5px swatches in its hue, 500-weight soft-ink names, and the words "not chosen".
+One wrapping inline strip, each row now two lines tall (since 2026-09-25): the top line is a 0.8rem square swatch with a 35% ink border, the bed name, and "earned/required units" in soft ink, with " — complete" appended when full; the second line is a 4px flat fill bar (track: surface-sunk, fill: the bed's own hue, or ink for the Total row) at that bed's earned/required percentage. The bar carries no label of its own — it sits beside the units text, never replacing it. The total leads with an ink dot in bold. Pathway options cluster inline. The unchosen option gets hollow 1.5px swatches in its hue, 500-weight soft-ink names, and the words "not chosen".
 
 ## Do's and Don'ts
 
@@ -298,12 +302,13 @@ One wrapping inline strip: a 0.8rem square swatch with a 35% ink border, the bed
 - **Do** make past seasons recede by tone and hairline, never by opacity.
 - **Do** keep every surface flat: paper on sage, 1px hairlines, 3px corners.
 - **Do** keep the 8px hairline grid on the ground.
+- **Do** pair every legend bar with its units text — the bar is never the only cue for progress.
 
 ### Don't:
-- **Don't** build the plan from dashboard parts: no stat tiles, progress rings, progress bars or big-number summaries. Progress is a count in words.
-- **Don't** use box-shadows or gradient fills on surfaces, bands or swatches.
+- **Don't** build the plan from dashboard parts: no stat tiles, progress rings, or big-number summaries. A thin flat bed-coloured bar beside the units text is the one exception the client asked back in (2026-09-25); it never stands alone or gains a gradient.
+- **Don't** use box-shadows or gradient fills on surfaces, bands, swatches or bars.
 - **Don't** use teal for a bed, a mark, or a decorative fill.
 - **Don't** use a bed hue to signal status, or a mark colour (Stamp Red, Shrug Grey, amber, Counts Green) to name a group or decorate an interaction.
 - **Don't** add a second typeface or uppercase bands, marks or buttons.
 - **Don't** add ambient or looping animation. The only motion is the one-shot stamp settle.
-- **Don't** imitate ANU branding or show a logo.
+- **Don't** imitate ANU branding, adopt ANU's fonts or layout, or show a logo — the palette is the only thing borrowed, and the footer disclaimer stays.

@@ -27,15 +27,20 @@ export interface Bed {
 // Order matters: it's also the fallback assignment order for an 8th+ bed
 // (see buildBedMap's `% 8`), which is why slate is 7th, since
 // MMLCV's largest real case (7 beds) should land on slate.
+// 2026-09-25 (epic.md 18.4): recoloured to harmonise with ANU's gold/black
+// while staying pairwise distinct and clear of the reserved --action teal
+// and the mark-* status colours; every hex re-checked at 4.5:1+ against its
+// paired text colour (see PRODUCT.md's Brand Commitments entry for the date
+// and DESIGN.md for the source citation).
 const BED_HUES: Bed[] = [
-  { hueName: "moss", hex: "#4F6B3A", textColor: "#ffffff" },
-  { hueName: "marigold", hex: "#D98A22", textColor: "var(--ink)" },
+  { hueName: "moss", hex: "#3F5B2E", textColor: "#ffffff" },
+  { hueName: "marigold", hex: "#BE830E", textColor: "var(--ink)" },
   { hueName: "brick", hex: "#6E4A36", textColor: "#ffffff" },
-  { hueName: "iris", hex: "#4C5A9E", textColor: "#ffffff" },
-  { hueName: "plum", hex: "#7A4569", textColor: "#ffffff" },
-  { hueName: "rose", hex: "#B84A73", textColor: "#ffffff" },
-  { hueName: "slate", hex: "#45606B", textColor: "#ffffff" },
-  { hueName: "sky", hex: "#7FB3D9", textColor: "var(--ink)" },
+  { hueName: "iris", hex: "#2C3A55", textColor: "#ffffff" },
+  { hueName: "plum", hex: "#5A3568", textColor: "#ffffff" },
+  { hueName: "rose", hex: "#9E3F5C", textColor: "#ffffff" },
+  { hueName: "slate", hex: "#5E6670", textColor: "#ffffff" },
+  { hueName: "sky", hex: "#D9C08A", textColor: "var(--ink)" },
 ];
 
 // Groups that should share one hue rather than each taking their own:

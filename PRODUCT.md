@@ -72,6 +72,8 @@ student in advance that a specific planned course will earn zero credit.
   date.
 - Voice: plain, direct and honest. Say "can't check" rather than guess; a
   wrong "this is fine" is worse than an honest "we can't tell".
+- 2026-09-25: the client chose ANU's colour palette; the app stays
+  unofficial — no logo, no ANU fonts or layout, footer disclaimer kept.
 
 ## Evidence on Hand
 
