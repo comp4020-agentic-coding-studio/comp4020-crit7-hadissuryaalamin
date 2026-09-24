@@ -159,9 +159,11 @@ export function evaluate(
   const loserPathway: "A" | "B" | null =
     pathwayConflict && winnerPathway ? (winnerPathway === "A" ? "B" : "A") : null;
 
-  // Groups usable for placement this plan: exclude the losing pathway's
-  // groups entirely (they're "not in use" once the conflict is resolved).
-  const candidateGroups = groups.filter((g) => !(g.pathway && g.pathway === loserPathway));
+  // Once a pathway is known, only its groups take courses; otherwise an
+  // earlier pathway's filter group can swallow the chosen pathway's courses.
+  const candidateGroups = groups.filter(
+    (g) => !(g.pathway && winnerPathway && g.pathway !== winnerPathway),
+  );
 
   const resultByPlanCourseId = new Map<string, CourseResult>();
 

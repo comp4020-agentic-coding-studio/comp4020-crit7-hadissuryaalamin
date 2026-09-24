@@ -395,6 +395,32 @@ describe("checker: credit allocation (9.1)", () => {
       "Pick one project pathway: you have courses from both A and B",
     );
   });
+
+  it("single pathway B: pathway A's filter group can't swallow B's courses", () => {
+    const catalogue = mmlcvCatalogue([course("COMP6445"), course("COMP8800", { units: 12 })]);
+    // Real MMLCV order: pathway A's "further COMP/ENGN" filter group sits
+    // before pathway B's list groups and would accept any 6000+ COMP course.
+    catalogue.groups.splice(5, 0, {
+      id: "pathway-a-further",
+      position: 5.5,
+      name: "Project pathway A: further COMP/ENGN courses",
+      kind: "filter",
+      unitsRequired: 12,
+      courseCodes: [],
+      filterSubjects: ["COMP", "ENGN"],
+      filterMinLevel: 6000,
+      pathway: "A",
+      pathwayMarkers: ["COMP6442", "COMP8715", "COMP8830"],
+    });
+    const result = evaluate(plan({ currentSemester: 1 }), [
+      pc("c1", 1, "COMP6445", 1),
+      pc("c2", 2, "COMP8800", 2),
+    ], catalogue);
+    expect(statusOf(result, "c1").groupName).toBe("Project pathway B");
+    expect(statusOf(result, "c2").groupName).toBe("Project pathway B");
+    expect(result.groups.find((g) => g.name === "Project pathway A: further COMP/ENGN courses")?.earned).toBe(0);
+    expect(result.warnings).toHaveLength(0);
+  });
 });
 
 describe("checker: timing (9.3)", () => {
