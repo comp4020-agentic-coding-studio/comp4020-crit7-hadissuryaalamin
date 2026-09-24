@@ -15,10 +15,33 @@ interface Props {
   planCourseId: number;
   from: "plan" | "catchup";
   result?: CourseResult;
+  /** D15 (epic.md 16): current waiver state, straight from plan_courses —
+   * needed even when `result`'s messages no longer show a prereq note
+   * (waiving replaces it), so "Undo permission" still has something to
+   * show. */
+  prereqWaived?: boolean;
 }
 
-const { code, title, units, unverified, removeAction, planId, planCourseId, from, result } =
-  Astro.props;
+const {
+  code,
+  title,
+  units,
+  unverified,
+  removeAction,
+  planId,
+  planCourseId,
+  from,
+  result,
+  prereqWaived = false,
+} = Astro.props;
+
+// D15: the button shows whenever there's a live prerequisite message to
+// waive (amber "Needs ... first" or grey "Check P&C: ...") — or, once
+// waived, so "Undo permission" stays available even though the waiver
+// replaced that message with its own note.
+const hasPrereqMessage =
+  result?.messages.some((m) => m.startsWith("Needs ") || m.startsWith("Check P&C:")) ?? false;
+const showWaiverButton = hasPrereqMessage || prereqWaived;
 ---
 
 <li class="course-card">
@@ -36,6 +59,19 @@ const { code, title, units, unverified, removeAction, planId, planCourseId, from
           <li>{message}</li>
         ))}
       </ul>
+    )
+  }
+  {
+    showWaiverButton && (
+      <form method="post" action="/api/plan-courses" class="course-waiver-form">
+        <input type="hidden" name="intent" value={prereqWaived ? "unwaive-prereq" : "waive-prereq"} />
+        <input type="hidden" name="planId" value={planId} />
+        <input type="hidden" name="planCourseId" value={planCourseId} />
+        <input type="hidden" name="from" value={from} />
+        <button type="submit" class="btn btn-ghost">
+          {prereqWaived ? "Undo permission" : "I have permission to enrol"}
+        </button>
+      </form>
     )
   }
   <form method="post" action={removeAction} class="course-remove-form">

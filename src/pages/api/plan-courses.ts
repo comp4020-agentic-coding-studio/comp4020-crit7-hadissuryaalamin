@@ -4,7 +4,7 @@
 // "error" query param instead of a 500, so a typo'd course code or a bad
 // semester never breaks the page.
 import type { APIRoute } from "astro";
-import { addCourse, removeCourse, PlanValidationError } from "../../lib/plans";
+import { addCourse, removeCourse, setPrereqWaived, PlanValidationError } from "../../lib/plans";
 
 export const prerender = false;
 
@@ -35,6 +35,14 @@ export const POST: APIRoute = async ({ request, redirect }) => {
       const planCourseId = Number.parseInt(String(form.get("planCourseId") ?? ""), 10);
       if (Number.isInteger(planCourseId)) {
         removeCourse(planId, planCourseId);
+      }
+      return redirect(back, 303);
+    }
+    if (intent === "waive-prereq" || intent === "unwaive-prereq") {
+      // D15 (epic.md 16): "I have permission to enrol" / "Undo permission".
+      const planCourseId = Number.parseInt(String(form.get("planCourseId") ?? ""), 10);
+      if (Number.isInteger(planCourseId)) {
+        setPrereqWaived(planId, planCourseId, intent === "waive-prereq");
       }
       return redirect(back, 303);
     }

@@ -190,6 +190,7 @@ const hasPastCourses = courses.some((c) => c.semesterIndex < plan.currentSemeste
                   planCourseId={course.id}
                   from="plan"
                   result={resultByPlanCourseId.get(String(course.id))}
+                  prereqWaived={course.prereqWaived}
                 />
               ))}
             </ul>
@@ -228,6 +229,7 @@ const hasPastCourses = courses.some((c) => c.semesterIndex < plan.currentSemeste
                   planCourseId={course.id}
                   from="plan"
                   result={resultByPlanCourseId.get(String(course.id))}
+                  prereqWaived={course.prereqWaived}
                 />
               ))}
             </ul>

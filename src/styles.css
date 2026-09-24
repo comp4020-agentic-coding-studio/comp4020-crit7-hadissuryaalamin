@@ -496,8 +496,12 @@ form {
   content: "— ";
 }
 
-.course-remove-form {
+.course-waiver-form {
   margin-top: 0.6rem;
+}
+
+.course-remove-form {
+  margin-top: 0.4rem;
 }
 
 .empty {
