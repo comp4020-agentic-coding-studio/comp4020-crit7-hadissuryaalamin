@@ -89,6 +89,27 @@ const ADMIN_NOTE_RE =
 // rather than testing each line against every other branch below.
 const PATHWAY_START_RE = /^either:?$/i;
 
+// "24 units from the completion of one of the following Specialisations:"
+// (MCOMP, VCOMP — epic.md 15, task 011). The specialisation names that
+// follow on the page (either one <ul><li> per name, e.g. MCOMP, or one bare
+// "<p>Name</p>" per name, e.g. VCOMP — no year or program consistently picks
+// one form) carry no course code, so they aren't a reliable source of
+// data — the real (code, name) pairs come from the page's separate
+// "#specialisations" link section instead (parseSpecialisationLinks below).
+// This just marks where in the group order the 24-unit specialisation
+// choice sits: a sentinel group with `specialisation: "__SLOT__"` and no
+// courses, which the runner (index.ts) replaces with the real, fetched
+// specialisation's groups at this exact position.
+const SPECIALISATION_HEADER_RE =
+  /^(\d+)\s*units?\s+from\s+(?:the\s+)?completion\s+of\s+one\s+of\s+the\s+following\s+specialisations:?\s*$/i;
+export const SPECIALISATION_SLOT = "__SLOT__";
+// A bare specialisation name line ("Artificial Intelligence", "Human Centred
+// and Creative Computing", ...) directly under SPECIALISATION_HEADER_RE on
+// pages that don't wrap them in a <ul> (VCOMP). Letters/spaces/hyphens only —
+// every real header below has digits or a trailing colon, so this can't
+// accidentally swallow one.
+const SPEC_NAME_LINE_RE = /^[A-Za-z]+(?:[\s-][A-Za-z]+)*$/;
+
 /**
  * Parse a program page
  * (`https://programsandcourses.anu.edu.au/<year>/program/<code>`) into the
@@ -120,6 +141,23 @@ export function parseProgram(html: string, code: string, year: number): ProgramJ
   const { groups, warnings } = parseRequirementGroups(doc);
   parseWarnings.push(...warnings);
 
+  // Fix badly-parsed group display names (epic.md 15). The parser reads
+  // group names out of the requirement prose itself, and one MMLCV phrasing
+  // ("24 units from completion of courses from the following list:") leaves
+  // nothing but the bare word "courses" after stripping the generic
+  // "completion of" lead-in — accurate as far as it goes, but not what a
+  // student should see. Named here rather than guessed at generically: this
+  // is the one group on the real MMLCV page (2025/2026/2027, same wording)
+  // that lists MLCV's own core courses (COMP6528/COMP6670/COMP8536/
+  // COMP8539/COMP8600/COMP8650).
+  if (code === "MMLCV") {
+    for (const g of groups) {
+      if (g.name.toLowerCase() === "courses") g.name = "MLCV core courses";
+    }
+  }
+
+  const specialisations = parseSpecialisationLinks(doc);
+
   return {
     code,
     year,
@@ -127,8 +165,40 @@ export function parseProgram(html: string, code: string, year: number): ProgramJ
     totalUnits: totalUnits ?? 0,
     semesters: semesters ?? 0,
     groups,
+    specialisations,
     parseWarnings,
   };
+}
+
+/**
+ * Reads the (code, name) pairs a program-year page lists under its own
+ * "Specialisations" section (epic.md 15, task 011) — never hard-coded, since
+ * the set of specialisations genuinely varies by program and by year (e.g.
+ * SOFT-SPEC replaces PCOM-SPEC from 2026; VCOMP alone offers CSEC-SPEC).
+ * Matches any anchor linking to "/specialisation/<CODE>", which is unique to
+ * this one section on every program page checked (task 011).
+ *
+ * NOTE: some program-year pages (2027, confirmed on MCOMP/VCOMP 2027 — an
+ * ANU page bug, not a parsing gap) link "/specialisation/<CODE>" with the
+ * year segment missing from the href. The runner must not follow these
+ * hrefs literally — it re-builds the fetch URL from the program-year's own
+ * year instead, using only the {code, name} read here.
+ */
+function parseSpecialisationLinks(doc: Document): { code: string; name: string }[] {
+  const result: { code: string; name: string }[] = [];
+  const seen = new Set<string>();
+  for (const a of doc.querySelectorAll('a[href*="/specialisation/"]')) {
+    const href = a.getAttribute("href") ?? "";
+    const match = href.match(/\/specialisation\/([A-Za-z0-9-]+)\/?$/);
+    if (!match) continue;
+    const code = match[1].toUpperCase();
+    if (seen.has(code)) continue;
+    const name = a.textContent?.trim();
+    if (!name) continue;
+    seen.add(code);
+    result.push({ code, name });
+  }
+  return result;
 }
 
 function parseTotalUnits(doc: Document): number | null {
@@ -406,6 +476,33 @@ function parseRequirementGroups(doc: Document): {
       continue;
     }
 
+    const specialisationMatch = text.match(SPECIALISATION_HEADER_RE);
+    if (specialisationMatch) {
+      groups.push({
+        position: groups.length,
+        name: "Specialisation",
+        kind: "list",
+        unitsRequired: Number(specialisationMatch[1]),
+        courses: [],
+        specialisation: SPECIALISATION_SLOT,
+      });
+      i++;
+      // Skip the bare specialisation-name lines that follow directly under
+      // this header on pages that don't wrap them in a <ul> (VCOMP; MCOMP's
+      // <ul> version is already invisible to this walk, which only collects
+      // <p> siblings). Never guessed at — the real (code, name) pairs come
+      // from parseSpecialisationLinks, not from these names.
+      while (i < paragraphs.length) {
+        const nameText = normalise(paragraphs[i].textContent ?? "");
+        if (nameText === "" || SPEC_NAME_LINE_RE.test(nameText)) {
+          i++;
+          continue;
+        }
+        break;
+      }
+      continue;
+    }
+
     // Anything else (admission-style prose inside the section, a line this
     // parser doesn't recognise, etc): never guess — record and continue.
     warnings.push(`unrecognised requirement line: "${text}"`);
@@ -424,5 +521,10 @@ function cleanListName(label: string): string {
     .replace(/^from\s+completion\s+of\s*/i, "")
     .replace(/^completion\s+of\s*/i, "")
     .trim();
-  return cleaned.length > 0 ? cleaned : "Requirement";
+  if (cleaned.length === 0) return "Requirement";
+  // Names are what students see (epic.md 15) — the source prose is a
+  // mid-sentence fragment ("foundational courses", "a professional practice
+  // course") once the generic lead-in is stripped, so capitalise it into a
+  // standalone label rather than shipping the lowercase fragment verbatim.
+  return `${cleaned[0]!.toUpperCase()}${cleaned.slice(1)}`;
 }
