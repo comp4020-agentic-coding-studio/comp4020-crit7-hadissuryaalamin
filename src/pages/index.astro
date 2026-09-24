@@ -48,11 +48,10 @@ const error = params.get("error");
 const values = {
   programCode: params.get("programCode") ?? "",
   startYear: params.get("startYear") ?? "",
-  startSemester: params.get("startSemester") ?? "2".slice(0, 0) || "1",
+  startSemester: params.get("startSemester") ?? "1",
   currentSemester: params.get("currentSemester") ?? "",
   specialisation: params.get("specialisation") ?? "",
 };
-if (params.get("startSemester")) values.startSemester = params.get("startSemester")!;
 
 // Guard against "</script>" inside embedded JSON breaking out of the tag.
 const specialisationDataJson = JSON.stringify(specialisationMap).replace(/</g, "\\u003c");
@@ -149,7 +148,7 @@ const specialisationDataJson = JSON.stringify(specialisationMap).replace(/</g, "
     <button type="submit" class="btn btn-primary">Start planning</button>
   </form>
 
-  <script type="application/json" id="specialisation-data" set:html={specialisationDataJson} />
+  <script type="application/json" id="specialisation-data" is:inline set:html={specialisationDataJson} />
   <script>
     // Progressive enhancement only — the form above already works without
     // this (epic.md section 15). Narrows the specialisation list to the
