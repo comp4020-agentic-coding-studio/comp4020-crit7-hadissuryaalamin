@@ -8,11 +8,13 @@
 //   --refresh   bypass the .cache/scrape/ cache and re-fetch every page.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { parseCourse } from "./parse-course.ts";
-import { parseProgram } from "./parse-program.ts";
-import type { CourseJson, ProgramJson } from "./types.ts";
+import { parseProgram, SPECIALISATION_SLOT } from "./parse-program.ts";
+import { parseSpecialisation } from "./parse-specialisation.ts";
+import type { CourseJson, ProgramJson, RequirementGroupJson } from "./types.ts";
 import { applyMmlcvOverrides } from "../../data/overrides/MMLCV.ts";
 import { applyVcompOverrides } from "../../data/overrides/VCOMP.ts";
 import { applyCourseOverrides } from "../../data/overrides/courses.ts";
+import { applySpecialisationOverrides } from "../../data/overrides/specialisations.ts";
 
 const USER_AGENT =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/153.0 Safari/537.36";
@@ -59,7 +61,10 @@ async function fetchCached(cacheKey: string, url: string): Promise<string | null
   }
   let html: string;
   try {
-    const res = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
+    const res = await fetch(url, {
+      headers: { "User-Agent": USER_AGENT },
+      signal: AbortSignal.timeout(40_000),
+    });
     if (!res.ok) {
       console.warn(`FETCH FAILED (HTTP ${res.status}): ${url}`);
       await sleep(REQUEST_DELAY_MS);
@@ -75,6 +80,79 @@ async function fetchCached(cacheKey: string, url: string): Promise<string | null
   writeFileSync(file, html);
   await sleep(REQUEST_DELAY_MS);
   return html;
+}
+
+/**
+ * Resolves a program's specialisation slot (epic.md 15, task 011): fetches
+ * every specialisation the program page itself links to
+ * (program.specialisations, from parseSpecialisationLinks — never a
+ * hard-coded set), parses each with parseSpecialisation, applies
+ * data/overrides/specialisations.ts, and splices every specialisation's
+ * groups into the program's groups array at the sentinel's former position
+ * (removing the sentinel), renumbering `position` to match. Every
+ * specialisation's groups are kept, each still tagged with its own
+ * `specialisation` code — like a pathway, a real student picks exactly one,
+ * so the sanity check below treats groups sharing a `specialisation` code as
+ * alternatives, not additive.
+ *
+ * Builds the fetch URL from the program-year's own year, never from the
+ * specialisation link's href — some 2027 program pages link
+ * "/specialisation/<CODE>" with the year segment missing (an ANU page bug,
+ * confirmed reading MCOMP/VCOMP 2027), and following it literally would 404.
+ *
+ * A no-op (returns `program` unchanged) for any program with no
+ * specialisation slot (e.g. MMLCV) — cheap to call unconditionally.
+ */
+async function resolveSpecialisations(program: ProgramJson): Promise<ProgramJson> {
+  const slotIndex = program.groups.findIndex((g) => g.specialisation === SPECIALISATION_SLOT);
+  if (slotIndex === -1) return program;
+
+  const specs = program.specialisations ?? [];
+  if (specs.length === 0) {
+    const groups = program.groups
+      .filter((_, idx) => idx !== slotIndex)
+      .map((g, idx) => ({ ...g, position: idx }));
+    return {
+      ...program,
+      groups,
+      parseWarnings: [
+        ...program.parseWarnings,
+        "specialisation slot present but no specialisations were found on the program page — slot removed, no groups added",
+      ],
+    };
+  }
+
+  const specGroups: RequirementGroupJson[] = [];
+  const specWarnings: string[] = [];
+  for (const { code } of specs) {
+    const url = `https://programsandcourses.anu.edu.au/${program.year}/specialisation/${code}`;
+    const html = await fetchCached(`specialisation-${code}-${program.year}`, url);
+    if (html === null) {
+      specWarnings.push(`specialisation ${code} ${program.year}: FETCH FAILED, no data captured: ${url}`);
+      continue;
+    }
+    const parsed = parseSpecialisation(html, code, program.year);
+    const { groups, warnings } = applySpecialisationOverrides(
+      code,
+      program.year,
+      parsed.groups,
+      parsed.warnings,
+    );
+    specGroups.push(...groups);
+    specWarnings.push(...warnings);
+  }
+
+  const merged = [
+    ...program.groups.slice(0, slotIndex),
+    ...specGroups,
+    ...program.groups.slice(slotIndex + 1),
+  ].map((g, idx) => ({ ...g, position: idx }));
+
+  return {
+    ...program,
+    groups: merged,
+    parseWarnings: [...program.parseWarnings, ...specWarnings],
+  };
 }
 
 function stubProgram(code: string, year: number, reason: string): ProgramJson {
@@ -122,6 +200,7 @@ async function main() {
         parsed = parseProgram(html, prog.code, year);
         const applyOverride = PROGRAM_OVERRIDES[prog.code];
         if (applyOverride) parsed = applyOverride(parsed);
+        parsed = await resolveSpecialisations(parsed);
       }
       programs.push(parsed);
       const set = courseCodesByYear.get(year)!;
@@ -165,22 +244,41 @@ async function main() {
     // every pathway but one. Count only the most expensive single pathway's
     // units once, alongside every non-pathway group, so this check reflects
     // what one real student's plan adds up to.
-    const nonPathwayUnits = p.groups
-      .filter((g) => !g.pathway)
+    // Specialisation groups (epic.md 15) are alternatives exactly like
+    // pathway groups above: a student completes ONE specialisation, so count
+    // only the most expensive single specialisation's units once.
+    const nonAlternativeUnits = p.groups
+      .filter((g) => !g.pathway && !g.specialisation)
       .reduce((s, g) => s + g.unitsRequired, 0);
     const unitsByPathway = new Map<string, number>();
+    const unitsBySpecialisation = new Map<string, number>();
     for (const g of p.groups) {
-      if (!g.pathway) continue;
-      unitsByPathway.set(g.pathway, (unitsByPathway.get(g.pathway) ?? 0) + g.unitsRequired);
+      if (g.pathway) {
+        unitsByPathway.set(g.pathway, (unitsByPathway.get(g.pathway) ?? 0) + g.unitsRequired);
+      }
+      if (g.specialisation) {
+        unitsBySpecialisation.set(
+          g.specialisation,
+          (unitsBySpecialisation.get(g.specialisation) ?? 0) + g.unitsRequired,
+        );
+      }
     }
     const pathwayUnits = unitsByPathway.size > 0 ? Math.max(...unitsByPathway.values()) : 0;
-    const sum = nonPathwayUnits + pathwayUnits;
+    const specialisationUnits =
+      unitsBySpecialisation.size > 0 ? Math.max(...unitsBySpecialisation.values()) : 0;
+    const sum = nonAlternativeUnits + pathwayUnits + specialisationUnits;
     if (sum !== p.totalUnits) {
       console.warn(
         `  MISMATCH: ${p.code} ${p.year}: groups sum to ${sum}, program total is ${p.totalUnits} (short by ${p.totalUnits - sum})`,
       );
     } else {
       console.log(`  OK: ${p.code} ${p.year}: ${sum}/${p.totalUnits}`);
+    }
+    if (unitsBySpecialisation.size > 0) {
+      const list = [...unitsBySpecialisation.entries()]
+        .map(([code, units]) => `${code}=${units}`)
+        .join(", ");
+      console.log(`    specialisations: ${list}`);
     }
   }
 
