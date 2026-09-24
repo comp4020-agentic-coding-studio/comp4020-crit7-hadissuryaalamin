@@ -1,11 +1,13 @@
 ---
-// The plan page (epic.md section 10): overall progress, then one section
-// per semester from "now" onward, each with its courses (status badge +
-// reasons) and a form to add another. Semesters already lived through are
-// on the catch-up page instead — this page is about what's ahead.
+// The plan page (Planting Plan direction): the pinned bed legend, then every
+// semester as a season column, side by side at laptop width — past seasons
+// shown but receded, the current one darker-headed and marked NOW, future
+// ones plain. Only the current semester and later get an add-a-course slot;
+// editing the past stays on the catch-up page.
 import Layout from "../../../components/Layout.astro";
 import GroupProgress from "../../../components/GroupProgress.astro";
 import CourseCard from "../../../components/CourseCard.astro";
+import { buildBedMap } from "../../../components/beds";
 import { evaluatePlan, getPlan, type PlanCourseRow } from "../../../lib/plans";
 import { getCatalogueForProgram, getProgram } from "../../../lib/catalogue";
 import { semesterCalendar } from "../../../lib/checker";
@@ -34,6 +36,10 @@ for (const result of evaluation?.courses ?? []) {
 
 const catalogue = getCatalogueForProgram(plan.programCode, plan.startYear, plan.specialisation);
 const allCourseCodes = catalogue ? Object.keys(catalogue.courses).sort() : [];
+
+// Every bed's colour, keyed by the exact group name the checker reports —
+// same map read for the legend swatches below and for each stake's band.
+const bedByGroupName = buildBedMap(catalogue?.groups ?? []);
 
 // Group the progress panel's rows for display (epic 10 review fix #3): a
 // project-pathway group ("pathway" set on the catalogue's RequirementGroup)
@@ -96,11 +102,12 @@ for (const course of courses) {
   coursesBySemester.set(course.semesterIndex, list);
 }
 
-const completedSemesterIndexes: number[] = [];
-for (let s = 1; s < plan.currentSemester; s++) completedSemesterIndexes.push(s);
-
-const semesterIndexes: number[] = [];
-for (let s = plan.currentSemester; s <= totalSemesters; s++) semesterIndexes.push(s);
+// One season column per semester of the whole program, 1..totalSemesters —
+// side by side at laptop width (see .seasons in styles.css). Past ones are
+// shown (review fix #1) but recede; only the current semester and later get
+// an add-a-course slot.
+const allSemesterIndexes: number[] = [];
+for (let s = 1; s <= totalSemesters; s++) allSemesterIndexes.push(s);
 
 const error = Astro.url.searchParams.get("error");
 const hasPastCourses = courses.some((c) => c.semesterIndex < plan.currentSemester);
@@ -118,36 +125,48 @@ const hasPastCourses = courses.some((c) => c.semesterIndex < plan.currentSemeste
 
   {
     evaluation ? (
-      <section class="card progress-summary">
-        <h2>Progress</h2>
-        <GroupProgress name="Total" earned={evaluation.totalEarned} required={evaluation.totalRequired} total />
-        {nonPathwayGroups.map((z) => (
-          <GroupProgress name={z.result.name} earned={z.result.earned} required={z.result.required} />
-        ))}
-        {pathwayGroups.length > 0 && (
-          <div class="pathway-block">
-            <h3 class="pathway-block__heading">
-              Project pathway — {pathwayLabels.join(" or ")} ({pathwayTotalUnits} units)
-            </h3>
-            {orderedPathwayLabels.map((label) => (
-              <div
-                class={`pathway-option${
-                  chosenPathway && label !== chosenPathway ? " pathway-option--not-chosen" : ""
-                }`}
-              >
-                <p class="pathway-option__label">
-                  Option {label}
-                  {chosenPathway === label ? " — chosen" : chosenPathway ? " — not chosen" : ""}
-                </p>
-                {pathwayGroups
-                  .filter((z) => z.pathway === label)
-                  .map((z) => (
-                    <GroupProgress name={z.result.name} earned={z.result.earned} required={z.result.required} />
-                  ))}
-              </div>
-            ))}
-          </div>
-        )}
+      <section class="card legend">
+        <h2>Legend</h2>
+        <div class="legend__rows">
+          <GroupProgress name="Total" earned={evaluation.totalEarned} required={evaluation.totalRequired} total />
+          {nonPathwayGroups.map((z) => (
+            <GroupProgress
+              name={z.result.name}
+              earned={z.result.earned}
+              required={z.result.required}
+              hex={bedByGroupName.get(z.result.name)?.hex}
+            />
+          ))}
+          {pathwayGroups.length > 0 && (
+            <div class="pathway-block">
+              <h3 class="pathway-block__heading">
+                Project pathway — {pathwayLabels.join(" or ")} ({pathwayTotalUnits} units)
+              </h3>
+              {orderedPathwayLabels.map((label) => (
+                <div
+                  class={`pathway-option${
+                    chosenPathway && label !== chosenPathway ? " pathway-option--not-chosen" : ""
+                  }`}
+                >
+                  <p class="pathway-option__label">
+                    Option {label}
+                    {chosenPathway === label ? " — chosen" : chosenPathway ? " — not chosen" : ""}
+                  </p>
+                  {pathwayGroups
+                    .filter((z) => z.pathway === label)
+                    .map((z) => (
+                      <GroupProgress
+                        name={z.result.name}
+                        earned={z.result.earned}
+                        required={z.result.required}
+                        hex={bedByGroupName.get(z.result.name)?.hex}
+                      />
+                    ))}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         {evaluation.warnings.length > 0 && (
           <ul class="alert alert-warn">
             {evaluation.warnings.map((warning) => (
@@ -163,99 +182,74 @@ const hasPastCourses = courses.some((c) => c.semesterIndex < plan.currentSemeste
     )
   }
 
-  {
-    completedSemesterIndexes.map((semesterIndex) => {
-      const cal = semesterCalendar(
-        { startYear: plan.startYear, startSemester: plan.startSemester as 1 | 2 },
-        semesterIndex,
-      );
-      const semCourses = coursesBySemester.get(semesterIndex) ?? [];
-      return (
-        <section class="semester semester--completed">
-          <h2>
-            Semester {semesterIndex} — {cal.year} S{cal.semester} — completed
-          </h2>
-          {semCourses.length === 0 ? (
-            <p class="empty">No courses recorded.</p>
-          ) : (
-            <ul class="course-list">
-              {semCourses.map((course) => (
-                <CourseCard
-                  code={course.courseCode}
-                  title={titleFor(course.courseCode, cal.year)}
-                  units={course.units}
-                  unverified={course.unverified}
-                  removeAction="/api/plan-courses"
-                  planId={plan.id}
-                  planCourseId={course.id}
-                  from="plan"
-                  result={resultByPlanCourseId.get(String(course.id))}
-                  prereqWaived={course.prereqWaived}
-                />
-              ))}
-            </ul>
-          )}
-        </section>
-      );
-    })
-  }
-
-  {
-    semesterIndexes.map((semesterIndex) => {
-      const cal = semesterCalendar(
-        { startYear: plan.startYear, startSemester: plan.startSemester as 1 | 2 },
-        semesterIndex,
-      );
-      const semCourses = coursesBySemester.get(semesterIndex) ?? [];
-      const isCurrent = semesterIndex === plan.currentSemester;
-      return (
-        <section class="semester">
-          <h2>
-            Semester {semesterIndex} — {cal.year} S{cal.semester}
-            {isCurrent && " — current"}
-          </h2>
-          {semCourses.length === 0 ? (
-            <p class="empty">No courses added yet.</p>
-          ) : (
-            <ul class="course-list">
-              {semCourses.map((course) => (
-                <CourseCard
-                  code={course.courseCode}
-                  title={titleFor(course.courseCode, cal.year)}
-                  units={course.units}
-                  unverified={course.unverified}
-                  removeAction="/api/plan-courses"
-                  planId={plan.id}
-                  planCourseId={course.id}
-                  from="plan"
-                  result={resultByPlanCourseId.get(String(course.id))}
-                  prereqWaived={course.prereqWaived}
-                />
-              ))}
-            </ul>
-          )}
-          <form method="post" action="/api/plan-courses" class="add-course-form">
-            <input type="hidden" name="intent" value="add" />
-            <input type="hidden" name="planId" value={plan.id} />
-            <input type="hidden" name="from" value="plan" />
-            <input type="hidden" name="semesterIndex" value={semesterIndex} />
-            <label for={`course-${semesterIndex}`}>Add a course</label>
-            <div class="add-course-form__row">
-              <input
-                id={`course-${semesterIndex}`}
-                name="courseCode"
-                list="course-codes"
-                placeholder="e.g. COMP6262"
-                autocomplete="off"
-                required
-              />
-              <button type="submit" class="btn">Add</button>
+  <div class="seasons" style={`--season-count:${allSemesterIndexes.length}`}>
+    {
+      allSemesterIndexes.map((semesterIndex) => {
+        const cal = semesterCalendar(
+          { startYear: plan.startYear, startSemester: plan.startSemester as 1 | 2 },
+          semesterIndex,
+        );
+        const semCourses = coursesBySemester.get(semesterIndex) ?? [];
+        const isCompleted = semesterIndex < plan.currentSemester;
+        const isCurrent = semesterIndex === plan.currentSemester;
+        return (
+          <section class={`season${isCompleted ? " season--completed" : ""}${isCurrent ? " season--current" : ""}`}>
+            <div class="season__head">
+              <h2>
+                Semester {semesterIndex} — {cal.year} S{cal.semester}
+                {isCompleted && " — completed"}
+              </h2>
+              {isCurrent && <span class="season__now">NOW</span>}
             </div>
-          </form>
-        </section>
-      );
-    })
-  }
+            {semCourses.length === 0 ? (
+              <p class="empty">{isCompleted ? "No courses recorded." : "No courses added yet."}</p>
+            ) : (
+              <ul class="course-list">
+                {semCourses.map((course) => {
+                  const result = resultByPlanCourseId.get(String(course.id));
+                  return (
+                    <CourseCard
+                      code={course.courseCode}
+                      title={titleFor(course.courseCode, cal.year)}
+                      units={course.units}
+                      unverified={course.unverified}
+                      removeAction="/api/plan-courses"
+                      planId={plan.id}
+                      planCourseId={course.id}
+                      from="plan"
+                      result={result}
+                      prereqWaived={course.prereqWaived}
+                      bedColor={result?.groupName ? bedByGroupName.get(result.groupName)?.hex : undefined}
+                    />
+                  );
+                })}
+              </ul>
+            )}
+            {!isCompleted && (
+              <form method="post" action="/api/plan-courses" class="add-course-form">
+                <input type="hidden" name="intent" value="add" />
+                <input type="hidden" name="planId" value={plan.id} />
+                <input type="hidden" name="from" value="plan" />
+                <input type="hidden" name="semesterIndex" value={semesterIndex} />
+                <label for={`course-${semesterIndex}`}>Add a course</label>
+                <div class="add-course-form__row">
+                  <input
+                    id={`course-${semesterIndex}`}
+                    name="courseCode"
+                    list="course-codes"
+                    placeholder="e.g. COMP6262"
+                    autocomplete="off"
+                    required
+                  />
+                  <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+              </form>
+            )}
+          </section>
+        );
+      })
+    }
+  </div>
 
   <datalist id="course-codes">
     {allCourseCodes.map((code) => <option value={code} />)}
