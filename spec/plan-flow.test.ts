@@ -71,6 +71,26 @@ async function postRemoveCourse(planId: string, planCourseId: string, from = "pl
   });
 }
 
+/** D15 (epic.md 16): "I have permission to enrol" / "Undo permission". */
+async function postWaivePrereq(
+  planId: string,
+  planCourseId: string,
+  waive: boolean,
+  from = "plan",
+): Promise<Response> {
+  return fetch(`${baseUrl}/api/plan-courses`, {
+    method: "POST",
+    redirect: "manual",
+    headers: { "content-type": "application/x-www-form-urlencoded", origin: baseUrl },
+    body: new URLSearchParams({
+      intent: waive ? "waive-prereq" : "unwaive-prereq",
+      planId,
+      planCourseId,
+      from,
+    }),
+  });
+}
+
 /** Creates an MMLCV plan (no specialisation slot — epic.md 15) and returns
  * its id, asserting the 303 lands where expected on the way. MMLCV has no
  * specialisation slot, so this helper never needs one. */
@@ -159,6 +179,45 @@ describe("plan flow: create -> reload -> persists (crit spec line 3)", () => {
     // checker.ts's UNDERGRAD_MESSAGE, as Astro escapes it into the page
     // (apostrophe -> &#39;).
     expect(html).toContain("Undergraduate course - can&#39;t count as a university elective");
+  });
+
+  it("waiving a prerequisite persists across reload, and undo restores the original message", async () => {
+    // COMP8539's real requisite (data/catalogue/courses.json) is an
+    // all-OR sentence over COMP6528/COMP4528/ENGN4528 — the parseable
+    // example (epic.md 7.1) — and none of them is anywhere on this plan.
+    const { id: planId, location: planPath } = await createMmlcvPlan("1");
+    await postAddCourse({ planId, semesterIndex: "2", courseCode: "COMP8539" });
+
+    const beforeRes = await fetch(`${baseUrl}${planPath}`);
+    const beforeHtml = await beforeRes.text();
+    expect(beforeHtml).toContain("Needs COMP6528, COMP4528, ENGN4528 first");
+    expect(beforeHtml).toContain("I have permission to enrol");
+    expect(beforeHtml).not.toContain("Prerequisite waived");
+
+    const planCourseId = planCourseIdFor(beforeHtml, "COMP8539");
+
+    const waiveRes = await postWaivePrereq(planId, planCourseId, true);
+    expect(waiveRes.status).toBe(303);
+    expect(waiveRes.headers.get("location")).toBe(planPath);
+
+    // A fresh reload — the waiver is stored on the row, not a session.
+    const afterWaiveRes = await fetch(`${baseUrl}${planPath}`);
+    const afterWaiveHtml = await afterWaiveRes.text();
+    expect(afterWaiveHtml).toContain(
+      "Prerequisite waived - you have permission to enrol",
+    );
+    expect(afterWaiveHtml).not.toContain("Needs COMP6528, COMP4528, ENGN4528 first");
+    expect(afterWaiveHtml).toContain("Undo permission");
+
+    const unwaiveRes = await postWaivePrereq(planId, planCourseId, false);
+    expect(unwaiveRes.status).toBe(303);
+    expect(unwaiveRes.headers.get("location")).toBe(planPath);
+
+    const afterUndoRes = await fetch(`${baseUrl}${planPath}`);
+    const afterUndoHtml = await afterUndoRes.text();
+    expect(afterUndoHtml).toContain("Needs COMP6528, COMP4528, ENGN4528 first");
+    expect(afterUndoHtml).not.toContain("Prerequisite waived");
+    expect(afterUndoHtml).toContain("I have permission to enrol");
   });
 
   it("refuses to create an MCOMP plan with no specialisation, and does not redirect to a plan", async () => {
