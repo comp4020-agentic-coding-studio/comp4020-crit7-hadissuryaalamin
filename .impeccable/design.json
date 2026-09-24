@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-24T00:00:00Z",
+  "title": "Design System: Degree Plan Checker",
+  "extensions": {
+    "colorMeta": {
+      "ground": { "role": "neutral", "displayName": "Drafting Sage", "tonalRamp": ["#272E1F", "#455136", "#63744D", "#819765", "#9EAF87", "#BAC6AA", "#D6DDCD", "#F3F5F0"] },
+      "grid-line": { "role": "neutral", "displayName": "Grid Hairline", "canonical": "rgba(30, 42, 34, 0.07)" },
+      "surface": { "role": "neutral", "displayName": "Label Paper", "tonalRamp": ["#353518", "#5D5D2A", "#85853C", "#ADAD4F", "#C0C075", "#D3D39D", "#E5E5C5", "#F7F7ED"] },
+      "surface-sunk": { "role": "neutral", "displayName": "Sunk Sage", "tonalRamp": ["#282D20", "#474F38", "#667150", "#859368", "#A0AC8A", "#BCC4AC", "#D7DCCE", "#F3F4F0"] },
+      "field": { "role": "neutral", "displayName": "Field White", "tonalRamp": ["#262626", "#434343", "#616161", "#7E7E7E", "#9B9B9B", "#B8B8B8", "#D5D5D5", "#F2F2F2"] },
+      "ink": { "role": "neutral", "displayName": "Garden Ink", "tonalRamp": ["#202D24", "#384F40", "#50715B", "#699377", "#8AAC95", "#ACC4B4", "#CEDCD3", "#F0F4F2"] },
+      "ink-soft": { "role": "neutral", "displayName": "Soft Ink", "tonalRamp": ["#232A23", "#3D4A3E", "#586959", "#728974", "#92A493", "#B2BEB2", "#D1D9D2", "#F1F3F1"] },
+      "line": { "role": "neutral", "displayName": "Hairline", "tonalRamp": ["#282C21", "#464D3A", "#646E53", "#828F6C", "#9EA98D", "#BAC2AE", "#D7DBCF", "#F3F4F0"] },
+      "action": { "role": "primary", "displayName": "Reserved Deep Teal", "tonalRamp": ["#0A3F42", "#126F75", "#199FA8", "#21CFDA", "#51DCE5", "#84E6EC", "#B6F0F4", "#E9FBFC"] },
+      "action-ink": { "role": "primary", "displayName": "Action Ink" },
+      "action-hover": { "role": "primary", "displayName": "Deeper Teal", "tonalRamp": ["#0A3F42", "#126F75", "#1A9FA7", "#22CFDA", "#51DBE4", "#84E6EC", "#B6F0F4", "#E9FAFC"] },
+      "mark-zero": { "role": "tertiary", "displayName": "Stamp Red", "tonalRamp": ["#41100B", "#731C14", "#A5271C", "#D73325", "#E26054", "#EA8E86", "#F3BCB7", "#FBEBE9"] },
+      "mark-unknown": { "role": "tertiary", "displayName": "Shrug Grey", "tonalRamp": ["#232927", "#3E4944", "#596862", "#74887F", "#93A39C", "#B2BEB9", "#D2D8D6", "#F1F3F2"] },
+      "mark-warn-ink": { "role": "tertiary", "displayName": "Amber Ink", "tonalRamp": ["#472C06", "#7D4E0A", "#B26F0F", "#E89113", "#F0AA46", "#F4C37C", "#F9DBB2", "#FDF4E7"] },
+      "mark-warn-bg": { "role": "tertiary", "displayName": "Amber Tag", "tonalRamp": ["#43330A", "#765A11", "#A98118", "#DCA81F", "#E6BC50", "#EDD083", "#F5E3B6", "#FCF6E9"] },
+      "mark-counts": { "role": "tertiary", "displayName": "Counts Green", "tonalRamp": ["#183525", "#295D41", "#3B865D", "#4DAE7A", "#74C198", "#9DD3B6", "#C5E5D4", "#EDF7F2"] },
+      "alert-error-bg": { "role": "tertiary", "displayName": "Error Wash", "tonalRamp": ["#3B1A11", "#682E1F", "#95422C", "#C25639", "#D17B64", "#DFA191", "#ECC8BE", "#F9EEEB"] },
+      "alert-error-ink": { "role": "tertiary", "displayName": "Error Ink", "tonalRamp": ["#40130C", "#712116", "#A2301F", "#D23E29", "#DE6857", "#E89488", "#F1C0B9", "#FBECEA"] },
+      "bed-moss": { "role": "secondary", "displayName": "Moss (bed 1, white text)", "tonalRamp": ["#25321B", "#41572F", "#5C7D44", "#78A358", "#97B97D", "#B5CDA3", "#D3E2C9", "#F2F6EE"] },
+      "bed-marigold": { "role": "secondary", "displayName": "Marigold (bed 2, ink text)", "tonalRamp": ["#422A0A", "#754A12", "#A76A1A", "#D98A22", "#E4A552", "#ECBF84", "#F4D9B7", "#FCF4E9"] },
+      "bed-brick": { "role": "secondary", "displayName": "Brick (bed 3, white text)", "tonalRamp": ["#332319", "#5A3D2C", "#815740", "#A97153", "#BD9179", "#D0B1A0", "#E3D1C7", "#F7F1EE"] },
+      "bed-iris": { "role": "secondary", "displayName": "Iris (bed 4, white text)", "tonalRamp": ["#191D34", "#2C345B", "#3F4A82", "#5261AA", "#7884BE", "#9FA8D1", "#C6CBE4", "#EEEFF7"] },
+      "bed-plum": { "role": "secondary", "displayName": "Plum (bed 5, white text)", "tonalRamp": ["#311C2A", "#56314A", "#7B466A", "#A15B8A", "#B77FA5", "#CCA4BF", "#E1C9D9", "#F6EFF4"] },
+      "bed-rose": { "role": "secondary", "displayName": "Rose (bed 6, white text)", "tonalRamp": ["#371622", "#61263C", "#8B3656", "#B54770", "#C76F90", "#D799B0", "#E7C3D0", "#F8EDF1"] },
+      "bed-slate": { "role": "secondary", "displayName": "Slate (bed 7, white text)", "tonalRamp": ["#1E2A2F", "#354A52", "#4C6975", "#638999", "#85A4B0", "#A9BEC7", "#CCD9DE", "#EFF3F5"] },
+      "bed-sky": { "role": "secondary", "displayName": "Sky (bed 8, ink text)", "tonalRamp": ["#12293B", "#1F4968", "#2C6995", "#3A88C2", "#65A3D1", "#91BEDE", "#BED9EC", "#EBF3F9"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The one page title per page; optional 400 soft-ink subline on its own line." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings such as Start a plan." },
+      "title": { "displayName": "Title", "purpose": "Course codes on stakes." },
+      "body": { "displayName": "Body", "purpose": "Prose and course titles, max 46rem." },
+      "label": { "displayName": "Label", "purpose": "Stake bands, marks, buttons, field labels. Sentence case." },
+      "season-head": { "displayName": "Season head", "purpose": "Uppercase semester column heads only." },
+      "mono": { "displayName": "Mono", "purpose": "Inline course codes in prose." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "stamp-settle", "value": "260ms ease-out; from scale(1.3) rotate(-8deg) opacity 0 to scale(1) rotate(-2.5deg)", "purpose": "One-shot landing of the Zero credit stamp. None under reduced motion." },
+      { "name": "stamp-settle-unknown", "value": "260ms ease-out; from scale(1.3) rotate(8deg) opacity 0 to scale(1) rotate(1.5deg)", "purpose": "One-shot landing of the Can't check stamp; own end angle. None under reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "480px" },
+      { "name": "form-two-up", "value": "600px" },
+      { "name": "seasons-side-by-side", "value": "860px" }
+    ],
+    "ground": {
+      "value": "background-color: #eef1ea; background-image: linear-gradient(rgba(30,42,34,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(30,42,34,0.07) 1px, transparent 1px); background-size: 8px 8px;",
+      "purpose": "The drafting-sheet ground with its 8px hairline grid."
+    },
+    "focus": { "value": "outline: 3px solid #0f5e63; outline-offset: 2px;", "purpose": "Every focusable element." }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Reserved teal action: Start planning, Add, Done.",
+      "html": "<button class=\"ds-btn ds-btn-primary\">Start planning</button>",
+      "css": ".ds-btn { display: inline-block; font-family: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, sans-serif; font-weight: 700; font-size: 0.9rem; padding: 0.6rem 1.15rem; border-radius: 3px; border: 1.5px solid #1e2a22; background: #fafaf4; color: #1e2a22; cursor: pointer; } .ds-btn-primary { background: #0f5e63; border-color: #0f5e63; color: #ffffff; } .ds-btn-primary:hover { background: #0c4a4e; border-color: #0c4a4e; } .ds-btn-primary:focus-visible { outline: 3px solid #0f5e63; outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Paper button with ink border for non-primary actions.",
+      "html": "<button class=\"ds-btn-secondary\">Add</button>",
+      "css": ".ds-btn-secondary { font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; font-weight: 700; font-size: 0.9rem; padding: 0.6rem 1.15rem; border-radius: 3px; border: 1.5px solid #1e2a22; background: #fafaf4; color: #1e2a22; cursor: pointer; } .ds-btn-secondary:hover { background: #e6e9e0; } .ds-btn-secondary:focus-visible { outline: 3px solid #0f5e63; outline-offset: 2px; } .ds-btn-secondary:disabled { border-color: #c7cdbd; color: #4b5a4c; background: #e6e9e0; cursor: not-allowed; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Small per-stake action (Remove, permission). Hover turns border and text to ink.",
+      "html": "<button class=\"ds-btn-ghost\">Remove COMP6710</button>",
+      "css": ".ds-btn-ghost { font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; font-weight: 500; font-size: 0.8rem; padding: 0.4rem 0.75rem; border-radius: 3px; border: 1.5px solid #c7cdbd; background: #fafaf4; color: #4b5a4c; cursor: pointer; } .ds-btn-ghost:hover { background: #e6e9e0; } .ds-btn-ghost:focus-visible { outline: 3px solid #0f5e63; outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Labelled field with hint, white fill and hairline border.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-f\">Program</label><input id=\"ds-f\" placeholder=\"e.g. COMP6262\"><p class=\"ds-hint\">1st semester of your program = 1.</p></div>",
+      "css": ".ds-field { font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; color: #1e2a22; } .ds-field label { display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 0.3rem; } .ds-field input { width: 100%; padding: 0.55rem 0.6rem; font: inherit; font-size: 0.95rem; border: 1px solid #c7cdbd; border-radius: 3px; background: #ffffff; color: #1e2a22; } .ds-field input:focus-visible { outline: 3px solid #0f5e63; outline-offset: 1px; } .ds-hint { margin: 0.3rem 0 0; font-size: 0.8rem; color: #4b5a4c; }"
+    },
+    {
+      "name": "Site Nav",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Full-width ink bar with text-only links; no logo.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Degree Plan Checker</a><a href=\"#\">About</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 1.25rem; align-items: center; padding: 0.9rem 1.25rem; background: #1e2a22; flex-wrap: wrap; } .ds-nav a { color: #fafaf4; text-decoration: none; font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; font-weight: 700; font-size: 0.95rem; } .ds-nav a:hover, .ds-nav a:focus-visible { text-decoration: underline; } .ds-nav a:focus-visible { outline: 3px solid #0f5e63; outline-offset: 2px; }"
+    },
+    {
+      "name": "Status Marks",
+      "kind": "chip",
+      "refersTo": "mark-counts",
+      "description": "Counts outline, Zero credit stamp, Can't check stamp, Timing warning tag. Text always present.",
+      "html": "<div class=\"ds-marks\"><span class=\"ds-mark ds-mark-counts\">Counts — MLCV core courses</span><span class=\"ds-mark ds-mark-zero\">Zero credit</span><span class=\"ds-mark ds-mark-unknown\">Can't check — University electives</span><span class=\"ds-mark ds-mark-warn\">Timing warning — MLCV core courses</span></div>",
+      "css": ".ds-marks { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; } .ds-mark { display: inline-flex; align-items: center; font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; font-size: 0.8rem; font-weight: 700; padding: 0.22rem 0.55rem; border-radius: 2px; line-height: 1.3; background: transparent; } .ds-mark-counts { color: #2f6a4a; border: 1.5px solid #2f6a4a; } .ds-mark-zero { color: #a3271c; border: 2px double #a3271c; padding: 0.24rem 0.6rem; transform: rotate(-2.5deg); animation: ds-stamp 260ms ease-out both; } .ds-mark-unknown { color: #52605a; border: 2px dashed #52605a; transform: rotate(1.5deg); } .ds-mark-warn { background: #f3dfab; color: #7a4c0a; border: 1.5px solid #7a4c0a; border-radius: 2px 8px 8px 2px; } @keyframes ds-stamp { from { opacity: 0; transform: scale(1.3) rotate(-8deg); } to { opacity: 1; transform: scale(1) rotate(-2.5deg); } } @media (prefers-reduced-motion: reduce) { .ds-mark-zero { animation: none; } }"
+    },
+    {
+      "name": "Stake",
+      "kind": "card",
+      "refersTo": "stake",
+      "description": "A course card: bed-colour band naming the bed, code, units, title, mark, reasons, ghost action.",
+      "html": "<div class=\"ds-stake\"><div class=\"ds-stake__band\">MLCV core courses</div><div class=\"ds-stake__body\"><div class=\"ds-stake__head\"><span class=\"ds-stake__code\">COMP8600</span><span class=\"ds-stake__units\">6 units</span></div><p class=\"ds-stake__title\">Statistical Machine Learning</p><span class=\"ds-stake__mark\">Counts — MLCV core courses</span><p class=\"ds-stake__msg\">— Prerequisite waived - you have permission to enrol</p></div></div>",
+      "css": ".ds-stake { font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; color: #1e2a22; background: #fafaf4; border: 1px solid #c7cdbd; border-radius: 3px; overflow: hidden; max-width: 18rem; } .ds-stake__band { background: #6E4A36; color: #ffffff; padding: 0.35rem 0.95rem; font-size: 0.8rem; font-weight: 700; } .ds-stake__body { padding: 0.9rem 1rem; } .ds-stake__head { display: flex; align-items: baseline; gap: 0.5rem; margin-bottom: 0.25rem; } .ds-stake__code { font-weight: 700; font-size: 1rem; letter-spacing: 0.01em; } .ds-stake__units { margin-left: auto; font-size: 0.82rem; color: #4b5a4c; font-variant-numeric: tabular-nums; } .ds-stake__title { font-size: 0.9rem; margin: 0 0 0.5rem; } .ds-stake__mark { display: inline-flex; font-size: 0.8rem; font-weight: 700; padding: 0.22rem 0.55rem; border-radius: 2px; color: #2f6a4a; border: 1.5px solid #2f6a4a; } .ds-stake__msg { margin: 0.5rem 0 0; font-size: 0.82rem; color: #4b5a4c; }"
+    },
+    {
+      "name": "Season Head",
+      "kind": "custom",
+      "refersTo": "season-head-current",
+      "description": "Semester column head: sunk by default, full ink with a paper NOW pill when current.",
+      "html": "<div class=\"ds-season\"><div class=\"ds-season__head\"><h2>Semester 2 — 2026 S2</h2></div><div class=\"ds-season__head ds-season__head--current\"><h2>Semester 3 — 2027 S1</h2><span class=\"ds-now\">NOW</span></div></div>",
+      "css": ".ds-season { display: grid; gap: 1rem; font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; max-width: 18rem; } .ds-season__head { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.7rem; border-radius: 3px 3px 0 0; border-bottom: 2px solid #1e2a22; background: #e6e9e0; } .ds-season__head h2 { margin: 0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; color: #4b5a4c; font-weight: 700; } .ds-season__head--current { background: #1e2a22; } .ds-season__head--current h2 { color: #fafaf4; } .ds-now { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; color: #fafaf4; border: 1.5px solid #fafaf4; padding: 0.1rem 0.4rem; border-radius: 2px; }"
+    },
+    {
+      "name": "Legend Row",
+      "kind": "custom",
+      "refersTo": "bed-moss",
+      "description": "Level key entry: swatch, bed name, units filled in words; hollow swatch for the unchosen pathway.",
+      "html": "<div class=\"ds-legend\"><span class=\"ds-lr ds-lr--total\"><i class=\"ds-sw ds-sw--total\"></i>Total <em>48/96 units</em></span><span class=\"ds-lr\"><i class=\"ds-sw\" style=\"--c:#4F6B3A\"></i>Structured Programming <em>6/6 units — complete</em></span><span class=\"ds-lr ds-lr--off\"><i class=\"ds-sw\" style=\"--c:#B84A73\"></i>Project pathway B <em>0/24 units</em></span></div>",
+      "css": ".ds-legend { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1.1rem; font-family: 'Atkinson Hyperlegible Next', system-ui, sans-serif; } .ds-lr { display: inline-flex; align-items: baseline; gap: 0.35rem; font-size: 0.85rem; color: #1e2a22; } .ds-lr em { font-style: normal; color: #4b5a4c; } .ds-lr--total { font-weight: 700; } .ds-sw { width: 0.8rem; height: 0.8rem; border-radius: 2px; border: 1px solid rgba(30,42,34,0.35); background: var(--c, #c7cdbd); transform: translateY(0.1rem); } .ds-sw--total { background: #1e2a22; border-radius: 50%; } .ds-lr--off { color: #4b5a4c; font-weight: 500; } .ds-lr--off .ds-sw { background: transparent; border: 1.5px solid var(--c); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Planting Plan",
+    "overview": "The degree is a garden drawn on a drafting sheet. Semesters are season columns, requirement groups are colour-coded beds, and every course is a labelled stake planted in one of them. A student reads the plan the way a gardener reads a bed layout: which beds are full, which stakes sit in the wrong place, what still needs planting. The system refuses the analytics dashboard: no stat tiles, no progress rings, no bars. Progress is always a count in words (\"6/12 units\").\n\nThe ground is a pale sage drafting sheet with a faint 8px grid; everything sits flat on it, separated by hairline borders and tonal steps, never shadows. Colour carries two jobs and keeps them apart: eight flat bed hues say *which group*, and a small set of marks (red stamp, grey stamp, amber tag, green outline, pin) say *what happened*. Every mark carries its own words; colour is always the second cue. One deep teal is reserved for primary actions and belongs to no bed.\n\nOne workhorse sans, Atkinson Hyperlegible Next, does everything, chosen because many readers use English as a second language. Density is moderate: readable line lengths, generous card padding, columns side by side at laptop width and stacked on a phone with no horizontal scroll.",
+    "keyCharacteristics": [
+      "Drafting-sheet ground with an 8px hairline grid; flat surfaces, hairline borders, no shadows.",
+      "Eight fixed bed hues, assigned by requirement-group position, identical everywhere a bed appears.",
+      "Status as a mark with text: stamps for verdicts, a tag for a timing problem, an outline for \"Counts\".",
+      "One reserved action teal, used by no bed and no mark.",
+      "A single legible sans for every role; no display face."
+    ],
+    "rules": [
+      { "name": "The Reserved Teal Rule", "body": "Teal means \"do this\". It is never a bed, never a mark, never a fill for state. The NOW pill on the dark current-season head is an outline in paper colour, not teal, for this reason.", "section": "colors" },
+      { "name": "The Two Vocabularies Rule", "body": "Bed hues say which group; mark colours say what happened. A bed hue never signals status and a mark colour never names a group. Brick is kept well clear of Stamp Red.", "section": "colors" },
+      { "name": "The Words First Rule", "body": "No colour stands alone. Every swatch has a name and a units count beside it, every mark has its label, and the unchosen pathway option says \"not chosen\" as well as going hollow.", "section": "colors" },
+      { "name": "The One Voice Rule", "body": "Every role uses Atkinson Hyperlegible Next. Don't add a display face for flair.", "section": "typography" },
+      { "name": "The Sentence Case Rule", "body": "Bands, marks and buttons are sentence case. Uppercase is reserved for season heads and the NOW pill.", "section": "typography" },
+      { "name": "The Flat Sheet Rule", "body": "Nothing lifts off the page. A surface is distinguished by fill and hairline, never by shadow.", "section": "elevation" },
+      { "name": "The No Fills Gradient Rule", "body": "No gradient fills or colour ramps on any surface, band or swatch. The only gradient in the system is the drafting grid itself: two 1px hairline line-gradients tiled at 8px, which draw the ground's grid lines. That grid is part of the world, not an exception to remove.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do assign bed hues only through the fixed eight-hue order, by requirement-group position, and use the same hue for that bed everywhere on the page.",
+      "Do put words next to every colour: a name and \"n/m units\" beside each swatch, the checker's exact label inside each mark.",
+      "Do keep Reserved Deep Teal for primary actions, links, selection and focus rings.",
+      "Do show state as a mark: red double-rule stamp for Zero credit, grey dashed stamp for Can't check, amber tag for Timing warning, green outline for Counts.",
+      "Do make past seasons recede by tone and hairline, never by opacity.",
+      "Do keep every surface flat: paper on sage, 1px hairlines, 3px corners.",
+      "Do keep the 8px hairline grid on the ground."
+    ],
+    "donts": [
+      "Don't build the plan from dashboard parts: no stat tiles, progress rings, progress bars or big-number summaries. Progress is a count in words.",
+      "Don't use box-shadows or gradient fills on surfaces, bands or swatches.",
+      "Don't use teal for a bed, a mark, or a decorative fill.",
+      "Don't use a bed hue to signal status, or a mark colour (Stamp Red, Shrug Grey, amber, Counts Green) to name a group or decorate an interaction.",
+      "Don't add a second typeface or uppercase bands, marks or buttons.",
+      "Don't add ambient or looping animation. The only motion is the one-shot stamp settle.",
+      "Don't imitate ANU branding or show a logo."
+    ]
+  }
+}
