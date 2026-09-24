@@ -1,71 +1,135 @@
-/* Degree Plan Checker — design tokens (epic.md section 10).
-   Direction: an audit ledger, not a marketing page. Paper-and-ink palette,
-   a mono data face for course codes/units, hairline rules for the semester
-   "pages". Status is always a text word — colour is a secondary cue only.
-   No ambient/floating animation anywhere. */
+/* Degree Plan Checker — Planting Plan design tokens.
+   Direction: the degree is a planting plan. Semesters are season columns,
+   requirement groups are colour-coded beds (flat, unmodulated fields from a
+   fixed set, assigned by group position — see src/components/beds.ts),
+   every course is a labelled stake. Status is a mark (a stamp or a tag),
+   never colour alone — every mark carries its own text.
+   No gradients, no shadows, no ambient/floating animation anywhere. */
 
 :root {
-  --paper: #eef0e6;
-  --surface: #fbfbf6;
-  --ink: #1e2a28;
-  --ink-soft: #4a5650;
-  --line: #c9cec0;
-  --accent: #2e6f5e;
-  --accent-ink: #ffffff;
-  --zero: #a23b2e;
-  --zero-bg: #f7e6e2;
-  --warn: #8a5a10;
-  --warn-bg: #f6ecd6;
-  --unknown: #52605a;
-  --unknown-bg: #e7ebe4;
-  --counts-bg: #e1ede8;
+  --ground: #eef1ea;
+  --grid-line: rgba(30, 42, 34, 0.07);
+  --surface: #fafaf4;
+  --surface-sunk: #e6e9e0;
+  --ink: #1e2a22;
+  --ink-soft: #4b5a4c;
+  --line: #c7cdbd;
 
-  --font-body: "IBM Plex Sans", system-ui, sans-serif;
-  --font-display: "Space Grotesk", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+  /* Reserved action colour — used by no bed. */
+  --action: #0f5e63;
+  --action-ink: #ffffff;
+  --action-hover: #0c4a4e;
 
-  --radius: 4px;
-  --gap: 1rem;
+  /* Marks: red-ink stamp, grey stamp, amber tag, pin. */
+  --mark-zero: #a3271c;
+  --mark-unknown: #52605a;
+  --mark-warn-ink: #7a4c0a;
+  --mark-warn-bg: #f3dfab;
+  --mark-counts: #2f6a4a;
+
+  --font-body: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;
+  --font-display: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;
+
+  --radius: 3px;
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  /* Custom scrollbar + selection theming (craft floor: browser surfaces
+     carry the design too), gutter reserved so the 8px grid doesn't jump. */
+  scrollbar-color: var(--ink-soft) var(--surface-sunk);
+  scrollbar-width: thin;
+}
+
 body {
   margin: 0;
-  background: var(--paper);
+  background-color: var(--ground);
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 8px 8px;
   color: var(--ink);
   font-family: var(--font-body);
   line-height: 1.55;
   font-size: 16px;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--action);
+  color: var(--action-ink);
 }
 
 h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
 h1 {
-  font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.2rem);
-  margin: 0 0 0.5rem;
+  font-size: clamp(1.7rem, 1.35rem + 1.3vw, 2.35rem);
+  margin: 0 0 0.6rem;
 }
 
 h2 {
-  font-size: 1.15rem;
-  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+  margin: 2rem 0 0.75rem;
+}
+
+h3 {
+  font-size: 0.95rem;
+  margin: 1.25rem 0 0.5rem;
 }
 
 a {
-  color: var(--accent);
+  color: var(--action);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.18em;
 }
 
 p {
   margin: 0 0 0.75rem;
+  max-width: 46rem;
+}
+
+ul,
+ol {
+  margin: 0 0 0.75rem;
+  padding-left: 1.4rem;
+}
+
+li {
+  margin-bottom: 0.3rem;
+}
+
+code {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.92em;
+  background: var(--surface-sunk);
+  padding: 0.08em 0.32em;
+  border-radius: 2px;
+}
+
+pre code {
+  display: block;
+  padding: 0.75rem 1rem;
+  overflow-x: auto;
+}
+
+strong {
+  font-weight: 700;
+}
+
+/* Keyboard focus is always visible — no outline: none anywhere. */
+:focus-visible {
+  outline: 3px solid var(--action);
+  outline-offset: 2px;
 }
 
 /* --- Layout shell --- */
@@ -83,7 +147,7 @@ nav[aria-label="site"] a {
   color: var(--surface);
   text-decoration: none;
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 700;
   font-size: 0.95rem;
 }
 
@@ -99,13 +163,13 @@ main {
 }
 
 main.wide {
-  max-width: 62rem;
+  max-width: 76rem;
 }
 
 footer {
   border-top: 1px solid var(--line);
   padding: 1.25rem;
-  max-width: 62rem;
+  max-width: 76rem;
   margin: 0 auto;
 }
 
@@ -113,12 +177,7 @@ footer p {
   color: var(--ink-soft);
   font-size: 0.85rem;
   margin: 0;
-}
-
-/* Keyboard focus is always visible — no outline: none anywhere. */
-:focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 2px;
+  max-width: none;
 }
 
 /* --- Pitch / hero --- */
@@ -129,23 +188,35 @@ footer p {
   max-width: 38rem;
 }
 
+.plan-meta {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--ink-soft);
+  letter-spacing: 0;
+}
+
+.bookmark-note {
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
 .example-warning {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.7rem;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-left: 4px solid var(--zero);
   border-radius: var(--radius);
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1rem;
   margin: 0 0 1.5rem;
   font-size: 0.95rem;
 }
 
 .example-warning code {
-  font-family: var(--font-mono);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* --- Cards & forms --- */
@@ -158,17 +229,13 @@ footer p {
   margin-bottom: 1.5rem;
 }
 
-form {
-  display: block;
-}
-
 .field {
   margin-bottom: 1rem;
 }
 
 .field label {
   display: block;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9rem;
   margin-bottom: 0.3rem;
 }
@@ -176,13 +243,19 @@ form {
 .field select,
 .field input {
   width: 100%;
-  padding: 0.5rem 0.6rem;
+  padding: 0.55rem 0.6rem;
   font: inherit;
   font-size: 0.95rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: #fff;
   color: var(--ink);
+}
+
+.field select:focus-visible,
+.field input:focus-visible {
+  outline: 3px solid var(--action);
+  outline-offset: 1px;
 }
 
 .hint {
@@ -207,41 +280,52 @@ form {
   display: inline-block;
   font: inherit;
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.9rem;
-  padding: 0.55rem 1.1rem;
+  padding: 0.6rem 1.15rem;
   border-radius: var(--radius);
-  border: 1px solid var(--accent);
+  border: 1.5px solid var(--ink);
   background: var(--surface);
-  color: var(--accent);
+  color: var(--ink);
   cursor: pointer;
   text-decoration: none;
 }
 
 .btn:hover {
-  background: var(--counts-bg);
+  background: var(--surface-sunk);
 }
 
+.btn:disabled {
+  border-color: var(--line);
+  color: var(--ink-soft);
+  background: var(--surface-sunk);
+  cursor: not-allowed;
+}
+
+/* The one reserved action colour — used by no bed. Primary actions only:
+   Start planning, Add, Done. */
 .btn-primary {
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--action-ink);
 }
 
 .btn-primary:hover {
-  background: #245a4c;
+  background: var(--action-hover);
+  border-color: var(--action-hover);
 }
 
 .btn-ghost {
   border-color: var(--line);
   color: var(--ink-soft);
-  padding: 0.35rem 0.7rem;
+  padding: 0.4rem 0.75rem;
   font-size: 0.8rem;
+  font-weight: 500;
 }
 
 .btn-ghost:hover {
-  border-color: var(--zero);
-  color: var(--zero);
-  background: var(--zero-bg);
+  border-color: var(--mark-zero);
+  color: var(--mark-zero);
 }
 
 /* --- Alerts --- */
@@ -251,58 +335,95 @@ form {
   padding: 0.7rem 1rem;
   margin: 0 0 1rem;
   font-size: 0.92rem;
-  border-left: 4px solid transparent;
+  border: 1.5px solid transparent;
 }
 
 .alert-error {
-  background: var(--zero-bg);
-  border-left-color: var(--zero);
-  color: #6f2318;
+  background: #f5e2dd;
+  border-color: var(--mark-zero);
+  color: #6c2015;
 }
 
 .alert-warn {
-  background: var(--warn-bg);
-  border-left-color: var(--warn);
-  color: #5c3b09;
+  background: var(--mark-warn-bg);
+  border-color: var(--mark-warn-ink);
+  color: var(--mark-warn-ink);
 }
 
-/* --- Status badges: text label always present, colour is secondary --- */
+/* --- Status marks: a stamp or a tag, text always present, colour is the
+   secondary cue. StatusBadge.astro keeps the exact label text (Counts /
+   Zero credit / Timing warning / Can't check) — only the framing changes. --- */
 
 .badge {
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 0.2rem 0.5rem;
-  border-radius: 3px;
-  border: 1px solid currentColor;
+  padding: 0.22rem 0.55rem;
+  border-radius: 2px;
+  line-height: 1.3;
 }
 
 .badge-counts {
-  background: var(--counts-bg);
-  color: var(--accent);
+  background: transparent;
+  color: var(--mark-counts);
+  border: 1.5px solid var(--mark-counts);
 }
 
+/* Zero credit: a red-ink rubber stamp, slightly rotated, double rule. */
 .badge-zero-credit {
-  background: var(--zero-bg);
-  color: var(--zero);
+  background: transparent;
+  color: var(--mark-zero);
+  border: 2px double var(--mark-zero);
+  padding: 0.24rem 0.6rem;
+  transform: rotate(-2.5deg);
+  animation: stamp-settle 260ms ease-out both;
 }
 
-.badge-warn {
-  background: var(--warn-bg);
-  color: var(--warn);
-}
-
+/* Can't check: a grey stamp — an honest shrug, not a warning. */
 .badge-unknown {
-  background: var(--unknown-bg);
-  color: var(--unknown);
+  background: transparent;
+  color: var(--mark-unknown);
+  border: 2px dashed var(--mark-unknown);
+  transform: rotate(1.5deg);
+  animation: stamp-settle 260ms ease-out both;
 }
 
-/* --- Group / total progress (signature element: a tick-ruled ledger bar) --- */
+/* Timing warning: an amber tag, not a stamp — it names a scheduling
+   problem, not a verdict. */
+.badge-warn {
+  background: var(--mark-warn-bg);
+  color: var(--mark-warn-ink);
+  border: 1.5px solid var(--mark-warn-ink);
+  border-radius: 2px 8px 8px 2px;
+}
 
-.progress-summary {
+@keyframes stamp-settle {
+  from {
+    opacity: 0;
+    transform: scale(1.3) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(-2.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge-zero-credit,
+  .badge-unknown {
+    animation: none;
+  }
+}
+
+/* --- Pinned legend: the beds, their units filled, and the total. Replaces
+   the old ticked progress bar entirely — a legend, not a gauge. --- */
+
+.legend {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -310,68 +431,77 @@ form {
   margin-bottom: 1.5rem;
 }
 
-.group-progress {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--line);
+@media (min-width: 900px) {
+  .legend {
+    position: sticky;
+    top: 0.75rem;
+    z-index: 5;
+  }
 }
 
-.group-progress:last-child {
-  border-bottom: none;
-}
-
-.group-progress__label {
+.legend__rows {
   display: flex;
-  justify-content: space-between;
-  gap: 0.75rem;
-  font-size: 0.88rem;
-  margin-bottom: 0.35rem;
   flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
 }
 
-.group-progress__count {
-  font-family: var(--font-mono);
+.legend-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  min-width: 12rem;
+}
+
+.legend-row__swatch {
+  flex: none;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 2px;
+  border: 1px solid rgba(30, 42, 34, 0.35);
+  transform: translateY(0.15rem);
+}
+
+.legend-row__swatch--total {
+  background: var(--ink);
+  border-radius: 50%;
+}
+
+.legend-row__name {
+  color: var(--ink);
+}
+
+.legend-row__count {
   color: var(--ink-soft);
   white-space: nowrap;
+  margin-left: auto;
+  padding-left: 0.5rem;
 }
 
-.group-progress__track {
-  position: relative;
-  height: 0.7rem;
-  border-radius: 2px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  /* tick marks every ~8.33% (like a ruled ledger sheet) */
-  background-image: repeating-linear-gradient(
-    to right,
-    var(--line) 0,
-    var(--line) 1px,
-    transparent 1px,
-    transparent calc(100% / 12)
-  );
-  overflow: hidden;
+.legend-row--total {
+  font-weight: 700;
+  padding-top: 0.5rem;
+  margin-top: 0.35rem;
+  border-top: 1px solid var(--line);
+  flex-basis: 100%;
 }
 
-.group-progress__fill {
-  position: absolute;
-  inset: 0 auto 0 0;
-  background: var(--accent);
+.legend-row--complete .legend-row__count::after {
+  content: " — complete";
 }
 
-.group-progress--total .group-progress__fill {
-  background: var(--ink);
-}
-
-/* --- Project pathway sub-group (review fix #3): one heading, options
-   beneath, the unchosen one visually quieter — never colour-only, the label
-   text always says "chosen" / "not chosen". --- */
+/* --- Project pathway sub-group: one heading, options beneath, sharing one
+   hue per option (A one bed, B another) — the unchosen option is quieter,
+   never colour-only; the label text always says "chosen" / "not chosen". --- */
 
 .pathway-block {
   padding: 0.5rem 0 0.25rem;
+  flex-basis: 100%;
 }
 
 .pathway-block__heading {
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   color: var(--ink-soft);
@@ -384,13 +514,13 @@ form {
 
 .pathway-option__label {
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--ink);
   margin: 0 0 0.2rem;
 }
 
 .pathway-option--not-chosen {
-  opacity: 0.6;
+  opacity: 0.55;
 }
 
 .pathway-option--not-chosen .pathway-option__label {
@@ -398,52 +528,113 @@ form {
   font-weight: 500;
 }
 
-/* --- Semesters --- */
+/* --- Seasons: semester columns side by side at laptop width, stacking on
+   phone. Past seasons recede; the current one is darker-headed and marked
+   NOW. --- */
 
-.semester {
-  margin-bottom: 2rem;
-  padding-top: 1.25rem;
-  border-top: 2px solid var(--ink);
+.seasons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
 }
 
-.semester h2 {
-  font-size: 1rem;
-  color: var(--ink-soft);
+@media (min-width: 860px) {
+  .seasons {
+    grid-template-columns: repeat(var(--season-count, 4), minmax(0, 1fr));
+  }
+}
+
+.season {
+  min-width: 0;
+}
+
+.season__head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  margin: 0 0 0.9rem;
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom: 2px solid var(--ink);
+  background: var(--surface-sunk);
+}
+
+.season__head h2 {
+  margin: 0;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  font-weight: 700;
 }
 
-/* Completed semesters (review fix #1): shown, but quieter than the current
-   and future ones — no add box, muted rule and card fill. */
-
-.semester--completed {
-  border-top-color: var(--line);
+.season--current .season__head {
+  background: var(--ink);
+  border-bottom-color: var(--ink);
 }
 
-.semester--completed .course-card {
-  background: var(--paper);
+.season--current .season__head h2 {
+  color: var(--surface);
+}
+
+.season__now {
+  flex: none;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: var(--action);
+  color: var(--action-ink);
+  padding: 0.15rem 0.45rem;
+  border-radius: 2px;
+}
+
+.season--completed {
+  opacity: 0.75;
+}
+
+.season--completed .season__head {
+  background: transparent;
+  border-bottom-color: var(--line);
+}
+
+.season--completed .season__head h2 {
+  color: var(--ink-soft);
+}
+
+.season--completed .course-card {
+  background: var(--ground);
 }
 
 .course-list {
   list-style: none;
   margin: 0 0 1rem;
   padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 0.75rem;
 }
 
-@media (min-width: 640px) {
-  .course-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+/* --- Stakes: white labels with a bed-colour band and the bed's name in
+   words. State is a mark (badge above), never colour alone. --- */
 
 .course-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 0.85rem 1rem;
+  padding: 0.9rem 1rem 0.9rem 0.95rem;
+  border-left: 6px solid var(--line);
+}
+
+.course-card__bed {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin: 0 0 0.4rem;
 }
 
 .course-card__head {
@@ -455,22 +646,22 @@ form {
 }
 
 .course-code {
-  font-family: var(--font-mono);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1rem;
+  letter-spacing: 0.01em;
 }
 
 .course-units {
   margin-left: auto;
-  font-family: var(--font-mono);
   font-size: 0.82rem;
   color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
 }
 
 .tag-unverified {
   font-size: 0.72rem;
-  color: var(--warn);
-  border: 1px solid var(--warn);
+  color: var(--mark-warn-ink);
+  border: 1px solid var(--mark-warn-ink);
   border-radius: 3px;
   padding: 0.05rem 0.35rem;
 }
@@ -490,6 +681,7 @@ form {
 
 .course-messages li {
   padding: 0.15rem 0;
+  margin-bottom: 0;
 }
 
 .course-messages li::before {
@@ -498,6 +690,16 @@ form {
 
 .course-waiver-form {
   margin-top: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pin-mark {
+  flex: none;
+  width: 0.9rem;
+  height: 0.9rem;
+  color: var(--action);
 }
 
 .course-remove-form {
@@ -509,6 +711,7 @@ form {
   color: var(--ink-soft);
   font-size: 0.88rem;
   font-style: italic;
+  padding-left: 0;
 }
 
 .add-course-form {
@@ -520,25 +723,27 @@ form {
   border: 1px dashed var(--line);
   border-radius: var(--radius);
   padding: 0.75rem;
+  margin-top: 0.75rem;
 }
 
 .add-course-form label {
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   flex-basis: 100%;
+}
+
+.add-course-form__row {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .add-course-form input {
   flex: 1 1 12rem;
-  padding: 0.45rem 0.6rem;
+  padding: 0.5rem 0.6rem;
   font: inherit;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-}
-
-.bookmark-note {
-  font-size: 0.9rem;
-  color: var(--ink-soft);
 }
 
 @media (max-width: 480px) {
@@ -552,5 +757,13 @@ form {
 
   .course-units {
     margin-left: 0;
+  }
+
+  .legend__rows {
+    gap: 0.6rem 1rem;
+  }
+
+  .legend-row {
+    min-width: 100%;
   }
 }
