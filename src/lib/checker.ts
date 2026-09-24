@@ -103,9 +103,8 @@ function isPrereqSatisfied(expr: PrereqExpr, ctx: PrereqCtx): boolean {
   return expr.exprs.some((child) => isPrereqSatisfied(child, ctx)); // or
 }
 
-function leafSummary(expr: PrereqExpr): string {
-  if (expr.kind === "course") return expr.code;
-  return programDisplayName(expr.programCode); // program leaf (used only inside a larger OR/AND)
+function leafSummary(expr: { kind: "course"; code: string } | { kind: "program"; programCode: string }): string {
+  return expr.kind === "course" ? expr.code : programDisplayName(expr.programCode);
 }
 
 /** Builds the "Needs <this> first" summary for an unsatisfied expr. An AND
