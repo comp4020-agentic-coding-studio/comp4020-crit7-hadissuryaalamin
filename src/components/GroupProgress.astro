@@ -1,9 +1,11 @@
 ---
 // One row of the pinned bed legend (Planting Plan direction): a bed swatch
 // (flat colour, shared with that bed's stakes elsewhere on the page), the
-// group's name in words, and the unit count as text — never colour or a bar
-// alone. `hex` is omitted for the "Total" row, which gets a neutral ink dot
-// instead of a bed colour (the total isn't a bed).
+// group's name in words, the unit count as text, and a thin flat fill bar
+// in the bed's own colour (epic.md 18.2) — the bar is a second cue beside
+// the units text, never the only one. `hex` is omitted for the "Total" row,
+// which gets a neutral ink dot and ink-coloured bar instead of a bed colour
+// (the total isn't a bed).
 interface Props {
   name: string;
   earned: number;
@@ -14,14 +16,30 @@ interface Props {
 
 const { name, earned, required, total = false, hex } = Astro.props;
 const complete = earned >= required && required > 0;
+const fillPercent = required > 0 ? Math.min(100, Math.round((earned / required) * 100)) : 0;
 ---
 
 <div class={`legend-row${total ? " legend-row--total" : ""}${complete ? " legend-row--complete" : ""}`}>
-  <span
-    class={`legend-row__swatch${total ? " legend-row__swatch--total" : ""}`}
-    style={!total && hex ? `--swatch-color:${hex}` : undefined}
-    aria-hidden="true"
-  ></span>
-  <span class="legend-row__name">{name}</span>
-  <span class="legend-row__count">{earned}/{required} units</span>
+  <div class="legend-row__top">
+    <span
+      class={`legend-row__swatch${total ? " legend-row__swatch--total" : ""}`}
+      style={!total && hex ? `--swatch-color:${hex}` : undefined}
+      aria-hidden="true"
+    ></span>
+    <span class="legend-row__name">{name}</span>
+    <span class="legend-row__count">{earned}/{required} units</span>
+  </div>
+  <div
+    class="legend-row__bar"
+    role="progressbar"
+    aria-label={`${name} progress`}
+    aria-valuenow={earned}
+    aria-valuemin="0"
+    aria-valuemax={required}
+  >
+    <span
+      class="legend-row__bar-fill"
+      style={`--bar-fill:${fillPercent}%;--bar-color:${!total && hex ? hex : "var(--ink)"}`}
+    ></span>
+  </div>
 </div>

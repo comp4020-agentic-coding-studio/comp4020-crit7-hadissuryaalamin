@@ -7,18 +7,27 @@
    No gradients, no shadows, no ambient/floating animation anywhere. */
 
 :root {
-  --ground: #eef1ea;
-  --grid-line: rgba(30, 42, 34, 0.07);
-  --surface: #fafaf4;
-  --surface-sunk: #e6e9e0;
-  --ink: #1e2a22;
-  --ink-soft: #4b5a4c;
-  --line: #c7cdbd;
+  /* 2026-09-25 (epic.md 18.4): remapped to ANU Programs & Courses' own
+     palette, extracted from https://programsandcourses.anu.edu.au/ and its
+     stylesheet — ground/surfaces from ANU's parchment cream (#F5EDDE),
+     ink-soft and action from ANU's own slate-teal (#4C6E78) and link teal
+     (#2B788F) family, darkened where the raw hex fell short of 4.5:1 body
+     text on our ground. Structure (season columns, bed bands, stamps) is
+     unchanged — only the hues. Still not ANU: no logo, no ANU fonts. */
+  --ground: #f5edde;
+  --grid-line: rgba(26, 26, 26, 0.07);
+  --surface: #fbf7ee;
+  --surface-sunk: #eadfc1;
+  --ink: #1a1a1a;
+  --ink-soft: #3f5c64;
+  --line: #d9cba6;
 
-  /* Reserved action colour — used by no bed. */
-  --action: #0f5e63;
+  /* Reserved action colour — used by no bed. ANU teal (#2B788F extracted),
+     darkened to #1b6478 so it clears 4.5:1 as body/link text on the new
+     cream ground, not just as a button fill. */
+  --action: #1b6478;
   --action-ink: #ffffff;
-  --action-hover: #0c4a4e;
+  --action-hover: #103f4c;
 
   /* Marks: red-ink stamp, grey stamp, amber tag, pin. */
   --mark-zero: #a3271c;
@@ -471,11 +480,21 @@ footer p {
 }
 
 .legend-row {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.3rem;
   font-size: 0.85rem;
-  max-width: 100%;
+  flex: 1 1 9rem;
+  min-width: 8rem;
+  max-width: 15rem;
+}
+
+.legend-row__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.35rem;
 }
 
 .legend-row__swatch {
@@ -488,6 +507,25 @@ footer p {
   transform: translateY(0.1rem);
 }
 
+/* 2026-09-25 (epic.md 18.2): the client asked for the progress bars back.
+   Flat fill, no gradient, in the bed's own colour — the units text beside it
+   stays, so the bar is never the only cue. */
+.legend-row__bar {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--surface-sunk);
+  overflow: hidden;
+}
+
+.legend-row__bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--bar-color, var(--ink));
+  width: var(--bar-fill, 0%);
+}
+
 .legend-row__swatch--total {
   background: var(--ink);
   border-radius: 50%;
@@ -495,13 +533,15 @@ footer p {
 
 .legend-row__name {
   color: var(--ink);
-  min-width: 0;
+  flex: 1 1 auto;
+  min-width: 6rem;
   overflow-wrap: break-word;
 }
 
 .legend-row__count {
   color: var(--ink-soft);
   white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 .legend-row--total {
@@ -725,6 +765,30 @@ footer p {
 
 .course-messages li::before {
   content: "— ";
+}
+
+/* 2026-09-25 (epic.md 18.3): a "Check P&C:" message shows one short line;
+   the full requirement text sits behind a native disclosure, still in the
+   HTML either way — no JS needed to read it, just to hide it by default. */
+.course-messages details {
+  display: inline;
+}
+
+.course-messages summary {
+  display: inline;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+
+.course-messages summary:hover,
+.course-messages summary:focus-visible {
+  color: var(--ink);
+}
+
+.course-messages details[open] summary {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--ink);
 }
 
 .course-waiver-form {
