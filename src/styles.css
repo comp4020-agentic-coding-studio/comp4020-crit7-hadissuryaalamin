@@ -590,10 +590,6 @@ footer p {
   border-radius: 2px;
 }
 
-.season--completed {
-  opacity: 0.75;
-}
-
 .season--completed .season__head {
   background: transparent;
   border-bottom-color: var(--line);

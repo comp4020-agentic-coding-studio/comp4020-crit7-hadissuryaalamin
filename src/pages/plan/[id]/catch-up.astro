@@ -55,56 +55,60 @@ const error = Astro.url.searchParams.get("error");
     pastSemesterIndexes.length === 0 ? (
       <p class="empty">You're on semester 1 — there's nothing to catch up on yet.</p>
     ) : (
-      pastSemesterIndexes.map((semesterIndex) => {
-        const cal = semesterCalendar(
-          { startYear: plan.startYear, startSemester: plan.startSemester as 1 | 2 },
-          semesterIndex,
-        );
-        const semCourses = coursesBySemester.get(semesterIndex) ?? [];
-        return (
-          <section class="semester">
-            <h2>
-              Semester {semesterIndex} — {cal.year} S{cal.semester}
-            </h2>
-            {semCourses.length === 0 ? (
-              <p class="empty">Nothing added yet.</p>
-            ) : (
-              <ul class="course-list">
-                {semCourses.map((course) => (
-                  <CourseCard
-                    code={course.courseCode}
-                    title={titleFor(course.courseCode, cal.year)}
-                    units={course.units}
-                    unverified={course.unverified}
-                    removeAction="/api/plan-courses"
-                    planId={plan.id}
-                    planCourseId={course.id}
-                    from="catchup"
-                  />
-                ))}
-              </ul>
-            )}
-            <form method="post" action="/api/plan-courses" class="add-course-form">
-              <input type="hidden" name="intent" value="add" />
-              <input type="hidden" name="planId" value={plan.id} />
-              <input type="hidden" name="from" value="catchup" />
-              <input type="hidden" name="semesterIndex" value={semesterIndex} />
-              <label for={`course-${semesterIndex}`}>Add a course</label>
-              <div class="add-course-form__row">
-                <input
-                  id={`course-${semesterIndex}`}
-                  name="courseCode"
-                  list="course-codes"
-                  placeholder="e.g. COMP6262"
-                  autocomplete="off"
-                  required
-                />
-                <button type="submit" class="btn">Add</button>
+      <div class="seasons" style={`--season-count:${pastSemesterIndexes.length}`}>
+        {pastSemesterIndexes.map((semesterIndex) => {
+          const cal = semesterCalendar(
+            { startYear: plan.startYear, startSemester: plan.startSemester as 1 | 2 },
+            semesterIndex,
+          );
+          const semCourses = coursesBySemester.get(semesterIndex) ?? [];
+          return (
+            <section class="season season--completed">
+              <div class="season__head">
+                <h2>
+                  Semester {semesterIndex} — {cal.year} S{cal.semester}
+                </h2>
               </div>
-            </form>
-          </section>
-        );
-      })
+              {semCourses.length === 0 ? (
+                <p class="empty">Nothing added yet.</p>
+              ) : (
+                <ul class="course-list">
+                  {semCourses.map((course) => (
+                    <CourseCard
+                      code={course.courseCode}
+                      title={titleFor(course.courseCode, cal.year)}
+                      units={course.units}
+                      unverified={course.unverified}
+                      removeAction="/api/plan-courses"
+                      planId={plan.id}
+                      planCourseId={course.id}
+                      from="catchup"
+                    />
+                  ))}
+                </ul>
+              )}
+              <form method="post" action="/api/plan-courses" class="add-course-form">
+                <input type="hidden" name="intent" value="add" />
+                <input type="hidden" name="planId" value={plan.id} />
+                <input type="hidden" name="from" value="catchup" />
+                <input type="hidden" name="semesterIndex" value={semesterIndex} />
+                <label for={`course-${semesterIndex}`}>Add a course</label>
+                <div class="add-course-form__row">
+                  <input
+                    id={`course-${semesterIndex}`}
+                    name="courseCode"
+                    list="course-codes"
+                    placeholder="e.g. COMP6262"
+                    autocomplete="off"
+                    required
+                  />
+                  <button type="submit" class="btn">Add</button>
+                </div>
+              </form>
+            </section>
+          );
+        })}
+      </div>
     )
   }
 
