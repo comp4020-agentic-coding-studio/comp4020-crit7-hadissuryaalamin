@@ -1,54 +1,45 @@
 # Process overview
 
-<!-- TEMPLATE: this file is a shape to fill in, not a form. Replace everything
-     in it with your own overview, and delete this comment — `pnpm
-     check:evidence` will remind you if it's still here. -->
-
-Written by you, for a reader: how you got from the brief to the harness and
-agentic workflow behind this submission. Markers read this file and follow its
-citations; they don't trawl the repo for evidence you didn't point at.
-
-This file is the shape; the course site's
-[assessment page](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#what-you-submit)
-is the requirement, and its
-[word counts](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#word-counts)
-cover every deliverable.
-
 ## What I built
 
-A sentence or two. `README.md` is where the account of what the app is and what
-good means here lives; this file is how you got there.
+Degree Plan Checker: a semester-by-semester planner for ANU Computing and
+MLCV master's students that warns, before enrolment, when a course would
+earn zero credit toward the degree. `README.md` says what good means here.
 
 ## How I got here
 
-The account of the process: how the work actually went, and how you knew the
-result was right. Tell it in whatever order makes it clear. A weekly prototype
-needs a paragraph or two; an assignment needs more.
+I started from my own frustration as an MMLCV student and chose, from the
+options, the failure that hurts most: a course that counts for nothing. I
+directed the scope as a client: plan per link, warnings that never block,
+three masters, 2025 onward.
 
-Cite the record as you go, as links whose text is the commit hash or range and
-whose target is this repo's commit or compare URL, so a reader clicks straight
-to the evidence:
+I grounded it in real data, not examples. A scraper reads Programs & Courses
+into a committed snapshot, with hand-written overrides that must cite their
+source sentence
+([`d51f97c`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit7-hadissuryaalamin/commit/d51f97c)).
+The checker was test-first
+([`4137e3e...510b0b0`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit7-hadissuryaalamin/compare/4137e3e...510b0b0)).
 
-- one commit: [`a1b2c3d`](https://github.com/YOUR-ORG/YOUR-REPO/commit/a1b2c3d)
-- a range:
-  [`a1b2c3d...e4f5a6b`](https://github.com/YOUR-ORG/YOUR-REPO/compare/a1b2c3d...e4f5a6b)
+Corrections came from checking against reality. The agents caught two wrong
+facts in the plan: COMP8600's prerequisite is too tangled to parse, and the
+MMLCV pathway is 30 units, not 24. The scrape showed MCOMP only summed to
+72/96; asked, I chose to scrape the specialisations rather than fake them
+([`9ae9591`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit7-hadissuryaalamin/commit/9ae9591)).
+A browser review found past semesters missing from the plan page
+([`1ae4eb4`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit7-hadissuryaalamin/commit/1ae4eb4)).
+Then I used the live app on my own plan and asked for two changes it showed
+were missing:
 
-To pair a prompt with the commit it produced, quote the prompt (curated, not a
-full transcript) next to the citation:
+> For the course that not meet the pre requisite give something like I
+> enrolled bcs I have the permission.
 
-> the prompt, verbatim
+([`53ef604...d3996b4`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit7-hadissuryaalamin/compare/53ef604...d3996b4)).
 
-Screenshots are welcome where one carries the point better than a sentence does.
-Commit the file to this repo and link it with a **relative** path, which is what
-makes it render on GitHub: `![alt text](docs/before.png)`. Images don't count
-towards the word count and don't replace the citation.
+For the look I used the Impeccable skill: I picked a direction in its
+browser page and a fresh reviewer checked the build. Its pathway-B screenshot
+exposed a real checker bug, fixed test-first
+([`6d6c687`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit7-hadissuryaalamin/commit/6d6c687)).
 
-## Before you ship
-
-`pnpm check:evidence` verifies that this comment is gone, that your citations
-resolve to real commits, that a crit week's reflection entry is in
-`reflections/`, and that your `CLAUDE.md` is there. It checks that your account
-is traceable, not that it is good: that is the marker's call.
-
-Images aren't checked: unlike a citation whose SHA doesn't resolve, a broken
-image is visible the moment this file is rendered on GitHub.
+I knew it was right when the reload test passed over HTTP
+([`8a93165`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit7-hadissuryaalamin/commit/8a93165))
+and the deployed app flagged a real course in my own plan as zero credit.
