@@ -4,8 +4,9 @@
 // reads — they line up with `src/lib/schema.ts` column names in camelCase.
 //
 // No network and no DB access in this file, or in parse-program.ts,
-// parse-course.ts, parse-prereq.ts — those are pure functions over HTML
-// strings so they can be unit-tested against saved fixtures.
+// parse-course.ts, parse-prereq.ts, parse-specialisation.ts — those are pure
+// functions over HTML strings so they can be unit-tested against saved
+// fixtures.
 
 /** `requirement_groups.kind` (epic.md section 8). */
 export type RequirementGroupKind = "list" | "filter";
@@ -39,6 +40,23 @@ export interface RequirementGroupJson {
    * updates/003.md).
    */
   pathwayMarkers?: string[];
+  /**
+   * Specialisation code (e.g. "ARTIF-SPEC") this group belongs to, for a
+   * group produced by `parseSpecialisation` and spliced into a program's
+   * `groups` by the runner (epic.md 15, task 011). Like `pathway`, groups
+   * sharing a `specialisation` code are alternatives to every *other*
+   * specialisation's groups, not additive — a real student picks exactly
+   * one specialisation. null/undefined for a group that isn't part of a
+   * specialisation choice.
+   *
+   * NOTE for task 005 (DB loader): `src/lib/schema.ts`'s
+   * `requirement_groups` table has no matching column yet, and neither does
+   * `plans` for the student's chosen specialisation (epic.md 8) — this
+   * field needs the same kind of migration `pathwayMarkers` already needs
+   * (see updates/003.md). Not added here per this task's brief (must not
+   * touch schema.ts/checker*.ts).
+   */
+  specialisation?: string | null;
 }
 
 export interface ProgramJson {
@@ -50,6 +68,13 @@ export interface ProgramJson {
   semesters: number;
   /** Ordered (by `position`) requirement groups this parse could confidently extract. */
   groups: RequirementGroupJson[];
+  /**
+   * Specialisations this program-year lets a student choose between (epic.md
+   * 15, task 011), read from the program page's own "Specialisations" link
+   * list — never hard-coded, since the set varies by program and year.
+   * Empty for a program with no specialisation choice (e.g. MMLCV).
+   */
+  specialisations?: { code: string; name: string }[];
   /**
    * Anything the parser could not turn into a group safely — e.g. a
    * project-pathway "Either/Or" block, a rule needing a hand-written
