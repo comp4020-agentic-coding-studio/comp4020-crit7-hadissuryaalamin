@@ -1,7 +1,9 @@
 ---
-// One course card (epic.md section 10): code, title, units, status badge
-// (or nothing, on the catch-up screen where nothing is evaluated yet),
-// the reasons behind that status, and a remove form (plain POST/redirect).
+// One stake (Planting Plan direction): code, title, units, a bed-colour band
+// naming its bed in words (only when the checker has placed it in a group —
+// catch-up's un-evaluated cards and non-counting courses get no band), the
+// status mark (or nothing, on catch-up), the reasons behind it, and a
+// remove form (plain POST/redirect).
 import StatusBadge from "./StatusBadge.astro";
 import type { CourseResult } from "../lib/checker-types";
 
@@ -20,6 +22,10 @@ interface Props {
    * (waiving replaces it), so "Undo permission" still has something to
    * show. */
   prereqWaived?: boolean;
+  /** This stake's bed colour, looked up by the page from the group this
+   * course fills (`result.groupName`) via src/components/beds.ts. Absent
+   * when the course fills no group. */
+  bedColor?: string;
 }
 
 const {
@@ -33,6 +39,7 @@ const {
   from,
   result,
   prereqWaived = false,
+  bedColor,
 } = Astro.props;
 
 // D15: the button shows whenever there's a live prerequisite message to
@@ -44,7 +51,8 @@ const hasPrereqMessage =
 const showWaiverButton = hasPrereqMessage || prereqWaived;
 ---
 
-<li class="course-card">
+<li class="course-card" style={bedColor ? `border-left-color:${bedColor}` : undefined}>
+  {result?.groupName && <span class="course-card__bed">Bed: {result.groupName}</span>}
   <div class="course-card__head">
     <span class="course-code">{code}</span>
     {unverified && <span class="tag-unverified">unverified</span>}
@@ -68,6 +76,19 @@ const showWaiverButton = hasPrereqMessage || prereqWaived;
         <input type="hidden" name="planId" value={planId} />
         <input type="hidden" name="planCourseId" value={planCourseId} />
         <input type="hidden" name="from" value={from} />
+        {
+          prereqWaived && (
+            <svg class="pin-mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M12 3.5c-3 0-5.4 2.3-5.4 5.3 0 3.7 4 8.6 5 9.6.2.2.6.2.8 0 1-1 5-5.9 5-9.6 0-3-2.4-5.3-5.4-5.3Z"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linejoin="round"
+              ></path>
+              <circle cx="12" cy="8.8" r="1.8" fill="currentColor"></circle>
+            </svg>
+          )
+        }
         <button type="submit" class="btn btn-ghost">
           {prereqWaived ? "Undo permission" : "I have permission to enrol"}
         </button>
