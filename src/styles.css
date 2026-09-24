@@ -361,6 +361,43 @@ form {
   background: var(--ink);
 }
 
+/* --- Project pathway sub-group (review fix #3): one heading, options
+   beneath, the unchosen one visually quieter — never colour-only, the label
+   text always says "chosen" / "not chosen". --- */
+
+.pathway-block {
+  padding: 0.5rem 0 0.25rem;
+}
+
+.pathway-block__heading {
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  margin: 0.25rem 0 0.6rem;
+}
+
+.pathway-option {
+  margin-bottom: 0.4rem;
+}
+
+.pathway-option__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 0.2rem;
+}
+
+.pathway-option--not-chosen {
+  opacity: 0.6;
+}
+
+.pathway-option--not-chosen .pathway-option__label {
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+
 /* --- Semesters --- */
 
 .semester {
@@ -374,6 +411,17 @@ form {
   color: var(--ink-soft);
   text-transform: uppercase;
   letter-spacing: 0.03em;
+}
+
+/* Completed semesters (review fix #1): shown, but quieter than the current
+   and future ones — no add box, muted rule and card fill. */
+
+.semester--completed {
+  border-top-color: var(--line);
+}
+
+.semester--completed .course-card {
+  background: var(--paper);
 }
 
 .course-list {

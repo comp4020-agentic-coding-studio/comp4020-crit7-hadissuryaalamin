@@ -9,7 +9,7 @@ import CourseCard from "../../../components/CourseCard.astro";
 import { evaluatePlan, getPlan, type PlanCourseRow } from "../../../lib/plans";
 import { getCatalogueForProgram, getProgram } from "../../../lib/catalogue";
 import { semesterCalendar } from "../../../lib/checker";
-import type { CourseResult } from "../../../lib/checker-types";
+import type { CourseResult, GroupResult } from "../../../lib/checker-types";
 
 const { id } = Astro.params;
 const found = id ? getPlan(id) : null;
@@ -35,6 +35,49 @@ for (const result of evaluation?.courses ?? []) {
 const catalogue = getCatalogueForProgram(plan.programCode, plan.startYear, plan.specialisation);
 const allCourseCodes = catalogue ? Object.keys(catalogue.courses).sort() : [];
 
+// Group the progress panel's rows for display (epic 10 review fix #3): a
+// project-pathway group ("pathway" set on the catalogue's RequirementGroup)
+// gets pulled out of the plain list and shown under one sub-heading, split
+// by option. `evaluate()` builds its GroupResult[] from `catalogue.groups`
+// in the same order (checker.ts: `groups = catalogue.groups`), so zipping by
+// index recovers which pathway (if any) each result belongs to without
+// touching the checker's output shape.
+interface ZippedGroup {
+  result: GroupResult;
+  pathway: "A" | "B" | null;
+}
+const zippedGroups: ZippedGroup[] = evaluation
+  ? evaluation.groups.map((result, i) => ({
+      result,
+      pathway: catalogue?.groups[i]?.pathway ?? null,
+    }))
+  : [];
+const nonPathwayGroups = zippedGroups.filter((z) => z.pathway == null);
+const pathwayGroups = zippedGroups.filter(
+  (z): z is ZippedGroup & { pathway: "A" | "B" } => z.pathway != null,
+);
+const pathwayLabels = [...new Set(pathwayGroups.map((z) => z.pathway))];
+// The checker result doesn't say which pathway was picked directly (9.2), so
+// derive it the way the task asks: whichever pathway's groups have earned
+// units is the one in use (the losing pathway's courses are forced
+// zero-credit and never earn anything — see checker.ts's `loserPathway`).
+const pathwayEarned = new Map<string, number>(pathwayLabels.map((l) => [l, 0]));
+for (const z of pathwayGroups) {
+  pathwayEarned.set(z.pathway, (pathwayEarned.get(z.pathway) ?? 0) + z.result.earned);
+}
+const chosenPathway = pathwayLabels.find((l) => (pathwayEarned.get(l) ?? 0) > 0) ?? null;
+const orderedPathwayLabels = chosenPathway
+  ? [chosenPathway, ...pathwayLabels.filter((l) => l !== chosenPathway)]
+  : pathwayLabels;
+const pathwayTotalUnits = pathwayLabels.reduce(
+  (max, label) =>
+    Math.max(
+      max,
+      pathwayGroups.filter((z) => z.pathway === label).reduce((sum, z) => sum + z.result.required, 0),
+    ),
+  0,
+);
+
 function titleFor(code: string, calendarYear: number): string | null {
   const entries = catalogue?.courses[code] ?? [];
   if (entries.length === 0) return null;
@@ -42,13 +85,19 @@ function titleFor(code: string, calendarYear: number): string | null {
   return (exact ?? [...entries].sort((a, b) => b.year - a.year)[0])!.title;
 }
 
+// Completed semesters' courses still count toward progress (they're in
+// `evaluation`), but used to be invisible here entirely — review fix #1.
+// Show them, quieter, above the current semester; editing them stays on the
+// catch-up page (the "Edit past semesters" link below).
 const coursesBySemester = new Map<number, PlanCourseRow[]>();
 for (const course of courses) {
-  if (course.semesterIndex < plan.currentSemester) continue; // shown on catch-up instead
   const list = coursesBySemester.get(course.semesterIndex) ?? [];
   list.push(course);
   coursesBySemester.set(course.semesterIndex, list);
 }
+
+const completedSemesterIndexes: number[] = [];
+for (let s = 1; s < plan.currentSemester; s++) completedSemesterIndexes.push(s);
 
 const semesterIndexes: number[] = [];
 for (let s = plan.currentSemester; s <= totalSemesters; s++) semesterIndexes.push(s);
@@ -72,9 +121,33 @@ const hasPastCourses = courses.some((c) => c.semesterIndex < plan.currentSemeste
       <section class="card progress-summary">
         <h2>Progress</h2>
         <GroupProgress name="Total" earned={evaluation.totalEarned} required={evaluation.totalRequired} total />
-        {evaluation.groups.map((group) => (
-          <GroupProgress name={group.name} earned={group.earned} required={group.required} />
+        {nonPathwayGroups.map((z) => (
+          <GroupProgress name={z.result.name} earned={z.result.earned} required={z.result.required} />
         ))}
+        {pathwayGroups.length > 0 && (
+          <div class="pathway-block">
+            <h3 class="pathway-block__heading">
+              Project pathway — {pathwayLabels.join(" or ")} ({pathwayTotalUnits} units)
+            </h3>
+            {orderedPathwayLabels.map((label) => (
+              <div
+                class={`pathway-option${
+                  chosenPathway && label !== chosenPathway ? " pathway-option--not-chosen" : ""
+                }`}
+              >
+                <p class="pathway-option__label">
+                  Option {label}
+                  {chosenPathway === label ? " — chosen" : chosenPathway ? " — not chosen" : ""}
+                </p>
+                {pathwayGroups
+                  .filter((z) => z.pathway === label)
+                  .map((z) => (
+                    <GroupProgress name={z.result.name} earned={z.result.earned} required={z.result.required} />
+                  ))}
+              </div>
+            ))}
+          </div>
+        )}
         {evaluation.warnings.length > 0 && (
           <ul class="alert alert-warn">
             {evaluation.warnings.map((warning) => (
@@ -91,16 +164,54 @@ const hasPastCourses = courses.some((c) => c.semesterIndex < plan.currentSemeste
   }
 
   {
-    semesterIndexes.map((semesterIndex) => {
+    completedSemesterIndexes.map((semesterIndex) => {
       const cal = semesterCalendar(
         { startYear: plan.startYear, startSemester: plan.startSemester as 1 | 2 },
         semesterIndex,
       );
       const semCourses = coursesBySemester.get(semesterIndex) ?? [];
       return (
+        <section class="semester semester--completed">
+          <h2>
+            Semester {semesterIndex} — {cal.year} S{cal.semester} — completed
+          </h2>
+          {semCourses.length === 0 ? (
+            <p class="empty">No courses recorded.</p>
+          ) : (
+            <ul class="course-list">
+              {semCourses.map((course) => (
+                <CourseCard
+                  code={course.courseCode}
+                  title={titleFor(course.courseCode, cal.year)}
+                  units={course.units}
+                  unverified={course.unverified}
+                  removeAction="/api/plan-courses"
+                  planId={plan.id}
+                  planCourseId={course.id}
+                  from="plan"
+                  result={resultByPlanCourseId.get(String(course.id))}
+                />
+              ))}
+            </ul>
+          )}
+        </section>
+      );
+    })
+  }
+
+  {
+    semesterIndexes.map((semesterIndex) => {
+      const cal = semesterCalendar(
+        { startYear: plan.startYear, startSemester: plan.startSemester as 1 | 2 },
+        semesterIndex,
+      );
+      const semCourses = coursesBySemester.get(semesterIndex) ?? [];
+      const isCurrent = semesterIndex === plan.currentSemester;
+      return (
         <section class="semester">
           <h2>
             Semester {semesterIndex} — {cal.year} S{cal.semester}
+            {isCurrent && " — current"}
           </h2>
           {semCourses.length === 0 ? (
             <p class="empty">No courses added yet.</p>
